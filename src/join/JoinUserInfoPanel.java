@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 
 import interfaces.Setting;
 import mainClasses.JoinFrame;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class JoinUserInfoPanel extends JPanel implements Setting {
 	private JLabel[] labels = {new JLabel("ID: "), new JLabel("PW: "), /*new JLabel("PW Check: "),*/new JLabel("Name: "),  new JLabel("Nickname: ")

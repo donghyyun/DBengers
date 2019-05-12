@@ -6,10 +6,10 @@ public class DB {
 	private static DB db = new DB();
 
 	private DB() {        	
-        String url = "jdbc:mysql://localhost/DBengers_Project?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.192.186/test?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "root", "vision2414");
+			con = DriverManager.getConnection(url, "kdh", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
@@ -28,7 +28,7 @@ public class DB {
 	    	try {
 				st = con.createStatement();
 				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
-	    		result = st.executeQuery("SHOW DATABASES");
+	    		result = st.executeQuery("describe testing");
 	    		
 	    		// 결과를 하나씩 출력한다.
 		    	while (result.next()){

@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import join.JoinUserPanel;
 
 public class JoinFrame extends JFrame{
+	public JoinFrame() {
+	}
 	public static final int startX = mainClasses.MainFrame.startX + mainClasses.MainFrame.frameWidth / 3;
 	public static final int startY = mainClasses.MainFrame.startY - mainClasses.MainFrame.frameHeight / 4;
 	public static final int frameWidth = mainClasses.MainFrame.frameWidth;
@@ -19,11 +21,11 @@ public class JoinFrame extends JFrame{
 	
 
 	public void setThis() {
-		this.setLayout(null);
+		getContentPane().setLayout(null);
 		this.setLocation(startX, startY);
 		this.setSize(frameWidth, frameHeight);
 		this.setVisible(true);
 		usrPanel = new JoinUserPanel();
-		this.add(usrPanel);
+		getContentPane().add(usrPanel);
 	}
 }

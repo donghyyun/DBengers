@@ -1,8 +1,8 @@
 package mainClasses;
-import java.awt.Component;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import java.awt.Window.Type;
 
 public class MainFrame extends JFrame {
 	public static int screenWidth = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -18,12 +18,8 @@ public class MainFrame extends JFrame {
 	
 	public void setThis() {
 		this.setBounds(startX, startY, frameWidth, frameHeight);
-		this.setLayout(null);
+		getContentPane().setLayout(null);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	
-	
-	
 }
