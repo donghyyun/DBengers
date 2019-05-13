@@ -66,4 +66,6 @@ public class LogPanel extends JPanel implements interfaces.Setting{
 		this.add(loginButton);
 		this.add(joinButton);
 	}
+	
+	public LogInfoPanel getLogInfoPanel() {return logInfoPanel;}
 }

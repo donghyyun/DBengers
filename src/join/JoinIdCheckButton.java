@@ -33,7 +33,7 @@ public class JoinIdCheckButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			//register new 'user' in db
+			
 		}
 	}
 }

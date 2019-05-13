@@ -7,7 +7,6 @@ public class MainController {
 	public static void main(String[] args) {
 		 //TODO Auto-generated method stub
 		mainFrame.setThis();
-		mainFrame.add(mainFrame.logPanel);
-		//DB.getInstance().addTuples();
+		mainFrame.add(mainFrame.getLogPanel());
 	}
 }

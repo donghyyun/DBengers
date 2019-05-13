@@ -61,6 +61,31 @@ public class DB {
 			}
 	}
 	
+	public boolean checkID(String id, String pw) {
+		Statement st = null;
+		ResultSet result = null;
+
+    	System.out.println("checkID entered!!");
+    	try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		result = st.executeQuery("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
+    		System.out.println("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
+    		if (!result.next()) {
+    			System.out.println("return false");
+    			return false;
+    		}
+    		while (result.next()){
+	    		System.out.println(result.getNString(2) + " " + result.getNString(3));
+	    	}
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}
+    	System.out.println("return true");
+    	return true;
+	}
+	
 	public void closeConnection(Connection con) {
 		try {
             if(con != null && !con.isClosed())

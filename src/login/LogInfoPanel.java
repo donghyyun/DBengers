@@ -30,4 +30,7 @@ public class LogInfoPanel extends JPanel implements interfaces.Setting{
 		this.add(pwTextF);
 	}
 	
+	
+	public String getId() {return idTextF.getText();}
+	public String getPw() {return new String(pwTextF.getPassword());}
 }
