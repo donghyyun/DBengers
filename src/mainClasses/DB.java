@@ -18,14 +18,19 @@ public class DB {
 	
 	public static DB getInstance() {return db;}
 	
+	
 	public void addTuples() {
 		PreparedStatement pstmt;
 		String tableName = "test ";
 		String sql = "INSERT INTO " + tableName + "(num) VALUES " + "(?)";
+		
+		
 		for (int i = 0; i < 10; i++) {
 			try {
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, (int) (Math.random() * 100) + 1);
+				
+				
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
