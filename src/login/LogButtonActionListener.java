@@ -14,8 +14,8 @@ public class LogButtonActionListener implements ActionListener{
 		// TODO Auto-generated method stub
 		
 		if (e.getSource().toString().contains("text=Login")) {			
-			if(DB.getInstance().checkID(mainClasses.MainController.mainFrame.getLogPanel().getLogInfoPanel().getId()
-							, mainClasses.MainController.mainFrame.getLogPanel().getLogInfoPanel().getPw())) {
+			if(DB.getInstance().checkLogin(mainClasses.MainController.mainFrame.getLogPanel().getLogInfoPanel().idTextF.getText()
+							, new String(mainClasses.MainController.mainFrame.getLogPanel().getLogInfoPanel().pwTextF.getPassword()))) {
 				
 				//지울때는 항상 setVisible(false) 할
 				mainClasses.MainController.mainFrame.getLogPanel().setVisible(false);

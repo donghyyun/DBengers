@@ -17,7 +17,7 @@ public class JoinFrame extends JFrame{
 	public static final int marginHeight = frameHeight / 20;
 	public static final int marginWidth = frameWidth / 20;
 	
-	public JoinUserPanel usrPanel;
+	public JoinUserPanel joinUserPanel;
 	
 
 	public void setThis() {
@@ -25,7 +25,7 @@ public class JoinFrame extends JFrame{
 		this.setLocation(startX, startY);
 		this.setSize(frameWidth, frameHeight);
 		this.setVisible(true);
-		usrPanel = new JoinUserPanel();
-		getContentPane().add(usrPanel);
+		joinUserPanel = new JoinUserPanel();
+		getContentPane().add(joinUserPanel);
 	}
 }
