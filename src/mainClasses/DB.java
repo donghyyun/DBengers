@@ -142,8 +142,8 @@ public class DB {
 					pstmt2.setString(16, "facebook." + getRandomString(4) + ".com");	// artist facebook facebook. +random+ .com
 					pstmt2.setString(17, "twitter." + getRandomString(4) + ".com");	// artist twitter twitter. + random + .com
 					
-//					System.out.println("artist : " + i);
-//					System.out.println(pstmt2);
+					System.out.println("artist : " + i);
+					System.out.println(pstmt2);
 					pstmt2.executeUpdate();
 				}
 				else {
@@ -152,8 +152,8 @@ public class DB {
 				
 				pstmt.setString(17, "null");	// liked_artist
 				
-//				System.out.println("user list : " + i);
-//				System.out.println(pstmt);
+				System.out.println("user list : " + i);
+				System.out.println(pstmt);
 				 pstmt.executeUpdate();
 				 
 			} catch (SQLException e) {
