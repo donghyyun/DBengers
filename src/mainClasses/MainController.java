@@ -8,6 +8,6 @@ public class MainController {
 		 //TODO Auto-generated method stub
 		mainFrame.setThis();
 		mainFrame.add(mainFrame.logPanel);
-		DB.getInstance().addTuples();
+		//DB.getInstance().addTuples();
 	}
 }
