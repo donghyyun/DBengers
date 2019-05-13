@@ -1,5 +1,10 @@
 package mainClasses;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Random;
 
 public class DB {
 	private Connection con = null;
@@ -21,22 +26,190 @@ public class DB {
 	
 	public void addTuples() {
 		PreparedStatement pstmt;
-		String tableName = "test ";
-		String sql = "INSERT INTO " + tableName + "(num) VALUES " + "(?)";
+		PreparedStatement pstmt2;
+		String tableName = "User ";
+		String tableName2 = "Artist ";
+		String sql = "INSERT INTO " + tableName + "(name, id, password, password_change_date, nickname, birthday, gender, address, profile_photo, email, phone_num, voucher_name, is_artist, is_block, alarm_to_mail, alarm_to_sms, liked_artist) VALUES " + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql2 = "INSERT INTO " + tableName2 + "(id, name, birthday, introduction, debut_date, debut_song, type, gender, agency, nationality, constellation, blood_type, num_stars, fanclub, youtube, facebook, twitter) VALUES " + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";		
 		
-		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 1; i <= 100; i++) {
 			try {
+				
 				pstmt = con.prepareStatement(sql);
-				pstmt.setInt(1, (int) (Math.random() * 100) + 1);
+				String name = "name"+getRandomString(4);
+				String id = "id"+getRandomString(4);
+				Date bday = getRandomDate();
+				
+				pstmt.setString(1, name);	// name
+				pstmt.setString(2, id);	// id
+				pstmt.setString(3, getRandomString(6));	// password
+				
+				pstmt.setDate(4, getRandomDate());	// password_change_date
+				
+				pstmt.setString(5, "n"+getRandomString(7));	// nickname
+				
+				pstmt.setDate(6, bday);	// birthday
+				
+				if (i%2 == 0) {
+					// 2의 배수면 M
+					pstmt.setString(7, "M");	// gender
+				} else {
+					// else, F
+					pstmt.setString(7, "F");	// gender
+				}
+				pstmt.setString(8, getRandomString(10));	// address
+				pstmt.setString(9, getRandomString(10));	// profile_photo
+				pstmt.setString(10, name + "@gmail.com");	// email
 				
 				
-				pstmt.executeUpdate();
+				pstmt.setString(11, getRandomPhoneNum());	// phone_num
+				
+				if (i%2 == 0) {
+					pstmt.setString(12, "Unlimited Streaming");	// voucher_name
+				}
+				else if (i%3 == 0) {
+					pstmt.setString(12, "300 Streaming");	// voucher_name
+				}
+				else {
+					pstmt.setString(12, "100 Streaming");	// voucher_name
+				}
+				pstmt.setInt(14, (int) 0);							// is_block
+				
+				if (i%2 ==0) {
+					// 2의 배수면 0
+					pstmt.setInt(15, 0);	// alarm_to_mail
+				} else {
+					pstmt.setInt(15, 1);
+				}
+				
+				if (i%3 ==0) {
+					// 3의 배수면 0
+					pstmt.setInt(16, 0);	// alarm_to_sms
+				} else {
+					pstmt.setInt(16, 1);
+				}
+				
+				if (i%5 == 0) {
+					pstmt.setInt(13, 1);	// is_artist -> yes
+					// set up for artist table
+					pstmt2 = con.prepareStatement(sql2);
+					
+					pstmt2.setString(1, id);	// artist id (user id)
+					
+					if (i%2 == 0) { 
+						pstmt2.setString(2, name);	// artist name (짝수 : real name = artist name, 홀수 : another random name)
+					} else {
+						pstmt2.setString(2,  "name" + getRandomString(4));
+					}
+					pstmt2.setDate(3, bday);
+					
+					pstmt2.setString(4, "hi! my name is " + name);	// artist introduction
+					
+					pstmt2.setDate(5, addDate(bday, i));	// artist debut_date <- real birthday + 20 + i years
+					
+					pstmt2.setString(6, "song" + getRandomString(4));	// artist debut_song
+					if (i%2 ==0) {
+						pstmt2.setString(7, "solo");	// artist type solo
+					} else {
+						pstmt2.setString(7, "group");	// artist type group
+					}
+					if (i%2 ==0) {
+						pstmt2.setString(8, "M");	// artist gender
+					} else {
+						pstmt2.setString(8, "F");	// artist gender
+					}
+					
+					pstmt2.setString(9, "agency" + getRandomString(4));	// artist agency
+					pstmt2.setString(10, "nation" + getRandomString(4));	// artist nationality
+					pstmt2.setString(11, "const" + getRandomString(4));	// artist constellation
+					
+					if ((i/5)%4==0) {
+						pstmt2.setString(12, "A");	// artist blood type = A, B, AB, O
+					} 
+					else if ((i/5)%4 == 1) {
+						pstmt2.setString(12, "B");	// artist blood type = A, B, AB, O
+					} 
+					else if ((i/5)%4 == 2) {
+						pstmt2.setString(12, "AB");	// artist blood type = A, B, AB, O
+					} 
+					else {
+						pstmt2.setString(12, "O");	// artist blood type = A, B, AB, O
+					}
+					
+					pstmt2.setInt(13, 0);	// artist num_stars = 0
+					pstmt2.setString(14, "www." + getRandomString(4) + ".com");	// artist fanclub www.+random+.com
+					pstmt2.setString(15, "youtube." + getRandomString(4) + ".com");	// artist youtube youtube. +random+ .com
+					pstmt2.setString(16, "facebook." + getRandomString(4) + ".com");	// artist facebook facebook. +random+ .com
+					pstmt2.setString(17, "twitter." + getRandomString(4) + ".com");	// artist twitter twitter. + random + .com
+					
+//					System.out.println("artist : " + i);
+//					System.out.println(pstmt2);
+					pstmt2.executeUpdate();
+				}
+				else {
+					pstmt.setInt(13, 0);	// is_artist -> no
+				}
+				
+				pstmt.setString(17, "null");	// liked_artist
+				
+//				System.out.println("user list : " + i);
+//				System.out.println(pstmt);
+				 pstmt.executeUpdate();
+				 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private static String getRandomPhoneNum()
+	{
+		Random rand = new Random();
+		int mid = rand.nextInt(9000)+1000;
+		int end = rand.nextInt(9000)+1000;
+		String phoneNum = "010-"+Integer.toString(mid)+"-"+Integer.toString(end);
+		return phoneNum;
+	}
+	
+	private static Date addDate(Date date, int num)
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.YEAR, num/5 + 20);
+		
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String tempDate = sdFormat.format(new Date(cal.getTimeInMillis()));
+		
+		
+		return new Date(cal.getTimeInMillis());
+	}
+	
+	private static Date getRandomDate()
+	{
+		Random random = new Random();
+		int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
+		int maxDay = (int) LocalDate.of(2019, 5, 1).toEpochDay();
+		long randomDay = minDay + random.nextInt(maxDay - minDay);
+
+		LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
+
+		return Date.valueOf(randomBirthDate);
+	}
+	
+	
+	private static String getRandomString(int length)
+	{
+	  StringBuffer buffer = new StringBuffer();
+	  Random random = new Random();
+	 
+	  char chars[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+	 
+	  for (int i=0 ; i<length ; i++)
+	  {
+	    buffer.append(chars[random.nextInt(chars.length)]);
+	  }
+	  return buffer.toString();
 	}
 	
 	public void showDatabases() {
