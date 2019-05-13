@@ -8,10 +8,10 @@ import interfaces.Setting;
 import mainClasses.JoinFrame;
 
 public class JoinUserPanel extends JPanel implements Setting {
-	private JoinUserInfoPanel userInfoPanel = new JoinUserInfoPanel();
-	private JoinRegisterButton regButton = new JoinRegisterButton();
-	private JoinCancelButton canButton = new JoinCancelButton();
-	private JoinIdCheckButton idCheckButton = new JoinIdCheckButton();
+	public JoinUserInfoPanel joinUserInfoPanel = new JoinUserInfoPanel();
+	public JoinRegisterButton regButton = new JoinRegisterButton();
+	public JoinCancelButton canButton = new JoinCancelButton();
+	public JoinIdCheckButton idCheckButton = new JoinIdCheckButton();
 	
 	public JoinUserPanel() {this.setThis(null);}
 
@@ -27,16 +27,16 @@ public class JoinUserPanel extends JPanel implements Setting {
 	@Override
 	public void setComponents() {
 		// TODO Auto-generated method stub
-		userInfoPanel.setThis(null);
-		regButton.setThis(userInfoPanel);
+		joinUserInfoPanel.setThis(null);
+		regButton.setThis(joinUserInfoPanel);
 		canButton.setThis(regButton);
-		idCheckButton.setThis(userInfoPanel);
+		idCheckButton.setThis(joinUserInfoPanel);
 	}
 
 	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
-		this.add(userInfoPanel);
+		this.add(joinUserInfoPanel);
 		this.add(regButton);
 		this.add(canButton);
 		this.add(idCheckButton);

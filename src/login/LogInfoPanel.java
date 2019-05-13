@@ -10,8 +10,8 @@ import javax.swing.JTextField;
 public class LogInfoPanel extends JPanel implements interfaces.Setting{
 	private JLabel idLabel = new JLabel("ID:  ");
 	private JLabel pwLabel = new JLabel("Password:  ");
-	private JTextField idTextF = new JTextField();
-	private JPasswordField pwTextF = new JPasswordField();
+	public JTextField idTextF = new JTextField();
+	public JPasswordField pwTextF = new JPasswordField();
 	
 	@Override
 	public void setThis(Component prevComp) {
@@ -29,5 +29,4 @@ public class LogInfoPanel extends JPanel implements interfaces.Setting{
 		this.add(pwLabel);
 		this.add(pwTextF);
 	}
-	
 }

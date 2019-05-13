@@ -17,10 +17,22 @@ import javax.swing.ScrollPaneConstants;
 public class JoinUserInfoPanel extends JPanel implements Setting {
 	private JLabel[] labels = {new JLabel("ID: "), new JLabel("PW: "), /*new JLabel("PW Check: "),*/new JLabel("Name: "),  new JLabel("Nickname: ")
 								, new JLabel("Birthday: "), new JLabel("Address: "), new JLabel("Profile Photo: "), new JLabel("E-mail: ")
-								, new JLabel("Phone num: "), new JLabel("Alarm: ")};
-	private Component[] fields = {new JTextField(), new JPasswordField(), new JTextField(), new JTextField()
-								, new JTextField(), new JTextField(), new JTextField(), new JTextField()
-								, new JTextField(), new JTextField()};
+								, new JLabel("Phone num: "), new JLabel("Gender: ")};
+	
+	public JTextField idTextF = new JTextField();
+	public JPasswordField pwTextF = new JPasswordField();
+	public JTextField nameTextF = new JTextField();
+	public JTextField nickNameTextF = new JTextField();
+	public JTextField birthdayTextF = new JTextField();
+	public JTextField addressTextF = new JTextField();
+	public JTextField profilePhotoTextF = new JTextField();
+	public JTextField eMailTextF = new JTextField();
+	public JTextField phoneNumTextF = new JTextField();
+	public JTextField genderTextF = new JTextField();
+	
+	private Component[] fields = {idTextF, pwTextF, nameTextF, nickNameTextF
+								, birthdayTextF, addressTextF, profilePhotoTextF, eMailTextF
+								, phoneNumTextF, genderTextF};
 	
 	public static Font font = new Font ("Arial", Font.BOLD, JoinFrame.frameHeight / 30);
 	

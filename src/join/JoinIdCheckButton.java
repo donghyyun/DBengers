@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import interfaces.Setting;
+import mainClasses.DB;
 import mainClasses.JoinFrame;
 
 public class JoinIdCheckButton extends JButton implements Setting {
@@ -33,7 +35,10 @@ public class JoinIdCheckButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			//register new 'user' in db
+			if(DB.getInstance().checkId(mainClasses.MainController.joinFrame.joinUserPanel.joinUserInfoPanel.idTextF.getText()))
+				JOptionPane.showMessageDialog(null, "You can use it", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			else
+				JOptionPane.showMessageDialog(null, "Use another ID", "WARNING", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

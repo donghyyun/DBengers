@@ -14,7 +14,7 @@ public class MainFrame extends JFrame {
 	public static int frameHeight = screenHeight * 2 / 3;
 	
 	
-	login.LogPanel logPanel = new login.LogPanel();
+	private login.LogPanel logPanel = new login.LogPanel();
 	
 	public void setThis() {
 		this.setBounds(startX, startY, frameWidth, frameHeight);
@@ -22,4 +22,6 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	public login.LogPanel getLogPanel() {return logPanel;}
 }

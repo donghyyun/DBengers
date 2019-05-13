@@ -1,5 +1,8 @@
 package mainClasses;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -23,7 +26,55 @@ public class DB {
 	
 	public static DB getInstance() {return db;}
 	
+	private static String getRandomPhoneNum()
+	{
+		Random rand = new Random();
+		int mid = rand.nextInt(9000)+1000;
+		int end = rand.nextInt(9000)+1000;
+		String phoneNum = "010-"+Integer.toString(mid)+"-"+Integer.toString(end);
+		return phoneNum;
+	}
 	
+	private static Date addDate(Date date, int num)
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.YEAR, num/5 + 20);
+		
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String tempDate = sdFormat.format(new Date(cal.getTimeInMillis()));
+		
+		
+		return new Date(cal.getTimeInMillis());
+	}
+	
+	private static Date getRandomDate()
+	{
+		Random random = new Random();
+		int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
+		int maxDay = (int) LocalDate.of(2019, 5, 1).toEpochDay();
+		long randomDay = minDay + random.nextInt(maxDay - minDay);
+
+		LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
+
+		return Date.valueOf(randomBirthDate);
+	}
+	
+	
+	private static String getRandomString(int length)
+	{
+	  StringBuffer buffer = new StringBuffer();
+	  Random random = new Random();
+	 
+	  char chars[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+	 
+	  for (int i=0 ; i<length ; i++)
+	  {
+	    buffer.append(chars[random.nextInt(chars.length)]);
+	  }
+	  return buffer.toString();
+	}
+
 	public void addTuples() {
 		PreparedStatement pstmt;
 		PreparedStatement pstmt2;
@@ -163,76 +214,85 @@ public class DB {
 		}
 	}
 	
-	private static String getRandomPhoneNum()
-	{
-		Random rand = new Random();
-		int mid = rand.nextInt(9000)+1000;
-		int end = rand.nextInt(9000)+1000;
-		String phoneNum = "010-"+Integer.toString(mid)+"-"+Integer.toString(end);
-		return phoneNum;
-	}
-	
-	private static Date addDate(Date date, int num)
-	{
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		cal.add(Calendar.YEAR, num/5 + 20);
-		
-		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String tempDate = sdFormat.format(new Date(cal.getTimeInMillis()));
-		
-		
-		return new Date(cal.getTimeInMillis());
-	}
-	
-	private static Date getRandomDate()
-	{
-		Random random = new Random();
-		int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
-		int maxDay = (int) LocalDate.of(2019, 5, 1).toEpochDay();
-		long randomDay = minDay + random.nextInt(maxDay - minDay);
-
-		LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
-
-		return Date.valueOf(randomBirthDate);
-	}
-	
-	
-	private static String getRandomString(int length)
-	{
-	  StringBuffer buffer = new StringBuffer();
-	  Random random = new Random();
-	 
-	  char chars[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-	 
-	  for (int i=0 ; i<length ; i++)
-	  {
-	    buffer.append(chars[random.nextInt(chars.length)]);
-	  }
-	  return buffer.toString();
-	}
-	
-	public void showDatabases() {
-		// Statement는 정적 SQL문을 실행하고 결과를 반환받기 위한 객체다. 
-    	// Statement하나당 한개의 ResultSet 객체만을 열 수 있다.
-    	Statement st = null;
-    	ResultSet result = null;
+	public void insertUserList(String [] infos) {
+		PreparedStatement pstmt = null;
+		//(name,id,password,now(),nickname, birthday, gender, address, profile_photo, email, phone_num,voucher_name,is_artist,is_block,alarm_to_mail,alarm_to_sms,liked_artist);
+		String sql = "INSERT INTO User VALUES(?, ?, ?,now(), ?, ?, ?, ?, ?, ?, ?, null, false, false, false , false, null)";
+    	System.out.println("insertUserList entered!!");
     	
-	    	try {
-				st = con.createStatement();
-				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
-	    		result = st.executeQuery("show tables");
-	    		
-	    		// 결과를 하나씩 출력한다.
-		    	while (result.next()){
-		    		String str = result.getNString(1);
-		    		System.out.println(str);
-		    	}
-			} catch (SQLException e) {
-				System.out.println("createStatement problem: ");
-				e.printStackTrace();
-			}
+    	try {
+    		pstmt = con.prepareStatement(sql);
+    		for (int i = 0; i < infos.length; i++) {
+    			if (i == 4) {
+    				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    				Calendar c = Calendar.getInstance();
+    				try{
+    				   c.setTime(sdf.parse(infos[i]));
+    				}catch(ParseException e){e.printStackTrace();}
+    				
+    				c.add(Calendar.DAY_OF_MONTH, 1);  
+    				String newDate = sdf.format(c.getTime());  
+    				pstmt.setDate(i + 1, Date.valueOf(newDate));
+    			}
+    				
+    			else
+    				pstmt.setString(i + 1, infos[i]);
+    		}
+    		pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}    	
 	}
+    		
+	
+	public boolean checkLogin(String id, String pw) {
+		Statement st = null;
+		ResultSet result = null;
+
+    	System.out.println("checkID entered!!");
+    	try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		result = st.executeQuery("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
+    		System.out.println("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
+    		if (!result.next()) {
+    			System.out.println("return false");
+    			return false;
+    		}
+
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}
+    	System.out.println("return true");
+    	return true;
+	}
+	
+	public boolean checkId(String id) {
+		Statement st = null;
+		ResultSet result = null;
+
+    	System.out.println("checkID entered!!");
+    	try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		result = st.executeQuery("SELECT * FROM User WHERE id='" + id +"'");
+    		System.out.println("SELECT * FROM User WHERE id='" + id + "'");
+    		if (!result.next()) {
+    			System.out.println("return true");
+    			return true;
+    		}
+    		
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}
+    	System.out.println("return false");
+    	return false;
+	}
+	
+	
 	
 	public void closeConnection(Connection con) {
 		try {
@@ -242,6 +302,4 @@ public class DB {
             e.printStackTrace();
         }
 	}
-	
-	
 }
