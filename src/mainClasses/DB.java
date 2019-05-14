@@ -12,7 +12,7 @@ public class DB {
 	private static DB db = new DB();
 
 	private DB() {        	
-        String url = "jdbc:mysql://172.17.193.12/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.192.171/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "ysh", "thisgood");
@@ -72,8 +72,8 @@ public class DB {
 	  }
 	  return buffer.toString();
 	}
-
-	public void addTuples() {
+	
+	public void Usergenerator() {
 		PreparedStatement pstmt;
 		PreparedStatement pstmt2;
 		String tableName = "User ";
