@@ -20,6 +20,7 @@ public class LogButtonActionListener implements ActionListener{
 				//지울때는 항상 setVisible(false) 할
 				mainClasses.MainController.mainFrame.logPanel.setVisible(false);
 				mainClasses.MainController.mainFrame.remove(mainClasses.MainController.mainFrame.logPanel);
+				mainClasses.MainController.mainFrame.add(mainClasses.MainController.mainFrame.mainPanel);
 			
 			}	
 			else {

@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import interfaces.Setting;
@@ -20,6 +21,8 @@ public class MainPanel extends JPanel implements Setting {
 	public MainGenreButton genreButton = new MainGenreButton();
 	public MainLikeButton likeButton = new MainLikeButton();
 	public MainDateButton dateButton = new MainDateButton();
+	
+	public JScrollPane scroll = new JScrollPane();
 	
 	public static final int width = mainClasses.MainFrame.frameWidth;
 	public static final int height = mainClasses.MainFrame.frameWidth;
