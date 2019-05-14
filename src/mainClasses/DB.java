@@ -10,6 +10,7 @@ import java.util.Random;
 public class DB {
 	private Connection con = null;
 	private static DB db = new DB();
+	private String[] artist_ids = new String[20];
 
 	private DB() {        	
         String url = "jdbc:mysql://172.17.192.171/DBengers?serverTimezone=UTC";
@@ -72,7 +73,49 @@ public class DB {
 	  }
 	  return buffer.toString();
 	}
-	
+	public void Musicgenerator() {
+		PreparedStatement pstmt;
+		String tableName = "Music ";
+		String sql = "INSERT INTO " + tableName + "(music_id, artist_id, album_id, name, released_date, genre, lyrics, hashtag, like_num, play_num) VALUES " + "(?,?,?,?,?,?,?,?,?,?)";
+		
+		for (int i = 1; i <= 20; i++) {
+			try {
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, i);	// music id
+				pstmt.setString(2, artist_ids[i-1]);	// artist id (which is user id of artist)
+				pstmt.setInt(3, i);	// album id
+				pstmt.setString(4, "music"+i);	// music name
+				pstmt.setDate(5, getRandomDate());	// released date
+				if (i%2 == 0) {
+					pstmt.setString(6, "Hiphop");
+				}
+				else if (i%5 == 0) {
+					pstmt.setString(6, "Balad");
+				}
+				else if (i%7 == 0) {
+					pstmt.setString(6, "R&B");
+				}
+				else if (i%9 == 0) {
+					pstmt.setString(6, "Pop");
+				}
+				else {
+					pstmt.setString(6, "Classic");
+				}
+				pstmt.setString(7, "lyric"+i+" "+getRandomString(10));	// lyrics
+				pstmt.setString(8, "#"+getRandomString(4));	// hash tag
+				pstmt.setInt(9, 0);	// like_num
+				pstmt.setInt(10, 0);	// play_num
+				
+//				System.out.println(pstmt);
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 	public void Usergenerator() {
 		PreparedStatement pstmt;
 		PreparedStatement pstmt2;
@@ -80,7 +123,7 @@ public class DB {
 		String tableName2 = "Artist ";
 		String sql = "INSERT INTO " + tableName + "(name, id, password, password_change_date, nickname, birthday, gender, address, profile_photo, email, phone_num, voucher_name, is_artist, is_block, alarm_to_mail, alarm_to_sms, liked_artist) VALUES " + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		String sql2 = "INSERT INTO " + tableName2 + "(id, name, birthday, introduction, debut_date, debut_song, type, gender, agency, nationality, constellation, blood_type, num_stars, fanclub, youtube, facebook, twitter) VALUES " + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";		
-		
+		int j = 0;
 		for (int i = 1; i <= 100; i++) {
 			try {
 				
@@ -139,11 +182,16 @@ public class DB {
 				}
 				
 				if (i%5 == 0) {
+					
 					pstmt.setInt(13, 1);	// is_artist -> yes
 					// set up for artist table
 					pstmt2 = con.prepareStatement(sql2);
 					
 					pstmt2.setString(1, id);	// artist id (user id)
+					
+					// since this user is artist, store this id for putting into artist_id in music table
+					artist_ids[j] = id;
+					j++;
 					
 					if (i%2 == 0) { 
 						pstmt2.setString(2, name);	// artist name (짝수 : real name = artist name, 홀수 : another random name)

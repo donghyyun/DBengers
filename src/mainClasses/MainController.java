@@ -8,10 +8,9 @@ public class MainController {
 		 //TODO Auto-generated method stub
 		mainFrame.setThis();
 		mainFrame.add(mainFrame.logPanel);
-		
 		//DB쓰고나서 closeConnection() 해주세요!!
-//		DB.getInstance().Usergenerator();
-	
-		//DB.getInstance().closeConnection();
+		DB.getInstance().Usergenerator();
+		DB.getInstance().Musicgenerator();
+		DB.getInstance().closeConnection();
 	}
 }
