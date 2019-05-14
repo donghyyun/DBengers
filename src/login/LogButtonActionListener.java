@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import mainClasses.DB;
+import join.JoinNextButton;;
 
 public class LogButtonActionListener implements ActionListener{
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -40,9 +40,12 @@ public class LogButtonActionListener implements ActionListener{
 				mainClasses.MainController.joinFrame = new mainClasses.JoinFrame();
 				mainClasses.MainController.joinFrame.setThis();
 			}
-				
-			else
-				System.out.println("Artist signup");
+			
+			else	// artist registration
+			{
+				mainClasses.MainController.joinFrame = new mainClasses.JoinFrame();
+				mainClasses.MainController.joinFrame.setThis2();
+			}
 		}
 	}
 	

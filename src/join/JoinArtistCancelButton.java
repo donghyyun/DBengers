@@ -7,17 +7,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import interfaces.Setting;
-import join.JoinRegisterButton.Listener;
-import mainClasses.JoinFrame;
+import mainClasses.JoinArtistFrame;
 
-public class JoinCancelButton extends JButton implements Setting {
-
+public class JoinArtistCancelButton extends JButton implements Setting{
+	
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setText("Cancel");
-		this.setFont(JoinUserInfoPanel.font);
+		this.setFont(JoinArtistInfoPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds(prevComp.getX() + prevComp.getWidth() + JoinFrame.marginWidth / 2, prevComp.getY(), prevComp.getWidth(), prevComp.getHeight());
+		this.setBounds(prevComp.getX() + prevComp.getWidth() + JoinArtistFrame.marginWidth / 2, prevComp.getY(), prevComp.getWidth(), prevComp.getHeight());
 		this.addActionListener(new Listener());
 	}
 
@@ -27,8 +26,10 @@ public class JoinCancelButton extends JButton implements Setting {
 	
 	class Listener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			mainClasses.MainController.joinFrame.setVisible(false);
-			mainClasses.MainController.joinFrame = null;
+			
+			mainClasses.MainController.joinArtistFrame.setVisible(false);
+			mainClasses.MainController.joinArtistFrame = null;
 		}
 	}
+
 }

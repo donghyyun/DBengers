@@ -11,7 +11,6 @@ import main.MainMyPlayListButton.Listener;
 
 public class MainMyPageButton extends JButton implements Setting {
 
-	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setText("My Page");
@@ -22,13 +21,11 @@ public class MainMyPageButton extends JButton implements Setting {
 		this.addActionListener(new Listener());
 	}
 
-	@Override
 	public void setComponents() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
 
@@ -36,7 +33,6 @@ public class MainMyPageButton extends JButton implements Setting {
 	
 	public class Listener implements ActionListener{
 
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
