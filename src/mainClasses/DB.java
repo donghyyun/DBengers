@@ -4,9 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Random;
 
 public class DB {
@@ -294,7 +292,7 @@ public class DB {
 	
 	
 	
-	public void closeConnection(Connection con) {
+	public void closeConnection() {
 		try {
             if(con != null && !con.isClosed())
                 con.close();

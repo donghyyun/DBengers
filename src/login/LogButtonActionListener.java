@@ -14,12 +14,12 @@ public class LogButtonActionListener implements ActionListener{
 		// TODO Auto-generated method stub
 		
 		if (e.getSource().toString().contains("text=Login")) {			
-			if(DB.getInstance().checkLogin(mainClasses.MainController.mainFrame.getLogPanel().getLogInfoPanel().idTextF.getText()
-							, new String(mainClasses.MainController.mainFrame.getLogPanel().getLogInfoPanel().pwTextF.getPassword()))) {
+			if(DB.getInstance().checkLogin(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText()
+							, new String(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().pwTextF.getPassword()))) {
 				
 				//지울때는 항상 setVisible(false) 할
-				mainClasses.MainController.mainFrame.getLogPanel().setVisible(false);
-				mainClasses.MainController.mainFrame.remove(mainClasses.MainController.mainFrame.getLogPanel());
+				mainClasses.MainController.mainFrame.logPanel.setVisible(false);
+				mainClasses.MainController.mainFrame.remove(mainClasses.MainController.mainFrame.logPanel);
 			
 			}	
 			else {
