@@ -11,6 +11,7 @@ public class DB {
 	private Connection con = null;
 	private static DB db = new DB();
 	private String[] artist_ids = new String[20];
+	private String[] artist_names = new String[20];
 
 	private DB() {        	
         String url = "jdbc:mysql://172.17.192.171/DBengers?serverTimezone=UTC";
@@ -72,6 +73,36 @@ public class DB {
 	    buffer.append(chars[random.nextInt(chars.length)]);
 	  }
 	  return buffer.toString();
+	}
+	public void StarPostgenerator() {
+		PreparedStatement pstmt;
+		String tableName = "Star_Post ";
+		String sql = "INSERT INTO " + tableName + "(user_id, artist_name, star_post_id, title, description, photo, date, like_num, view_num, video) VALUES " + "(?,?,?,?,?,?,?,?,?,?)";
+		for (int i = 1; i <= 20; i++) {
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, artist_ids[i-1]);	// user_id (artist)
+				pstmt.setString(2, artist_names[i-1]);	// artist_name
+				pstmt.setInt(3, i);	// star_post_id
+				pstmt.setString(4, "title: " + getRandomString(4));	// title
+				pstmt.setString(5, "desc : " + getRandomString(5));	// description
+				if (i%2 == 0) {
+					pstmt.setString(6, "photo : " + getRandomString(4));	// photo
+					pstmt.setString(10, "null");	// video
+				} else {
+					pstmt.setString(10, "video : " + getRandomString(4));	// video
+					pstmt.setString(6, "null");	// photo
+				}
+				pstmt.setDate(7, getRandomDate());	// date
+				pstmt.setInt(8, 0);	// like_num
+				pstmt.setInt(9, 0);	// view_num (only for video)
+				
+				pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	public void Musicgenerator() {
 		PreparedStatement pstmt;
@@ -191,13 +222,17 @@ public class DB {
 					
 					// since this user is artist, store this id for putting into artist_id in music table
 					artist_ids[j] = id;
-					j++;
 					
 					if (i%2 == 0) { 
 						pstmt2.setString(2, name);	// artist name (짝수 : real name = artist name, 홀수 : another random name)
+						artist_names[j] = name;
 					} else {
-						pstmt2.setString(2,  "name" + getRandomString(4));
+						String tempname = getRandomString(4);
+						pstmt2.setString(2,  "name" + tempname);
+						artist_names[j] = "name"+tempname;
 					}
+					j++;
+					
 					pstmt2.setDate(3, bday);
 					
 					pstmt2.setString(4, "hi! my name is " + name);	// artist introduction

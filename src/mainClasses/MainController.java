@@ -11,6 +11,7 @@ public class MainController {
 		//DB쓰고나서 closeConnection() 해주세요!!
 		DB.getInstance().Usergenerator();
 		DB.getInstance().Musicgenerator();
+		DB.getInstance().StarPostgenerator();
 		DB.getInstance().closeConnection();
 	}
 }
