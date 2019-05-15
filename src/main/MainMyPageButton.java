@@ -39,7 +39,8 @@ public class MainMyPageButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			mainClasses.MainController.myPageFrame = new mainClasses.MyPageFrame();
+			mainClasses.MainController.myPageFrame.setThis();
 		}
 	}
 

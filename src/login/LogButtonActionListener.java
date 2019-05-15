@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import mainClasses.DB;
+import mainClasses.JoinFrame;
 
 public class LogButtonActionListener implements ActionListener{
 
@@ -41,8 +42,10 @@ public class LogButtonActionListener implements ActionListener{
 				mainClasses.MainController.joinFrame.setThis();
 			}
 				
-			else
-				System.out.println("Artist signup");
+			else {
+				mainClasses.MainController.joinFrame = new mainClasses.JoinFrame();
+				mainClasses.MainController.joinFrame.setThis2();
+			}
 		}
 	}
 	

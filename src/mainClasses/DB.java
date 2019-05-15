@@ -14,7 +14,7 @@ public class DB {
 	private String[] artist_names = new String[20];
 
 	private DB() {        	
-        String url = "jdbc:mysql://172.17.193.38/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.223.163/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "kdh", "thisgood");
@@ -373,6 +373,25 @@ public class DB {
     	return false;
 	}
 	
+	
+	public void myPageUserList(String id) {
+    	
+    	Statement st = null;
+		ResultSet result = null;
+
+    	System.out.println("MyPage entered!!");
+    	
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		result = st.executeQuery("SELECT * FROM User WHERE id='"+id+"'" );
+    		System.out.println("SELECT * FROM User WHERE id='" + id + "'");
+    		
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}    	
+	}
 	
 	
 	public void closeConnection() {

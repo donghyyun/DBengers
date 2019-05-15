@@ -1,23 +1,21 @@
 package mainClasses;
 
-import java.awt.Component;
-
 import javax.swing.JFrame;
 
-import join.JoinUserPanel;
+import join.JoinArtistPanel;
 
-public class JoinFrame extends JFrame{
-	public JoinFrame() {
+public class JoinArtistFrame extends JFrame{
+	public JoinArtistFrame() {
 	}
 	public static final int startX = mainClasses.MainFrame.startX + mainClasses.MainFrame.frameWidth / 3;
 	public static final int startY = mainClasses.MainFrame.startY - mainClasses.MainFrame.frameHeight / 4;
 	public static final int frameWidth = mainClasses.MainFrame.frameWidth;
-	public static final int frameHeight = mainClasses.MainFrame.frameHeight;
+	public static final int frameHeight = (int) (mainClasses.MainFrame.frameHeight*1.2);
 	
 	public static final int marginHeight = frameHeight / 20;
 	public static final int marginWidth = frameWidth / 20;
 	
-	public JoinUserPanel joinUserPanel;
+	public JoinArtistPanel joinArtistPanel;
 	
 
 	public void setThis() {
@@ -25,16 +23,7 @@ public class JoinFrame extends JFrame{
 		this.setLocation(startX, startY);
 		this.setSize(frameWidth, frameHeight);
 		this.setVisible(true);
-		joinUserPanel = new JoinUserPanel();
-		getContentPane().add(joinUserPanel);
-	}
-	
-	public void setThis2() {
-		getContentPane().setLayout(null);
-		this.setLocation(startX, startY);
-		this.setSize(frameWidth, frameHeight);
-		this.setVisible(true);
-		joinUserPanel = new JoinUserPanel(2);
-		getContentPane().add(joinUserPanel);
+		joinArtistPanel = new JoinArtistPanel();
+		getContentPane().add(joinArtistPanel);
 	}
 }
