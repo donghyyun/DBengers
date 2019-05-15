@@ -38,7 +38,7 @@ public class MyPagePurchaseButton extends JButton implements Setting {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
-			DB.getInstance().myPageUserList(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText());
+			
 	
 		}
 	}

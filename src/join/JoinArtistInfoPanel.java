@@ -16,7 +16,7 @@ public class JoinArtistInfoPanel extends JPanel implements Setting{
 
 	private JLabel[] labels = {new JLabel("Artist name: "), new JLabel("Birthday: "), new JLabel("Introduce: "),  new JLabel("Debut date: ")
 			, new JLabel("Debut song: "), new JLabel("Type: "), new JLabel("Gender: "), new JLabel("Agency: "), new JLabel("Nationality: ")
-			, new JLabel("Constellation: "), new JLabel("Blood type: "), new JLabel("Photo: "), new JLabel("Fanclub: "), new JLabel("Youtube: ")
+			, new JLabel("Constellation: "), new JLabel("Blood type: "), new JLabel("Fanclub: "), new JLabel("Youtube: ")
 			, new JLabel("Facebook: "), new JLabel("Twitter: ")};
 
 	public JLabel typeLabel = new JLabel("Solo/Group");
@@ -28,7 +28,7 @@ public class JoinArtistInfoPanel extends JPanel implements Setting{
 	public JLabel twitterLabel = new JLabel("URL");
 	
 	public JTextField artistNameTextF = new JTextField();
-	public JTextField birthdayTextF = new JPasswordField();
+	public JTextField birthdayTextF = new JTextField();
 	public JTextField introduceTextF = new JTextField();
 	public JTextField debutDateTextF = new JTextField();
 	public JTextField debutSongTextF = new JTextField();
@@ -38,7 +38,6 @@ public class JoinArtistInfoPanel extends JPanel implements Setting{
 	public JTextField nationalityTextF = new JTextField();
 	public JTextField constellationTextF = new JTextField();
 	public JTextField bloodTypeTextF = new JTextField();
-	public JTextField photoTextF = new JTextField();
 	public JTextField fanclubTextF = new JTextField();
 	public JTextField youtubeTextF = new JTextField();
 	public JTextField facebookTextF = new JTextField();
@@ -46,7 +45,7 @@ public class JoinArtistInfoPanel extends JPanel implements Setting{
 	
 	
 	private Component[] fields = {artistNameTextF,birthdayTextF,introduceTextF,debutDateTextF,debutSongTextF,typeTextF,genderTextF,agencyTextF,nationalityTextF
-			,constellationTextF,bloodTypeTextF,photoTextF,fanclubTextF,youtubeTextF,facebookTextF,twitterTextF};
+			,constellationTextF,bloodTypeTextF,fanclubTextF,youtubeTextF,facebookTextF,twitterTextF};
 	
 	public static Font font = new Font ("Arial", Font.BOLD, JoinArtistFrame.frameHeight / 40);
 	public static Font font2 = new Font ("Arial", Font.PLAIN, JoinArtistFrame.frameHeight / 60);

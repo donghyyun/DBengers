@@ -3,11 +3,13 @@ package myPage;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import interfaces.Setting;
+import mainClasses.DB;
 import mainClasses.JoinFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -28,6 +30,16 @@ public class MyPageUserInfoPanel extends JPanel implements Setting {
 			label.setFont(font);
 			label.setHorizontalAlignment(JLabel.LEFT);
 		}
+	}
+	
+	private void setDbLabels() {
+		ArrayList<String> infos = new ArrayList<String>();
+		
+		infos = DB.getInstance().getUserInfo(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText());
+		
+		for (int i = 0; i < infos.size(); i++) {dblabels[i].setText(infos.get(i));}
+		
+		
 		for (JLabel label : dblabels) {
 			label.setFont(font);
 			label.setHorizontalAlignment(JLabel.LEFT);
@@ -48,6 +60,7 @@ public class MyPageUserInfoPanel extends JPanel implements Setting {
 	public void setComponents() {
 		// TODO Auto-generated method stub
 		setLabels();
+		setDbLabels();
 	}
 
 	@Override

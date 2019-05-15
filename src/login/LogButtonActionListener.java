@@ -30,7 +30,6 @@ public class LogButtonActionListener implements ActionListener{
 				
 				
 		} else if (e.getSource().toString().contains("text=Join")) {
-			System.out.println("Join button pressed");
 			int ans = JOptionPane.showOptionDialog(null, "Do you want to sign up as a Artist?", "User type check", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 			
 			//make question to choose user artist

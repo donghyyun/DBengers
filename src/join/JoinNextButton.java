@@ -37,18 +37,19 @@ private Font font = new Font("Arial", Font.BOLD, JoinUserInfoPanel.font.getSize(
 			mainClasses.MainController.joinArtistFrame.setThis();
 			
 			// Saving to database (User info)
-//			String [] infos = {MainController.joinFrame.joinUserPanel.joinUserInfoPanel.nameTextF.getText(), 
-//					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.idTextF.getText(),
-//					new String(MainController.joinFrame.joinUserPanel.joinUserInfoPanel.pwTextF.getPassword()),
-//					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.nickNameTextF.getText(),
-//					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.birthdayTextF.getText(),
-//					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.genderTextF.getText(),
-//					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.addressTextF.getText(),
-//					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.profilePhotoTextF.getText(),
-//					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.eMailTextF.getText(),
-//					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.phoneNumTextF.getText()};
-//			
-//			DB.getInstance().insertUserList(infos);
+			String [] infos = {MainController.joinFrame.joinUserPanel.joinUserInfoPanel.nameTextF.getText(), 
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.idTextF.getText(),
+					new String(MainController.joinFrame.joinUserPanel.joinUserInfoPanel.pwTextF.getPassword()),
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.nickNameTextF.getText(),
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.birthdayTextF.getText(),
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.genderTextF.getText(),
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.addressTextF.getText(),
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.profilePhotoTextF.getText(),
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.eMailTextF.getText(),
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.phoneNumTextF.getText()};
+			
+			DB.getInstance().insertUserList(infos);
+			JoinArtistRegisterButton.artistId = infos[1];
 			
 			mainClasses.MainController.joinFrame.setVisible(false);
 			mainClasses.MainController.joinFrame = null;
