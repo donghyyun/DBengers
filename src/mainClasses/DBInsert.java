@@ -18,7 +18,7 @@ public class DBInsert {
 	private String[] artist_names = new String[20];
 
 	private DBInsert() {        	
-        String url = "jdbc:mysql://172.17.223.163/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.193.38/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "kdh", "thisgood");

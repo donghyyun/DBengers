@@ -15,10 +15,10 @@ public class DB {
 	private String[] artist_names = new String[20];
 
 	private DB() {        	
-        String url = "jdbc:mysql://172.17.223.163/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.193.38/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "kdh", "thisgood");
+			con = DriverManager.getConnection(url, "ysh", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
