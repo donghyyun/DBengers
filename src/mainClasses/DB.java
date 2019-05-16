@@ -11,11 +11,9 @@ import java.util.Random;
 public class DB {
 	private Connection con = null;
 	private static DB db = new DB();
-	private String[] artist_ids = new String[20];
-	private String[] artist_names = new String[20];
 
 	private DB() {        	
-        String url = "jdbc:mysql://172.17.223.163/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.193.38/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "kdh", "thisgood");
@@ -172,6 +170,7 @@ public class DB {
     	    	infos.add(String.valueOf(result.getBoolean("is_artist")));
     	    	infos.add(String.valueOf(result.getBoolean("alarm_to_mail")));
     	    	infos.add(String.valueOf(result.getBoolean("alarm_to_sms")));
+    	    	break;
     		}
 	    	
     	

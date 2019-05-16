@@ -11,9 +11,10 @@ public class MainController {
 		mainFrame.setThis();
 		mainFrame.add(mainFrame.logPanel);
 		//DB쓰고나서 closeConnection() 해주세요!!
-		//DB.getInstance().Usergenerator();
-		//DB.getInstance().Musicgenerator();
-		//DB.getInstance().StarPostgenerator();
-		//DB.getInstance().closeConnection();
+		/*DBInsert.getInstance().Usergenerator();
+		DBInsert.getInstance().Musicgenerator();
+		DBInsert.getInstance().StarPostgenerator();
+		DBInsert.getInstance().closeConnection();
+		*/
 	}
 }
