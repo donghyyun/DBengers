@@ -6,11 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 import interfaces.Setting;
-import mainClasses.DB;
-import mainClasses.MyPageFrame;
+import mainClasses.*;
 
 public class MyPageChangeSettingsButton extends JButton implements Setting {
 	private Font font = new Font("Arial", Font.BOLD, MyPageUserInfoPanel.font.getSize() / 2);
@@ -35,7 +33,7 @@ public class MyPageChangeSettingsButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
+			MainController.changeSettingFrame = new ChangeSettingFrame();
 		}
 	}
 }

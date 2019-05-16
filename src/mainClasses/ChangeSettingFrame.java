@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 
 public class ChangeSettingFrame extends JFrame{
 	
+	public ChangeSettingFrame() {this.setThis();}
 	
 	public static final int startX = MainFrame.startX + MainFrame.frameWidth / 3;
 	public static final int startY = MainFrame.startY - mainClasses.MainFrame.frameHeight / 4;
