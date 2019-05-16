@@ -13,10 +13,10 @@ public class DB {
 	private static DB db = new DB();
 
 	private DB() {        	
-        String url = "jdbc:mysql://172.17.193.38/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://119.202.40.103/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "ysh", "thisgood");
+			con = DriverManager.getConnection(url, "kdh", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();

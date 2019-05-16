@@ -30,7 +30,7 @@ public class LogPanel extends JPanel implements interfaces.Setting{
 	
 	@Override
 	public void setThis(Component prevComp) {
-		this.setBounds(0, 0, LogPanel.width, LogPanel.height);
+		this.setBounds(0, 0, width, height);
 		this.setLayout(null);
 		addComponents();
 		setComponents();
