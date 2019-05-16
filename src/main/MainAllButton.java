@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import interfaces.Setting;
 
@@ -21,6 +23,7 @@ public class MainAllButton extends JButton implements Setting {
 		this.addActionListener(new Listener());
 	}
 
+
 	@Override
 	public void setComponents() {}
 
@@ -32,7 +35,6 @@ public class MainAllButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			
 		}
 	}
 }
