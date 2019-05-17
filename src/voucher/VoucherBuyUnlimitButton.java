@@ -43,6 +43,8 @@ public class VoucherBuyUnlimitButton extends JButton implements Setting {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			JOptionPane.showMessageDialog(null, "You bought Unlimited Streaming", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			mainClasses.MainController.myPageFrame.setVisible(false);
+			mainClasses.MainController.myPageFrame = null;
 			mainClasses.MainController.voucherFrame.setVisible(false);
 			mainClasses.MainController.voucherFrame = null;
 
