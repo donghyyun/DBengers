@@ -196,29 +196,17 @@ public class DB {
     	return infos;
 	}
 	
-<<<<<<< HEAD
 	public ArrayList<String> voucherInfo() {
     	Statement st = null;
 		ResultSet result = null;
 		String sql = "SELECT * FROM Voucher"; 
 		ArrayList<String> voucherinfos = new ArrayList<String>();
-    	
-=======
-	public ArrayList<String> getPlayListInfo(String id) {
-		Statement st = null;
-		ResultSet result = null;
-		String sql = "SELECT name FROM User_PlayList WHERE id='"+id+"'"; 
-		ArrayList<String> infos = new ArrayList<String>();
-
-    	MyPlayListPanel.numOfPlayList = 0;
->>>>>>> pjh
-    	try {
-    		st = con.createStatement();
+		try {
+			st = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
-    		result = st.executeQuery(sql);
-    		
-    		while (result.next()) {
-<<<<<<< HEAD
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
     			voucherinfos.add(result.getString("voucher_name"));
     			voucherinfos.add(result.getString("voucher_price"));
     			voucherinfos.add(result.getString("download_num"));
@@ -253,7 +241,20 @@ public class DB {
 		}
     	
     	return artists;
-=======
+	}
+	public ArrayList<String> getPlayListInfo(String id) {
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT name FROM User_PlayList WHERE id='"+id+"'"; 
+		ArrayList<String> infos = new ArrayList<String>();
+	
+		MyPlayListPanel.numOfPlayList = 0;
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
     			infos.add(result.getString("name"));
     			MyPlayListPanel.numOfPlayList++;
     		}
@@ -320,7 +321,6 @@ public class DB {
 			System.out.println("addPlayList problem: ");
 			e.printStackTrace();
 		}
->>>>>>> pjh
 	}
 	
 	
