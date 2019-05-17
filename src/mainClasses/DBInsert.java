@@ -16,12 +16,14 @@ public class DBInsert {
 	private static DBInsert db = new DBInsert();
 	private String[] artist_ids = new String[20];
 	private String[] artist_names = new String[20];
+	private String pwd = System.getProperty("user.dir");
+
 
 	private DBInsert() {        	
-        String url = "jdbc:mysql://172.17.193.38/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://119.202.40.103/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "kdh", "thisgood");
+			con = DriverManager.getConnection(url, "ysh", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
@@ -111,7 +113,7 @@ public class DBInsert {
 	public void Musicgenerator() {
 		PreparedStatement pstmt;
 		String tableName = "Music ";
-		String sql = "INSERT INTO " + tableName + "(music_id, artist_id, album_id, name, released_date, genre, lyrics, hashtag, like_num, play_num) VALUES " + "(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO " + tableName + "(music_id, artist_id, album_id, name, released_date, genre, lyrics, like_num, play_num) VALUES " + "(?,?,?,?,?,?,?,?,?)";
 		
 		for (int i = 1; i <= 20; i++) {
 			try {
@@ -138,11 +140,11 @@ public class DBInsert {
 					pstmt.setString(6, "Classic");
 				}
 				pstmt.setString(7, "lyric"+i+" "+getRandomString(10));	// lyrics
-				pstmt.setString(8, "#"+getRandomString(4));	// hash tag
-				pstmt.setInt(9, 0);	// like_num
-				pstmt.setInt(10, 0);	// play_num
+//				pstmt.setString(8, "#"+getRandomString(4));	// hash tag
+				pstmt.setInt(8, 0);	// like_num
+				pstmt.setInt(9, 0);	// play_num
 				
-//				System.out.println(pstmt);
+				System.out.println(pstmt);
 				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -185,7 +187,8 @@ public class DBInsert {
 					pstmt.setString(7, "F");	// gender
 				}
 				pstmt.setString(8, getRandomString(10));	// address
-				pstmt.setString(9, getRandomString(10));	// profile_photo
+//				pstmt.setString(9, "/Users/sihyungyou/eclipse-workspace/DBengers/img/"+id);	// profile_photo
+				pstmt.setString(9, pwd + "/img/" + id);	// profile_photo extract path from java
 				pstmt.setString(10, name + "@gmail.com");	// email
 				
 				

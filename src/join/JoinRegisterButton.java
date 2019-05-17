@@ -16,6 +16,7 @@ import mainClasses.JoinFrame;
 
 public class JoinRegisterButton extends JButton implements interfaces.Setting{
 	
+	private String pwd = System.getProperty("user.dir");
 	
 	@Override
 	public void setThis(Component prevComp) {
@@ -48,9 +49,10 @@ public class JoinRegisterButton extends JButton implements interfaces.Setting{
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.birthdayTextF.getText(),
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.genderTextF.getText(),
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.addressTextF.getText(),
-					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.profilePhotoTextF.getText(),
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.eMailTextF.getText(),
-					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.phoneNumTextF.getText()};
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.phoneNumTextF.getText(),
+					pwd+ "/img/" +MainController.joinFrame.joinUserPanel.joinUserInfoPanel.profilePhotoTextF.getText()+".jpg",
+					};
 			
 			DB.getInstance().insertUserList(infos);
 			
