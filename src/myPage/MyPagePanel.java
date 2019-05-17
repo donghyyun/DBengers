@@ -7,14 +7,14 @@ import javax.swing.JPanel;
 import interfaces.Setting;
 import mainClasses.MyPageFrame;
 
-public class MyPageUserPanel extends JPanel implements Setting {
+public class MyPagePanel extends JPanel implements Setting {
 	public MyPageUserInfoPanel myPageUserInfoPanel = new MyPageUserInfoPanel();
 	public MyPageUploadButton uploadButton = new MyPageUploadButton();
 	public MyPageCheckButton checkButton = new MyPageCheckButton();
 	public MyPagePurchaseButton purchaseButton = new MyPagePurchaseButton();
 	public MyPageChangeSettingsButton changeSettingsButton = new MyPageChangeSettingsButton();
 	
-	public MyPageUserPanel() {this.setThis(null);}
+	public MyPagePanel() {this.setThis(null);}
 
 	@Override
 	public void setThis(Component prevComp) {
@@ -29,9 +29,9 @@ public class MyPageUserPanel extends JPanel implements Setting {
 	public void setComponents() {
 		// TODO Auto-generated method stub
 		myPageUserInfoPanel.setThis(null);
-		uploadButton.setThis(myPageUserInfoPanel);
-		checkButton.setThis(uploadButton);
 		purchaseButton.setThis(myPageUserInfoPanel);
+		checkButton.setThis(purchaseButton);
+		uploadButton.setThis(checkButton);
 		changeSettingsButton.setThis(myPageUserInfoPanel);
 	}
 

@@ -11,20 +11,19 @@ import javax.swing.JPanel;
 import interfaces.Setting;
 import mainClasses.DB;
 import mainClasses.JoinFrame;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import mainClasses.MyPageFrame;
 
 public class MyPageUserInfoPanel extends JPanel implements Setting {
 	
 	private JLabel[] labels = {new JLabel("Name: "), new JLabel("ID: "), new JLabel("PW: "),new JLabel("Last PW changed: "),  new JLabel("Nickname: ")
-								, new JLabel("Birthday: "), new JLabel("Gender: "),new JLabel("Address: "), new JLabel("Profile Photo: "), new JLabel("E-mail: ")
+								, new JLabel("Birthday: "), new JLabel("Gender: "),new JLabel("Address: "), new JLabel("E-mail: ")
 								, new JLabel("Phone num: "), new JLabel("Voucher name: "), new JLabel("is Artist: "), new JLabel("Alarm to mail: "), new JLabel("Alarm to SMS: "), new JLabel("streaming: "), new JLabel("download: ")};
 	public JLabel[] dblabels = {new JLabel("Name"), new JLabel("ID"), new JLabel("PW"),new JLabel("Last PW changed"),  new JLabel("Nickname")
-								, new JLabel("Birthday"), new JLabel("Gender"),new JLabel("Address"), new JLabel("Profile Photo"), new JLabel("E-mail")
+								, new JLabel("Birthday"), new JLabel("Gender"),new JLabel("Address"), new JLabel("E-mail")
 								, new JLabel("Phone num"), new JLabel("Voucher name"), new JLabel("is Artist"), new JLabel("Alarm to mail"), new JLabel("Alarm to SMS"), new JLabel("streaming"), new JLabel("download")};
 
 	
-	public static Font font = new Font ("Arial", Font.BOLD, JoinFrame.frameHeight / 30);
+	public static Font font = new Font ("Arial", Font.BOLD, MyPageFrame.frameHeight / 30);
 	
 	private void setLabels(){
 		for (JLabel label : labels) {
@@ -38,7 +37,10 @@ public class MyPageUserInfoPanel extends JPanel implements Setting {
 		
 		infos = DB.getInstance().getUserInfo(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText());
 		
-		for (int i = 0; i < infos.size(); i++) {dblabels[i].setText(infos.get(i));}
+		for (int i = 0; i < infos.size(); i++) {
+			System.out.println(infos.get(i));
+			dblabels[i].setText(infos.get(i));
+		}
 		
 		
 		for (JLabel label : dblabels) {
@@ -67,7 +69,7 @@ public class MyPageUserInfoPanel extends JPanel implements Setting {
 	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
-		for (int i = 0, j = 0; i < labels.length; i++, j += 2) {
+		for (int i = 0; i < labels.length; i++) {
 			this.add(labels[i]);
 			this.add(dblabels[i]);
 		}

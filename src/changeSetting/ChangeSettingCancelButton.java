@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 import interfaces.Setting;
 import mainClasses.ChangeSettingFrame;
+import mainClasses.MainController;
 
 public class ChangeSettingCancelButton extends JButton implements Setting {
 
@@ -30,7 +31,8 @@ public class ChangeSettingCancelButton extends JButton implements Setting {
 	class Listener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			MainController.changeSettingFrame.setVisible(false);
+			MainController.changeSettingFrame = null;
 		}
 	}
 }

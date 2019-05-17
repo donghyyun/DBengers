@@ -23,7 +23,8 @@ public class MyPagePurchaseButton extends JButton implements Setting {
 		this.setText("Purchase");
 		this.setFont(MyPageUserInfoPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds(prevComp.getX() + prevComp.getWidth(), prevComp.getY()+255, MyPageFrame.buttonWidth+100, MyPageFrame.buttonHeight+10);
+		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MyPageFrame.marginHeight);
+		this.setLocation(prevComp.getX(), prevComp.getY() + prevComp.getHeight() + MyPageFrame.marginHeight);
 		this.addActionListener(new Listener());
 	}
 

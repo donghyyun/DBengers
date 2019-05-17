@@ -17,7 +17,8 @@ public class MyPageCheckButton extends JButton implements Setting {
 		this.setText("Check");
 		this.setFont(MyPageUserInfoPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds(prevComp.getX() + MyPageFrame.buttonWidth +100, prevComp.getY(), MyPageFrame.buttonWidth+100, MyPageFrame.buttonHeight+10);
+		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MyPageFrame.marginHeight);
+		this.setLocation(prevComp.getX() + prevComp.getWidth(), prevComp.getY());
 		this.addActionListener(new Listener());
 	}
 

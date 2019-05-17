@@ -19,7 +19,8 @@ public class MyPageChangeSettingsButton extends JButton implements Setting {
 		this.setText("Change Settings");
 		this.setFont(MyPageUserInfoPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds(prevComp.getWidth(), prevComp.getY()-60, MyPageFrame.buttonWidth+150, MyPageFrame.buttonHeight+10);
+		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MyPageFrame.marginHeight);
+		this.setLocation(MyPageFrame.frameWidth - (this.getWidth() + MyPageFrame.marginWidth), prevComp.getY() - (this.getHeight() + MyPageFrame.marginHeight));
 		this.addActionListener(new Listener());
 	}
 

@@ -143,7 +143,7 @@ public class DB {
 	public ArrayList<String> getUserInfo(String id) {
     	Statement st = null;
 		ResultSet result = null;
-		String sql = "SELECT name, id, password, password_change_date, nickname, birthday, gender, address, profile_photo, email, phone_num,"
+		String sql = "SELECT name, id, password, password_change_date, nickname, birthday, gender, address, email, phone_num,"
 				+ "voucher_name, is_artist, alarm_to_mail, alarm_to_sms "
 				+ " FROM User WHERE id='"+id+"'"; 
 		ArrayList<String> infos = new ArrayList<String>();
@@ -164,7 +164,6 @@ public class DB {
     	    	infos.add(String.valueOf(result.getDate("birthday")));
     	    	infos.add(result.getString("gender"));
     	    	infos.add(result.getString("address"));
-    	    	infos.add(result.getString("profile_photo"));
     	    	infos.add(result.getString("email"));
     	    	infos.add(result.getString("phone_num"));
     	    	infos.add(result.getString("voucher_name"));

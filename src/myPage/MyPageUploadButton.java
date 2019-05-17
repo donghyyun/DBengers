@@ -23,7 +23,8 @@ public class MyPageUploadButton extends JButton implements interfaces.Setting{
 		this.setText("Upload");
 		this.setFont(MyPageUserInfoPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds(prevComp.getX(), prevComp.getY() + prevComp.getHeight() + MyPageFrame.marginHeight, MyPageFrame.buttonWidth+100, MyPageFrame.buttonHeight+10);
+		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MyPageFrame.marginHeight);
+		this.setLocation(prevComp.getX() + prevComp.getWidth(), prevComp.getY());
 		this.addActionListener(new Listener());
 	}
 
@@ -39,8 +40,8 @@ public class MyPageUploadButton extends JButton implements interfaces.Setting{
 			// TODO Auto-generated method stub
 			
 			JOptionPane.showMessageDialog(null, "Upload!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-			mainClasses.MainController.myPageFrame.setVisible(false);
-			mainClasses.MainController.myPageFrame = null;
+			//mainClasses.MainController.myPageFrame.setVisible(false);
+			//mainClasses.MainController.myPageFrame = null;
 		}
 	}
 	
