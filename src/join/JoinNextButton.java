@@ -50,6 +50,7 @@ private Font font = new Font("Arial", Font.BOLD, JoinUserInfoPanel.font.getSize(
 			
 			DB.getInstance().insertUserList(infos);
 			JoinArtistRegisterButton.artistId = infos[1];
+
 			
 			mainClasses.MainController.joinFrame.setVisible(false);
 			mainClasses.MainController.joinFrame = null;

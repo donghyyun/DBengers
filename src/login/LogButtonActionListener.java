@@ -10,7 +10,6 @@ import mainClasses.JoinFrame;
 
 public class LogButtonActionListener implements ActionListener{
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -40,8 +39,8 @@ public class LogButtonActionListener implements ActionListener{
 				mainClasses.MainController.joinFrame = new mainClasses.JoinFrame();
 				mainClasses.MainController.joinFrame.setThis();
 			}
-				
-			else {
+			else	// artist registration
+			{
 				mainClasses.MainController.joinFrame = new mainClasses.JoinFrame();
 				mainClasses.MainController.joinFrame.setThis2();
 			}

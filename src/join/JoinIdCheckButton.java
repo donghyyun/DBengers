@@ -15,9 +15,7 @@ import mainClasses.JoinFrame;
 public class JoinIdCheckButton extends JButton implements Setting {
 	private Font font = new Font("Arial", Font.BOLD, JoinUserInfoPanel.font.getSize() / 2);
 	
-	@Override
 	public void setThis(Component prevComp) {
-		// TODO Auto-generated method stub
 		this.setText("ID check");
 		this.setFont(font);
 		this.setBorderPainted(true);
@@ -25,14 +23,11 @@ public class JoinIdCheckButton extends JButton implements Setting {
 		this.addActionListener(new Listener());
 	}
 
-	@Override
 	public void setComponents() {}
 
-	@Override
 	public void addComponents() {}
 	
 	class Listener implements ActionListener{
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if(DB.getInstance().checkId(mainClasses.MainController.joinFrame.joinUserPanel.joinUserInfoPanel.idTextF.getText()))

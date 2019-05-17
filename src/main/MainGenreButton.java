@@ -10,7 +10,6 @@ import interfaces.Setting;
 
 public class MainGenreButton extends JButton implements Setting {
 
-	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setText("Genre");
@@ -21,15 +20,12 @@ public class MainGenreButton extends JButton implements Setting {
 		this.addActionListener(new Listener());
 	}
 
-	@Override
 	public void setComponents() {}
 
-	@Override
 	public void addComponents() {}
 	
 	public class Listener implements ActionListener{
 
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			

@@ -8,12 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import interfaces.Setting;
+
 import mainClasses.DB;
 import mainClasses.JoinArtistFrame;
 import mainClasses.MainController;
 
 public class JoinArtistRegisterButton extends JButton implements Setting{
 	public static String artistId;
+
 
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
@@ -30,7 +32,6 @@ public class JoinArtistRegisterButton extends JButton implements Setting{
 	
 	class Listener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			
 			
 			String [] infos = {artistId,
 					MainController.joinArtistFrame.joinArtistPanel.joinArtistInfoPanel.artistNameTextF.getText(), 
@@ -54,7 +55,7 @@ public class JoinArtistRegisterButton extends JButton implements Setting{
 			
 			// SAVE ARTIST DATA TO DB!!
 			JOptionPane.showMessageDialog(null, "Welcome to DB Melon!\n(user & artist sign-up success)", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
-			
+
 			mainClasses.MainController.joinArtistFrame.setVisible(false);
 			mainClasses.MainController.joinArtistFrame = null;
 		}
