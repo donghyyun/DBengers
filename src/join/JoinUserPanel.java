@@ -14,6 +14,7 @@ public class JoinUserPanel extends JPanel implements Setting {
 	public JoinIdCheckButton idCheckButton = new JoinIdCheckButton();
 	public JoinNextButton nextButton = new JoinNextButton();
 	
+	
 	public JoinUserPanel() {this.setThis(null);}
 	public JoinUserPanel(int version) {this.setThis2(null);}
 

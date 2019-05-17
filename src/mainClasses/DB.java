@@ -25,21 +25,23 @@ public class DB {
 	
 	public static DB getInstance() {return db;}
 	
-	public void insertUserList(String [] infos) {
+	public void insertUserList(Object [] infos) {
 		PreparedStatement pstmt = null;
 		//(name,id,password,now(),nickname, birthday, gender, address, profile_photo, email, phone_num,voucher_name,is_artist,is_block,alarm_to_mail,alarm_to_sms,liked_artist);
 //		String sql = "INSERT INTO User VALUES(?, ?, ?,now(), ?, ?, ?, ?, ?, ?, ?, null, false, false, false , false, null)";
-		String sql = "INSERT INTO User VALUES(?, ?, ?,now(), ?, ?, ?, ?, ?, ?, null, false, false, false, false , null, ?)";
+		String sql = "INSERT INTO User VALUES(?, ?, ?,now(), ?, ?, ?, ?, ?, ?, null, false, false, ?, ?, null, ?)";
+	  //String sql = "INSERT INTO User VALUES(?, ?, ?,now(), ?, ?, ?, ?, ?, ?, null, false, false, Aemail, Asms, null, ?)";
     	System.out.println("insertUserList entered!!");
     	
     	try {
     		pstmt = con.prepareStatement(sql);
     		for (int i = 0; i < infos.length; i++) {
+    			
     			if (i == 4) {
     				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     				Calendar c = Calendar.getInstance();
     				try{
-    				   c.setTime(sdf.parse(infos[i]));
+    				   c.setTime(sdf.parse((String)infos[i]));
     				}catch(ParseException e){e.printStackTrace();}
     				
     				c.add(Calendar.DAY_OF_MONTH, 1);  
@@ -47,8 +49,11 @@ public class DB {
     				pstmt.setDate(i + 1, Date.valueOf(newDate));
     			}
     				
+    			else if(infos[i] instanceof Boolean) {
+    				pstmt.setBoolean(i + 1, (boolean) infos[i]);
+    			}
     			else
-    				pstmt.setString(i + 1, infos[i]);
+    				pstmt.setString(i + 1, (String)infos[i]);
     		}
     		pstmt.executeUpdate();
 		} catch (SQLException e) {

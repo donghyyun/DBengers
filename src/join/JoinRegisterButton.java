@@ -11,9 +11,6 @@ import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import mainClasses.DB;
-import mainClasses.JoinFrame;
-
 public class JoinRegisterButton extends JButton implements interfaces.Setting{
 	
 	private String pwd = System.getProperty("user.dir");
@@ -38,20 +35,21 @@ public class JoinRegisterButton extends JButton implements interfaces.Setting{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			//String birthday = String.valueOf(Integer.parseInt(MainController.joinFrame.joinUserPanel.joinUserInfoPanel.birthdayTextF.getText()) + 1);
-			//birthday = birthday.substring(0, 4) + "-" + birthday.substring(4, 6) + "-" + birthday.substring(6);
 			
-			//String birthday = new SimpleDateFormat("yyyy-MM-dd").format(MainController.joinFrame.joinUserPanel.joinUserInfoPanel.birthdayTextF.getText());
-			String [] infos = {MainController.joinFrame.joinUserPanel.joinUserInfoPanel.nameTextF.getText(), 
+			String gender = MainController.joinFrame.joinUserPanel.joinUserInfoPanel.genderCheckB.one.isSelected()? "M" : "F";
+			
+			Object [] infos = {MainController.joinFrame.joinUserPanel.joinUserInfoPanel.nameTextF.getText(), 
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.idTextF.getText(),
 					new String(MainController.joinFrame.joinUserPanel.joinUserInfoPanel.pwTextF.getPassword()),
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.nickNameTextF.getText(),
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.birthdayTextF.getText(),
-					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.genderTextF.getText(),
+					gender,
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.addressTextF.getText(),
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.eMailTextF.getText(),
 					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.phoneNumTextF.getText(),
-					pwd+ "/img/" +MainController.joinFrame.joinUserPanel.joinUserInfoPanel.profilePhotoTextF.getText()+".jpg",
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.alarmCheckB.one.isSelected(),
+					MainController.joinFrame.joinUserPanel.joinUserInfoPanel.alarmCheckB.two.isSelected(),
+					pwd+ "/img/" +MainController.joinFrame.joinUserPanel.joinUserInfoPanel.profilePhotoTextF.getText()+".jpg"
 					};
 			
 			DB.getInstance().insertUserList(infos);

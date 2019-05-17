@@ -15,9 +15,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 public class JoinUserInfoPanel extends JPanel implements Setting {
-	private JLabel[] labels = {new JLabel("ID: "), new JLabel("PW: "), /*new JLabel("PW Check: "),*/new JLabel("Name: "),  new JLabel("Nickname: ")
+	private JLabel[] labels = {new JLabel("ID: "), new JLabel("PW: "), new JLabel("Name: "),  new JLabel("Nickname: ")
 								, new JLabel("Birthday: "), new JLabel("Address: "), new JLabel("Profile Photo: "), new JLabel("E-mail: ")
-								, new JLabel("Phone num: "), new JLabel("Gender: ")};
+								, new JLabel("Phone num: "), new JLabel("Gender: "), new JLabel("Alarm: ")};
 	
 	public JTextField idTextF = new JTextField();
 	public JPasswordField pwTextF = new JPasswordField();
@@ -28,11 +28,12 @@ public class JoinUserInfoPanel extends JPanel implements Setting {
 	public JTextField profilePhotoTextF = new JTextField();
 	public JTextField eMailTextF = new JTextField();
 	public JTextField phoneNumTextF = new JTextField();
-	public JTextField genderTextF = new JTextField();
+	public JoinCheckBoxPanel genderCheckB = new JoinCheckBoxPanel("Mail", "Female");
+	public JoinCheckBoxPanel alarmCheckB = new JoinCheckBoxPanel("Email", "SMS");
 	
 	private Component[] fields = {idTextF, pwTextF, nameTextF, nickNameTextF
 								, birthdayTextF, addressTextF, profilePhotoTextF, eMailTextF
-								, phoneNumTextF, genderTextF};
+								, phoneNumTextF, genderCheckB, alarmCheckB};
 	
 	public static Font font = new Font ("Arial", Font.BOLD, JoinFrame.frameHeight / 30);
 	
