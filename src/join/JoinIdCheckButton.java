@@ -21,7 +21,8 @@ public class JoinIdCheckButton extends JButton implements Setting {
 		this.setText("ID check");
 		this.setFont(font);
 		this.setBorderPainted(true);
-		this.setBounds(prevComp.getX() + prevComp.getWidth() + JoinFrame.marginWidth / 2, prevComp.getY(), prevComp.getWidth() / 3, this.getFont().getSize() + JoinFrame.marginHeight / 2);
+		this.setSize(this.getPreferredSize().getSize());
+		this.setLocation(prevComp.getX() + prevComp.getWidth(), prevComp.getY());
 		this.addActionListener(new Listener());
 	}
 

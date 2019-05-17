@@ -28,7 +28,7 @@ public class JoinUserInfoPanel extends JPanel implements Setting {
 	public JTextField profilePhotoTextF = new JTextField();
 	public JTextField eMailTextF = new JTextField();
 	public JTextField phoneNumTextF = new JTextField();
-	public JoinCheckBoxPanel genderCheckB = new JoinCheckBoxPanel("Mail", "Female");
+	public JoinCheckBoxPanel genderCheckB = new JoinCheckBoxPanel("Male", "Female");
 	public JoinCheckBoxPanel alarmCheckB = new JoinCheckBoxPanel("Email", "SMS");
 	
 	private Component[] fields = {idTextF, pwTextF, nameTextF, nickNameTextF

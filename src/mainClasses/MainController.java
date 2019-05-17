@@ -13,7 +13,6 @@ public class MainController {
 		 //TODO Auto-generated method stub
 		
 		mainFrame.setThis();
-		
 		//DB쓰고나서 closeConnection() 해주세요!!
 		//DBInsert.getInstance().Usergenerator();
 		//DBInsert.getInstance().Musicgenerator();
