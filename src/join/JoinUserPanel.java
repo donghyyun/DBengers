@@ -18,7 +18,6 @@ public class JoinUserPanel extends JPanel implements Setting {
 	public JoinUserPanel() {this.setThis(null);}
 	public JoinUserPanel(int version) {this.setThis2(null);}
 
-	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setBounds(0, 0, JoinFrame.frameWidth, JoinFrame.frameHeight);
@@ -26,7 +25,7 @@ public class JoinUserPanel extends JPanel implements Setting {
 		this.setComponents();
 		this.addComponents();
 	}
-	
+
 	public void setThis2(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setBounds(0, 0, JoinFrame.frameWidth, JoinFrame.frameHeight);
@@ -36,16 +35,15 @@ public class JoinUserPanel extends JPanel implements Setting {
 		this.addComponents_withNext();
 	}
 
-	@Override
 	public void setComponents() {
 		// TODO Auto-generated method stub
 		joinUserInfoPanel.setThis(null);
 		regButton.setThis(joinUserInfoPanel);
 		canButton.setThis(regButton);
 		idCheckButton.setThis(joinUserInfoPanel);
+		nextButton.setThis(joinUserInfoPanel);
 	}
 
-	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
 		this.add(joinUserInfoPanel);
@@ -60,4 +58,5 @@ public class JoinUserPanel extends JPanel implements Setting {
 		this.add(canButton);
 		this.add(idCheckButton);
 	}
+
 }

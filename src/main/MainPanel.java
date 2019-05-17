@@ -41,7 +41,6 @@ public class MainPanel extends JPanel implements Setting {
 			
 	public MainPanel() {this.setThis(null);}
 	
-	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setBounds(0, 0, width, height);
@@ -50,7 +49,6 @@ public class MainPanel extends JPanel implements Setting {
 		this.addComponents();
 	}
 
-	@Override
 	public void setComponents() {
 		// TODO Auto-generated method stub
 		myPlayListButton.setThis(this);
@@ -72,7 +70,6 @@ public class MainPanel extends JPanel implements Setting {
 		dateButton.setThis(likeButton);
 	}
 
-	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
 		this.add(myPlayListButton);

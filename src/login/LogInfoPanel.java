@@ -13,16 +13,13 @@ public class LogInfoPanel extends JPanel implements interfaces.Setting{
 	public JTextField idTextF = new JTextField();
 	public JPasswordField pwTextF = new JPasswordField();
 	
-	@Override
 	public void setThis(Component prevComp) {
 		this.setLayout(new GridLayout(2,2));
 		this.setBounds(prevComp.getX(), prevComp.getY() + prevComp.getHeight() + 2 * LogPanel.marginHeight, prevComp.getWidth(), prevComp.getHeight());
 	}
 	
-	@Override
 	public void setComponents() {}
 	
-	@Override
 	public void addComponents() {
 		this.add(idLabel);
 		this.add(idTextF);

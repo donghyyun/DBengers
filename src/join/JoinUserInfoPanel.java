@@ -44,7 +44,6 @@ public class JoinUserInfoPanel extends JPanel implements Setting {
 		}
 	}
 	
-	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setBounds(JoinFrame.frameWidth / 6, JoinFrame.frameHeight / 7, JoinFrame.frameWidth / 2, JoinFrame.frameHeight * 4 / 7);
@@ -54,13 +53,11 @@ public class JoinUserInfoPanel extends JPanel implements Setting {
 		this.setSize(this.getPreferredSize());
 	}
 
-	@Override
 	public void setComponents() {
 		// TODO Auto-generated method stub
 		setLabels();
 	}
 
-	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
 		for (int i = 0, j = 0; i < labels.length; i++, j += 2) {

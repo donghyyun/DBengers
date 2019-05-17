@@ -55,6 +55,7 @@ public class JoinNextButton extends JButton implements Setting{
 			
 			DB.getInstance().insertUserList(infos);
 			JoinArtistRegisterButton.artistId = (String)infos[1];
+
 			
 			mainClasses.MainController.joinFrame.setVisible(false);
 			mainClasses.MainController.joinFrame = null;

@@ -15,7 +15,6 @@ public class JoinRegisterButton extends JButton implements interfaces.Setting{
 	
 	private String pwd = System.getProperty("user.dir");
 	
-	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setText("Register");
@@ -25,14 +24,12 @@ public class JoinRegisterButton extends JButton implements interfaces.Setting{
 		this.addActionListener(new Listener());
 	}
 
-	@Override
 	public void setComponents() {}
 
-	@Override
 	public void addComponents() {}
 	
 	class Listener implements ActionListener{
-		@Override
+
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			

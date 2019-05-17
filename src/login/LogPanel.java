@@ -28,7 +28,6 @@ public class LogPanel extends JPanel implements interfaces.Setting{
 	
 	public LogPanel() {this.setThis(null);}
 	
-	@Override
 	public void setThis(Component prevComp) {
 		this.setBounds(0, 0, width, height);
 		this.setLayout(null);
@@ -36,7 +35,6 @@ public class LogPanel extends JPanel implements interfaces.Setting{
 		setComponents();
 	}
 	
-	@Override
 	public void setComponents() {
 		headLabel.setFont(headFont);
 		headLabel.setForeground(new Color(105, 225, 83));
@@ -59,7 +57,6 @@ public class LogPanel extends JPanel implements interfaces.Setting{
 		joinButton.setFont(buttonFont);
 	}
 	
-	@Override
 	public void addComponents() {
 		this.add(headLabel);
 		this.add(logInfoPanel);
