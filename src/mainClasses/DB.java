@@ -16,7 +16,11 @@ public class DB {
         String url = "jdbc:mysql://119.202.40.103/DBengers?serverTimezone=UTC";
         
         try {
+<<<<<<< HEAD
 			con = DriverManager.getConnection(url, "kdh", "thisgood");
+=======
+			con = DriverManager.getConnection(url, "ysk", "thisgood");
+>>>>>>> THUYSK
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
@@ -214,4 +218,31 @@ public class DB {
             e.printStackTrace();
         }
 	}
+	
+	public ArrayList<String> voucherInfo() {
+    	Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT * FROM Voucher"; 
+		ArrayList<String> voucherinfos = new ArrayList<String>();
+    	
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		result = st.executeQuery(sql);
+    		
+    		while (result.next()) {
+    			voucherinfos.add(result.getString("voucher_name"));
+    			voucherinfos.add(result.getString("voucher_price"));
+    			voucherinfos.add(result.getString("download_num"));
+    			voucherinfos.add(result.getString("streaming_num"));    	    	
+    	    }
+    		
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return voucherinfos;
+	}
+
 }
