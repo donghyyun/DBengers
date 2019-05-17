@@ -1,6 +1,7 @@
 package voucher;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,15 +10,17 @@ import javax.swing.JButton;
 import interfaces.Setting;
 import mainClasses.VoucherFrame;
 
-public class VoucherCancelButton extends JButton implements Setting {
-
+public class VoucherBuy200Button extends JButton implements Setting {
+	
+	public static Font font = new Font ("Arial", Font.BOLD, VoucherFrame.frameHeight / 20);
+	
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setText("Cancel");
-		this.setFont(VoucherInfoPanel.font);
+		this.setText("Buy 200 Streaming");
+		this.setFont(font);
 		this.setBorderPainted(true);
-		this.setBounds(prevComp.getX(), prevComp.getY()+prevComp.getHeight(), prevComp.getWidth()/2, prevComp.getHeight()/2);
+		this.setBounds(prevComp.getX() +  prevComp.getWidth(), prevComp.getY(), prevComp.getWidth(), prevComp.getHeight());
 		this.addActionListener(new Listener());
 	}
 
@@ -38,9 +41,7 @@ public class VoucherCancelButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			mainClasses.MainController.myPageFrame = new mainClasses.MyPageFrame();
-			mainClasses.MainController.voucherFrame.setVisible(false);
-			mainClasses.MainController.voucherFrame = null;
+
 		}
 	}
 
