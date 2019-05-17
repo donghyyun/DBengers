@@ -16,7 +16,7 @@ import javax.swing.ScrollPaneConstants;
 
 public class MyPageUserInfoPanel extends JPanel implements Setting {
 	
-	private JLabel[] labels = {new JLabel("Name: "), new JLabel("ID: "), new JLabel("PW: "),new JLabel("Last PW changed: "),  new JLabel("Nickname: ")
+	private JLabel[] labels = {new JLabel("Artist Name: "), new JLabel("ID: "), new JLabel("PW: "),new JLabel("Last PW changed: "),  new JLabel("Nickname: ")
 								, new JLabel("Birthday: "), new JLabel("Gender: "),new JLabel("Address: "), new JLabel("Profile Photo: "), new JLabel("E-mail: ")
 								, new JLabel("Phone num: "), new JLabel("Voucher name: "), new JLabel("is Artist: "), new JLabel("Alarm to mail: "), new JLabel("Alarm to SMS: "), new JLabel("streaming: "), new JLabel("download: ")};
 	public JLabel[] dblabels = {new JLabel("Name"), new JLabel("ID"), new JLabel("PW"),new JLabel("Last PW changed"),  new JLabel("Nickname")

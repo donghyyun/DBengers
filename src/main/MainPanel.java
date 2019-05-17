@@ -21,6 +21,7 @@ public class MainPanel extends JPanel implements Setting {
 	public MainGenreButton genreButton = new MainGenreButton();
 	public MainLikeButton likeButton = new MainLikeButton();
 	public MainDateButton dateButton = new MainDateButton();
+	public MainArtistButton artistButton = new MainArtistButton();
 	
 	public JScrollPane scroll = new JScrollPane();
 	
@@ -59,6 +60,8 @@ public class MainPanel extends JPanel implements Setting {
 		searchTextF.setSize(myPlayListButton.getWidth() + myPageButton.getWidth(), font.getSize() + marginHeight);
 		searchButton.setThis(searchTextF);
 		
+		artistButton.setThis(searchTextF);
+		
 		rank.setFont(font);
 		rank.setSize(rank.getPreferredSize());
 		rank.setLocation(searchTextF.getX(), searchTextF.getY() + searchTextF.getHeight() + marginHeight * 2);
@@ -81,6 +84,7 @@ public class MainPanel extends JPanel implements Setting {
 		this.add(genreButton);
 		this.add(likeButton);
 		this.add(dateButton);
+		this.add(artistButton);
 	}
 
 }
