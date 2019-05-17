@@ -34,10 +34,8 @@ public class DB {
 	
 	public void insertUserList(Object [] infos) {
 		PreparedStatement pstmt = null;
-		//(name,id,password,now(),nickname, birthday, gender, address, profile_photo, email, phone_num,voucher_name,is_artist,is_block,alarm_to_mail,alarm_to_sms,liked_artist);
-//		String sql = "INSERT INTO User VALUES(?, ?, ?,now(), ?, ?, ?, ?, ?, ?, ?, null, false, false, false , false, null)";
 		String sql = "INSERT INTO User VALUES(?, ?, ?,now(), ?, ?, ?, ?, ?, ?, null, false, false, ?, ?, null, ?)";
-	  //String sql = "INSERT INTO User VALUES(?, ?, ?,now(), ?, ?, ?, ?, ?, ?, null, false, false, Aemail, Asms, null, ?)";
+		
     	System.out.println("insertUserList entered!!");
     	
     	try {
@@ -109,6 +107,34 @@ public class DB {
 			e.printStackTrace();
 		}    	
 	}
+	
+	public void changeUserInfo(Object[] infos) {
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE User SET name=?, password=?, nickname=?, address=?, profile_photo=?, "
+				+ "email=?, phone_num=?, alarm_to_mail=?, alarm_to_sms=? where id='" + (String)infos[0] + "'";
+		
+    	System.out.println("changeUserInfo entered!!");
+    	System.out.println(sql);
+    	
+    	try {
+    		pstmt = con.prepareStatement(sql);
+    		
+    		for (int i = 1; i < infos.length; i++) {
+    			
+    			if(infos[i] instanceof Boolean) {
+    				pstmt.setBoolean(i, (boolean) infos[i]);
+    			}
+    			else
+    				pstmt.setString(i, (String) infos[i]);
+    		}
+    		
+    		pstmt.executeUpdate();
+    		
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}
+	}
     		
 	
 	public boolean checkLogin(String id, String pw) {
@@ -119,7 +145,7 @@ public class DB {
 			st = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		result = st.executeQuery("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
-    		System.out.println("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
+    		//System.out.println("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
     		if (!result.next()) {
     			return false;
     		}
@@ -161,7 +187,7 @@ public class DB {
 				+ " FROM User WHERE id='"+id+"'"; 
 		ArrayList<String> infos = new ArrayList<String>();
 
-    	System.out.println("getUserInfo entered!!");
+    	//System.out.println("getUserInfo entered!!");
     	
     	try {
     		st = con.createStatement();

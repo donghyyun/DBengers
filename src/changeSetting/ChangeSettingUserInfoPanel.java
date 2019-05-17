@@ -9,13 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import interfaces.Setting;
-import mainClasses.ChangeSettingFrame;
+import mainClasses.*;
 
 
 public class ChangeSettingUserInfoPanel extends JPanel implements Setting {
-	private JLabel[] labels = {new JLabel("ID: "), new JLabel("Name: "), new JLabel("PW: "), new JLabel("Nickname: ")
-								, new JLabel("Birthday: "), new JLabel("Address: "), new JLabel("Profile Photo: "), new JLabel("E-mail: ")
-								, new JLabel("Phone num: "), new JLabel("Is Artist "), new JLabel("Alarm to mail "), new JLabel("Alarm to SMS")};
+	private JLabel[] labels = {new JLabel("Name"), new JLabel("ID"), new JLabel("PW"), new JLabel("Nickname")
+								, new JLabel("Birthday"), new JLabel("Address"), new JLabel("Profile Photo"), new JLabel("E-mail")
+								, new JLabel("Phone num"), new JLabel("Is Artist"), new JLabel("Alarms")};
 	
 	public JLabel id = new JLabel("id");
 	public JTextField nameTextF = new JTextField();
@@ -26,16 +26,16 @@ public class ChangeSettingUserInfoPanel extends JPanel implements Setting {
 	public JTextField profilePhotoTextF = new JTextField();
 	public JTextField eMailTextF = new JTextField();
 	public JTextField phoneNumTextF = new JTextField();
-	
-	public ChangeSettingCheckBoxPanel[] checkBoxes = {new ChangeSettingCheckBoxPanel(), 
-														new ChangeSettingCheckBoxPanel(), new ChangeSettingCheckBoxPanel()};
-	
+	public ChangeSettingCheckBoxPanel artistCheckB = new ChangeSettingCheckBoxPanel("yes", "no");
+	public ChangeSettingCheckBoxPanel alarmCheckB = new ChangeSettingCheckBoxPanel("Email", "SMS");
 	
 	
 	
-	private Component[] fields = {id, pwTextF, nameTextF, nickNameTextF
+	
+	
+	private Component[] fields = {nameTextF, id, pwTextF, nickNameTextF
 								, birthday, addressTextF, profilePhotoTextF, eMailTextF
-								,phoneNumTextF, checkBoxes[0], checkBoxes[1], checkBoxes[2]};
+								, phoneNumTextF, artistCheckB, alarmCheckB};
 	
 	public static Font font = new Font ("Arial", Font.BOLD, ChangeSettingFrame.frameHeight / 30);
 	
@@ -47,13 +47,29 @@ public class ChangeSettingUserInfoPanel extends JPanel implements Setting {
 	}
 	
 	private void setFields() {
-		for (int i = 0; i < checkBoxes.length; i++)
-			checkBoxes[i].setThis(null);
-		
-		//id, birthday setText();
-		id.setText("ID");
-		birthday.setText("BIRTHDAY");
-		
+		for (int i = 0; i < fields.length; i++) {
+			if (fields[i] instanceof JLabel)
+				((JLabel)fields[i]).setText(MainController.myPageFrame.myPagePanel.myPageUserInfoPanel.infoHash.get(labels[i].getText()));
+			else if (fields[i] instanceof JTextField)
+				((JTextField)fields[i]).setText(MainController.myPageFrame.myPagePanel.myPageUserInfoPanel.infoHash.get(labels[i].getText()));
+			else if (fields[i] instanceof ChangeSettingCheckBoxPanel){
+				ChangeSettingCheckBoxPanel temp = (ChangeSettingCheckBoxPanel)fields[i];
+				if (temp.one.getText().equals("yes")) {
+					
+					if (MainController.myPageFrame.myPagePanel.myPageUserInfoPanel.infoHash.get(labels[i].getText()).equals("true"))
+						temp.one.setSelected(true);
+					else
+						temp.two.setSelected(true);
+					
+				} else {
+					if (MainController.myPageFrame.myPagePanel.myPageUserInfoPanel.infoHash.get("Alarm to mail").equals("true"))
+						temp.one.setSelected(true);
+					
+					if (MainController.myPageFrame.myPagePanel.myPageUserInfoPanel.infoHash.get("Alarm to SMS").equals("true"))
+						temp.two.setSelected(true);
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -79,8 +95,6 @@ public class ChangeSettingUserInfoPanel extends JPanel implements Setting {
 		
 		for (int i = 0; i < labels.length; i++) {
 			this.add(labels[i]);
-			//if (i >= labels.length - checkBoxes.length)
-			//	checkBoxes[i - 9].setThis(null);
 			this.add(fields[i]);
 		}
 	}

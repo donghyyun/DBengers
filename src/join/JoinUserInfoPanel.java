@@ -11,8 +11,6 @@ import javax.swing.JTextField;
 
 import interfaces.Setting;
 import mainClasses.JoinFrame;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 public class JoinUserInfoPanel extends JPanel implements Setting {
 	private JLabel[] labels = {new JLabel("ID: "), new JLabel("PW: "), new JLabel("Name: "),  new JLabel("Nickname: ")
@@ -28,7 +26,7 @@ public class JoinUserInfoPanel extends JPanel implements Setting {
 	public JTextField profilePhotoTextF = new JTextField();
 	public JTextField eMailTextF = new JTextField();
 	public JTextField phoneNumTextF = new JTextField();
-	public JoinCheckBoxPanel genderCheckB = new JoinCheckBoxPanel("Mail", "Female");
+	public JoinCheckBoxPanel genderCheckB = new JoinCheckBoxPanel("Male", "Female");
 	public JoinCheckBoxPanel alarmCheckB = new JoinCheckBoxPanel("Email", "SMS");
 	
 	private Component[] fields = {idTextF, pwTextF, nameTextF, nickNameTextF
@@ -60,7 +58,7 @@ public class JoinUserInfoPanel extends JPanel implements Setting {
 
 	public void addComponents() {
 		// TODO Auto-generated method stub
-		for (int i = 0, j = 0; i < labels.length; i++, j += 2) {
+		for (int i = 0; i < labels.length; i++) {
 			this.add(labels[i]);
 			this.add(fields[i]);
 		}

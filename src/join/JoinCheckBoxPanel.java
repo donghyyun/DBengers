@@ -19,7 +19,6 @@ public class JoinCheckBoxPanel extends JPanel implements Setting {
 		this.setThis(null);
 	}
 	
-
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
