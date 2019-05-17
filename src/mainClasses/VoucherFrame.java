@@ -2,24 +2,31 @@ package mainClasses;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+
+import voucher.VoucherPanel;
+
 import java.awt.Window.Type;
 
 public class VoucherFrame extends JFrame {
-	public static int screenWidth = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	public static int screenHeight = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+	public VoucherFrame() {
+	}
+	public static final int startX = mainClasses.MyPageFrame.startX - mainClasses.MyPageFrame.frameWidth / 2;
+	public static final int startY = mainClasses.MyPageFrame.startY + mainClasses.MyPageFrame.frameHeight / 3;
+	public static final int frameWidth = mainClasses.MyPageFrame.frameWidth * 4 / 3;
+	public static final int frameHeight = mainClasses.MyPageFrame.frameHeight / 2;
 	
-	public static int startX = screenWidth / 3;
-	public static int startY = screenHeight / 6;
-	public static int frameWidth = screenWidth / 3;
-	public static int frameHeight = screenHeight * 2 / 6;
+	public static final int marginHeight = frameHeight / 20;
+	public static final int marginWidth = frameWidth / 20;
 	
-	public voucher.VoucherPanel voucherPanel = new voucher.VoucherPanel();
-
+	
+	public VoucherPanel voucherPanel;
+	
 	public void setThis() {
-		this.setBounds(startX, startY, frameWidth, frameHeight);
 		getContentPane().setLayout(null);
+		this.setLocation(startX, startY);
+		this.setSize(frameWidth, frameHeight);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(voucherPanel);
+		voucherPanel = new VoucherPanel();
+		getContentPane().add(voucherPanel);
 	}
 }
