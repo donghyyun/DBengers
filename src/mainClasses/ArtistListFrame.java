@@ -3,7 +3,7 @@ package mainClasses;
 import java.awt.Component;
 
 import javax.swing.JFrame;
-import myPage.MyPageUserPanel;
+import myPage.MyPagePanel;
 
 public class ArtistListFrame extends JFrame{
 	public ArtistListFrame() {

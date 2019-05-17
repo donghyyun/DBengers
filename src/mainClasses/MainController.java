@@ -15,13 +15,8 @@ public class MainController {
 		mainFrame.add(mainFrame.logPanel);
 		
 		//DB쓰고나서 closeConnection() 해주세요!!
-<<<<<<< HEAD
 		//DBInsert.getInstance().Usergenerator();
 		//DBInsert.getInstance().Musicgenerator();
-=======
-//		DBInsert.getInstance().Usergenerator();
-//		DBInsert.getInstance().Musicgenerator();
->>>>>>> ysh
 //		DBInsert.getInstance().StarPostgenerator();
 //		DBInsert.getInstance().closeConnection();
 	}
