@@ -25,6 +25,28 @@ public class DB {
 	
 	public static DB getInstance() {return db;}
 	
+	public ArrayList<String> getArtistInfo() {
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT name FROM Artist"; 
+		ArrayList<String> artists = new ArrayList<String>();
+
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		result = st.executeQuery(sql);
+    		while (result.next()) {
+    			artists.add(result.getString("name"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getPlayListInfo problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return artists;
+	}
+	
 	public void insertUserList(String [] infos) {
 		PreparedStatement pstmt = null;
 		//(name,id,password,now(),nickname, birthday, gender, address, profile_photo, email, phone_num,voucher_name,is_artist,is_block,alarm_to_mail,alarm_to_sms,liked_artist);
