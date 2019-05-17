@@ -5,12 +5,9 @@ public class MainController {
 	public static JoinFrame joinFrame;
 	public static MyPageFrame myPageFrame;
 	public static JoinArtistFrame joinArtistFrame;
-<<<<<<< HEAD
 	public static ChangeSettingFrame changeSettingFrame; 
 	public static ArtistListFrame artistlistframe;
-=======
 	public static VoucherFrame voucherFrame;
->>>>>>> THUYSK
 
 	public static void main(String[] args) {
 		 //TODO Auto-generated method stub

@@ -13,7 +13,7 @@ public class DB {
 	private static DB db = new DB();
 
 	private DB() {        	
-        String url = "jdbc:mysql://119.202.40.103/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.192.208/DBengers?serverTimezone=UTC";
         
         try {
 
@@ -190,16 +190,6 @@ public class DB {
     	return infos;
 	}
 	
-	
-	public void closeConnection() {
-		try {
-            if(con != null && !con.isClosed())
-                con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-	}
-	
 	public ArrayList<String> voucherInfo() {
     	Statement st = null;
 		ResultSet result = null;
@@ -225,5 +215,36 @@ public class DB {
     	
     	return voucherinfos;
 	}
+	
+	public ArrayList<String> getArtistInfo() {
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT name FROM Artist"; 
+		ArrayList<String> artists = new ArrayList<String>();
 
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		result = st.executeQuery(sql);
+    		while (result.next()) {
+    			artists.add(result.getString("name"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getPlayListInfo problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return artists;
+	}
+	
+	
+	public void closeConnection() {
+		try {
+            if(con != null && !con.isClosed())
+                con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
 }
