@@ -39,7 +39,8 @@ public class MyPagePurchaseButton extends JButton implements Setting {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
-			
+			mainClasses.MainController.voucherFrame = new mainClasses.VoucherFrame();
+			mainClasses.MainController.voucherFrame.setThis();
 	
 		}
 	}
