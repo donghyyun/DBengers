@@ -10,9 +10,14 @@ import interfaces.Setting;
 
 public class ChangeSettingCheckBoxPanel extends JPanel implements Setting {
 	
-	public JCheckBox yes = new JCheckBox("yes");
-	public JCheckBox no = new JCheckBox("no");
+	public JCheckBox one = new JCheckBox();
+	public JCheckBox two = new JCheckBox();
 	
+	public ChangeSettingCheckBoxPanel(String one, String two) {
+		this.one.setText(one);
+		this.two.setText(two);
+		this.setThis(null);
+	}
 
 	@Override
 	public void setThis(Component prevComp) {
@@ -28,8 +33,8 @@ public class ChangeSettingCheckBoxPanel extends JPanel implements Setting {
 	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
-		this.add(yes);
-		this.add(no);
+		this.add(one);
+		this.add(two);
 	}
 
 }

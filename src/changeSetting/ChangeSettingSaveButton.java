@@ -11,8 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import mainClasses.DB;
-
 public class ChangeSettingSaveButton extends JButton implements interfaces.Setting{
 	
 	
@@ -36,8 +34,28 @@ public class ChangeSettingSaveButton extends JButton implements interfaces.Setti
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			Object [] infos= {MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.id.getText(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.nameTextF.getText(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.pwTextF.getText(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.nickNameTextF.getText(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.addressTextF.getText(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.profilePhotoTextF.getText(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.eMailTextF.getText(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.phoneNumTextF.getText(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.alarmCheckB.one.isSelected(),
+					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.alarmCheckB.two.isSelected()
+			};
 			
+			DB.getInstance().changeUserInfo(infos);
+			JOptionPane.showMessageDialog(null, "Information Change Success", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			
+			MainController.changeSettingFrame.setVisible(false);
+			MainController.myPageFrame.setVisible(false);
+			
+			MainController.changeSettingFrame = null;
+			MainController.myPageFrame = null;
 		}
+		
 	}
 	
 }

@@ -11,8 +11,6 @@ import javax.swing.JTextField;
 
 import interfaces.Setting;
 import mainClasses.JoinFrame;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 public class JoinUserInfoPanel extends JPanel implements Setting {
 	private JLabel[] labels = {new JLabel("ID: "), new JLabel("PW: "), new JLabel("Name: "),  new JLabel("Nickname: ")
@@ -63,7 +61,7 @@ public class JoinUserInfoPanel extends JPanel implements Setting {
 	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
-		for (int i = 0, j = 0; i < labels.length; i++, j += 2) {
+		for (int i = 0; i < labels.length; i++) {
 			this.add(labels[i]);
 			this.add(fields[i]);
 		}
