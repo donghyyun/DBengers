@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import interfaces.Setting;
 import mainClasses.VoucherFrame;
@@ -41,6 +42,7 @@ public class VoucherBuy200Button extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			JOptionPane.showMessageDialog(null, "You bought 200 Streaming", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 
 		}
 	}
