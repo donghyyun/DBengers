@@ -36,8 +36,8 @@ public class MainMyPlayListButton extends JButton implements Setting {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			
+			mainClasses.MainController.myPlayListFrame = new mainClasses.MyPlayListFrame();
+			mainClasses.MainController.myPlayListFrame.setThis();
 		}
 		
 	}

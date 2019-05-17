@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
 	public void setThis() {
 		this.setBounds(startX, startY, frameWidth, frameHeight);
 		getContentPane().setLayout(null);
+		this.add(logPanel);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

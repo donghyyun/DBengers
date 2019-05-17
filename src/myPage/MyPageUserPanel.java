@@ -16,7 +16,6 @@ public class MyPageUserPanel extends JPanel implements Setting {
 	
 	public MyPageUserPanel() {this.setThis(null);}
 
-	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setBounds(0, 0, MyPageFrame.frameWidth, MyPageFrame.frameHeight);
@@ -25,7 +24,6 @@ public class MyPageUserPanel extends JPanel implements Setting {
 		this.addComponents();
 	}
 
-	@Override
 	public void setComponents() {
 		// TODO Auto-generated method stub
 		myPageUserInfoPanel.setThis(null);
@@ -35,7 +33,6 @@ public class MyPageUserPanel extends JPanel implements Setting {
 		changeSettingsButton.setThis(myPageUserInfoPanel);
 	}
 
-	@Override
 	public void addComponents() {
 		// TODO Auto-generated method stub
 		this.add(myPageUserInfoPanel);
