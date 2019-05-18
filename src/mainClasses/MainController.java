@@ -17,6 +17,7 @@ public class MainController {
 	
 	public static ArtistChannelFrame artistChannelFrame;
 	public static ArtistChannelMusicFrame artistChannelMusicFrame;
+	public static ArtistChannelAlbumFrame artistChannelAlbumFrame;
 	
 	public static void main(String[] args) {
 		 //TODO Auto-generated method stub

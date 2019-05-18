@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import interfaces.Setting;
+import mainClasses.ArtistChannelAlbumFrame;
 import mainClasses.ArtistChannelFrame;
 
 public class AlbumButton extends JButton implements Setting{
@@ -28,8 +29,8 @@ public class AlbumButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			
-//			mainClasses.MainController.addPlayListFrame.setVisible(false);
-//			mainClasses.MainController.addPlayListFrame = null;
+			mainClasses.MainController.artistChannelAlbumFrame = new ArtistChannelAlbumFrame();
+			mainClasses.MainController.artistChannelAlbumFrame.setThis();;
 		}
 	}
 }

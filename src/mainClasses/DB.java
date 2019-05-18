@@ -727,6 +727,99 @@ public class DB {
     	return albumName;
 	}
 	
+	public ArrayList<String> getArtistAlbum(String artistID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		ArrayList<String> infos = new ArrayList<String>();
+		ArrayList<String> albumName = new ArrayList<String>();
+		// get artist's album_id using artist_id
+		String sql = "SELECT album_id FROM Music where artist_id='"+artistID+"'"; 
+
+		try {
+			st = con.createStatement();
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			infos.add(result.getString("album_id"));
+    		}
+			
+			// get album name using album_id
+			for(int i=0; i<infos.size();i++)
+			{
+				sql = "SELECT title From Album where id = '"+infos.get(i)+"'";	
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			albumName.add(result.getString("title"));
+	    		}
+			}
+		} catch (SQLException e) {
+			System.out.println("getArtistAlbum problem: ");
+			e.printStackTrace();
+		}
+		
+    	return albumName;
+	}
+	
+	public ArrayList<Date> getArtistAlbumDate(String artistID, ArrayList<String> albumName)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Date> albumDate = new ArrayList<Date>();
+		
+		for(int i=0; i<albumName.size();i++)
+		{
+			sql = "SELECT released_date FROM Album WHERE artist_id='"+artistID+"' AND title='"+albumName.get(i)+"'"; 
+
+			try {
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			albumDate.add(result.getDate("released_date"));
+	    		}
+				
+			} catch (SQLException e) {
+				System.out.println("getArtistAlbumDate problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+		
+    	return albumDate;
+	}
+	
+	public ArrayList<Integer> getArtistAlbumLikes(String artistID, ArrayList<String> albumName)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Integer> infos = new ArrayList<Integer>();
+		// get num_stars from album
+		for(int i=0;i<albumName.size();i++)
+		{
+			sql = "SELECT num_stars FROM Album WHERE artist_id='"+artistID+"' AND title='"+albumName.get(i)+"'"; 
+
+			try {
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getInt("num_stars"));
+	    		}
+				
+			} catch (SQLException e) {
+				System.out.println("getArtistAlbumLikes problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+    	return infos;
+	}
+	
 	public void closeConnection() {
 		try {
             if(con != null && !con.isClosed())
