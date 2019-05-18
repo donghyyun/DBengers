@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -17,13 +17,14 @@ public class DBInsert {
 	private String[] artist_ids = new String[20];
 	private String[] artist_names = new String[20];
 	private String pwd = System.getProperty("user.dir");
-
+	long time = System.currentTimeMillis(); 
+	Date now = new Date(time);
 
 	private DBInsert() {        	
-        String url = "jdbc:mysql://172.17.192.208/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.30.1.13/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "ysk", "thisgood");
+			con = DriverManager.getConnection(url, "ysh", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
@@ -54,17 +55,17 @@ public class DBInsert {
 		return new Date(cal.getTimeInMillis());
 	}
 	
-	private static Date getRandomDate()
-	{
-		Random random = new Random();
-		int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
-		int maxDay = (int) LocalDate.of(2019, 5, 1).toEpochDay();
-		long randomDay = minDay + random.nextInt(maxDay - minDay);
-
-		LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
-
-		return Date.valueOf(randomBirthDate);
-	}
+//	private static Date getRandomDate()
+//	{
+//		Random random = new Random();
+//		int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
+//		int maxDay = (int) LocalDate.of(2019, 5, 1).toEpochDay();
+//		long randomDay = minDay + random.nextInt(maxDay - minDay);
+//
+//		LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
+//
+//		return Date.valueOf(randomBirthDate);
+//	}
 	
 	
 	private static String getRandomString(int length)
@@ -99,7 +100,11 @@ public class DBInsert {
 					pstmt.setString(10, "video : " + getRandomString(4));	// video
 					pstmt.setString(6, "null");	// photo
 				}
-				pstmt.setDate(7, getRandomDate());	// date
+				
+				
+//				pstmt.setDate(7, getRandomDate());	// date
+				pstmt.setDate(7, now);	// date
+				
 				pstmt.setInt(8, 0);	// like_num
 				pstmt.setInt(9, 0);	// view_num (only for video)
 				
@@ -112,40 +117,71 @@ public class DBInsert {
 	}
 	public void Musicgenerator() {
 		PreparedStatement pstmt;
+		PreparedStatement pstmt_album;
+		PreparedStatement pstmt_album_music;
 		String tableName = "Music ";
 		String sql = "INSERT INTO " + tableName + "(music_id, artist_id, album_id, name, released_date, genre, lyrics, like_num, play_num) VALUES " + "(?,?,?,?,?,?,?,?,?)";
+		String sql_album = "INSERT INTO Album(id, artist_id, title, released_date, num_stars, description, genre, agency, publisher) Values " + "(?,?,?,?,?,?,?,?,?)";
+		String sql_album_music = "INSERT INTO Album_Music(album_id, music_id, music_name) Values " + "(?,?,?)";
 		
 		for (int i = 1; i <= 20; i++) {
 			try {
 				
 				pstmt = con.prepareStatement(sql);
+				pstmt_album = con.prepareStatement(sql_album);
+				pstmt_album_music = con.prepareStatement(sql_album_music);
+				
 				pstmt.setInt(1, i);	// music id
 				pstmt.setString(2, artist_ids[i-1]);	// artist id (which is user id of artist)
 				pstmt.setInt(3, i);	// album id
 				pstmt.setString(4, "music"+i);	// music name
-				pstmt.setDate(5, getRandomDate());	// released date
+				
+				pstmt_album.setInt(1, i); // album id in album table
+				pstmt_album.setString(2, artist_ids[i-1]);	// artist id who owns the album
+				pstmt_album.setString(3, "title"+getRandomString(4));
+//				pstmt_album.setDate(4, getRandomDate());
+				pstmt_album.setDate(4, now);
+				pstmt_album.setInt(5, 0);
+				pstmt_album.setString(6, "desc" + getRandomString(4));
+				
+				pstmt_album_music.setInt(2, i);	//music id in album_music table
+				pstmt_album_music.setInt(1, i);	// album id in album_music table
+				pstmt_album_music.setString(3, "music"+i);	// music name in album_music table
+				
+//				pstmt.setDate(5, getRandomDate());	// released date
+				pstmt.setDate(5, now);	// released date
 				if (i%2 == 0) {
 					pstmt.setString(6, "Hiphop");
+					pstmt_album.setString(7, "Hiphop");
 				}
 				else if (i%5 == 0) {
 					pstmt.setString(6, "Balad");
+					pstmt_album.setString(7, "Balad");
 				}
 				else if (i%7 == 0) {
 					pstmt.setString(6, "R&B");
+					pstmt_album.setString(7, "R&B");
 				}
 				else if (i%9 == 0) {
 					pstmt.setString(6, "Pop");
+					pstmt_album.setString(7, "Pop");
 				}
 				else {
 					pstmt.setString(6, "Classic");
+					pstmt_album.setString(7, "Classic");
 				}
+				pstmt_album.setString(8, "agency"+getRandomString(4));
+				pstmt_album.setString(9, "publisher"+getRandomString(4));
+				
 				pstmt.setString(7, "lyric"+i+" "+getRandomString(10));	// lyrics
-//				pstmt.setString(8, "#"+getRandomString(4));	// hash tag
 				pstmt.setInt(8, 0);	// like_num
 				pstmt.setInt(9, 0);	// play_num
 				
-				System.out.println(pstmt);
+				
+//				System.out.println(pstmt);
 				pstmt.executeUpdate();
+				pstmt_album.executeUpdate();
+				pstmt_album_music.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -167,13 +203,16 @@ public class DBInsert {
 				pstmt = con.prepareStatement(sql);
 				String name = "name"+getRandomString(4);
 				String id = "id"+getRandomString(4);
-				Date bday = getRandomDate();
+//				Date bday = getRandomDate();
+				Date bday = now;
+				
 				
 				pstmt.setString(1, name);	// name
 				pstmt.setString(2, id);	// id
 				pstmt.setString(3, getRandomString(6));	// password
 				
-				pstmt.setDate(4, getRandomDate());	// password_change_date
+//				pstmt.setDate(4, getRandomDate());	// password_change_date
+				pstmt.setDate(4, now);	// password_change_date
 				
 				pstmt.setString(5, "n"+getRandomString(7));	// nickname
 				
@@ -229,15 +268,16 @@ public class DBInsert {
 					
 					// since this user is artist, store this id for putting into artist_id in music table
 					artist_ids[j] = id;
-					
-					if (i%2 == 0) { 
-						pstmt2.setString(2, name);	// artist name (짝수 : real name = artist name, 홀수 : another random name)
-						artist_names[j] = name;
-					} else {
-						String tempname = getRandomString(4);
-						pstmt2.setString(2,  "name" + tempname);
-						artist_names[j] = "name"+tempname;
-					}
+					pstmt2.setString(2, name);
+					artist_names[j] = name;
+//					if (i%2 == 0) { 
+//						pstmt2.setString(2, name);	// artist name (짝수 : real name = artist name, 홀수 : another random name)
+//						artist_names[j] = name;
+//					} else {
+//						String tempname = getRandomString(4);
+//						pstmt2.setString(2,  "name" + tempname);
+//						artist_names[j] = "name"+tempname;
+//					}
 					j++;
 					
 					pstmt2.setDate(3, bday);
