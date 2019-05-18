@@ -18,7 +18,7 @@ public class ArtistChannelPanel extends JPanel implements Setting{
 	public ArrayList<JLabel> contents = new ArrayList<JLabel>();
 	public ArrayList<String> labelName = new ArrayList<String>();
 	public ArrayList<String> contentName = new ArrayList<String>();
-	String currentArtistName;
+	public static String currentArtistName;
 	
 	MusicButton musicButton = new MusicButton();
 	AlbumButton albumButton = new AlbumButton();
@@ -29,7 +29,7 @@ public class ArtistChannelPanel extends JPanel implements Setting{
 	
 	public ArtistChannelPanel(String ArtistName) {
 		currentArtistName = ArtistName;
-		this.setThis(null);	
+		this.setThis(null);
 	}
 
 	public void setThis(Component prevComp) {

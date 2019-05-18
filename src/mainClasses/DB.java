@@ -513,6 +513,29 @@ public class DB {
     	return infos;
 	}
 	
+	public String getArtistID(String artistName) {
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT id FROM Artist WHERE name = '"+artistName+"'"; 
+		String info = null;
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			info = result.getString("id");
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getArtistID problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return info;
+	}
+	
 	public ArrayList<String> getArtistField(){
 		Statement st = null;
 		ResultSet result = null;
@@ -534,6 +557,70 @@ public class DB {
 		}
     	
     	return infos;
+	}
+	
+	public ArrayList<String> getArtistMusic(String artistID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT name FROM Music WHERE artist_id='"+artistID+"'"; 
+		ArrayList<String> infos = new ArrayList<String>();
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			infos.add(result.getString("name"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getArtistMusic problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<String> getArtistMusicAlbum(String artistID, ArrayList<String> music)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql;
+		ArrayList<String> infos;
+		ArrayList<String> albumName = new ArrayList<String>();
+		// get album_id using artist_id and music's name
+		for(int m=0; m<music.size();m++)
+		{
+			sql = "SELECT album_id FROM Music where artist_id='"+artistID+"' AND name = '"+music.get(m)+"'"; 
+			infos = new ArrayList<String>();
+
+			try {
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getString("album_id"));
+	    		}
+				
+				// get album name using album_id
+				for(int i=0; i<infos.size();i++)
+				{
+					sql = "SELECT title From Album where id = '"+infos.get(i)+"'";	
+					st = con.createStatement();
+					result = st.executeQuery(sql);
+					
+					while (result.next()) {
+		    			albumName.add(result.getString("title"));
+		    		}
+				}
+			} catch (SQLException e) {
+				System.out.println("getArtistMusicAlbum problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+    	return albumName;
 	}
 	
 	public void closeConnection() {

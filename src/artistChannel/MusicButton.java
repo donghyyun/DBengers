@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 import interfaces.Setting;
 import mainClasses.ArtistChannelFrame;
-import mainClasses.DB;
+import mainClasses.ArtistChannelMusicFrame;
 
 public class MusicButton extends JButton implements Setting{
 
@@ -29,8 +29,8 @@ public class MusicButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			
-//			mainClasses.MainController.addPlayListFrame.setVisible(false);
-//			mainClasses.MainController.addPlayListFrame = null;
+			mainClasses.MainController.artistChannelMusicFrame = new ArtistChannelMusicFrame();
+			mainClasses.MainController.artistChannelMusicFrame.setThis();
 		}
 	}
 }
