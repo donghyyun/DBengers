@@ -27,10 +27,10 @@ public class MainController {
 		mainFrame.setThis();
 
 		//DB쓰고나서 closeConnection() 해주세요!!
-//		DBInsert.getInstance().Usergenerator();
-//		DBInsert.getInstance().Musicgenerator();
-//		DBInsert.getInstance().StarPostgenerator();
-//		DBInsert.getInstance().ArtistCommentgenerator();
-//		DBInsert.getInstance().closeConnection();
+		DBInsert.getInstance().Usergenerator();
+		DBInsert.getInstance().Musicgenerator();
+		DBInsert.getInstance().StarPostgenerator();
+		DBInsert.getInstance().ArtistCommentgenerator();
+		DBInsert.getInstance().closeConnection();
 	}
 }
