@@ -1446,19 +1446,25 @@ public class DB {
 		}
 	}
 	
-	public void addHashTag_Hashtag(String userID, String playlist, String hashtags)
+	public void addHashTag_Hashtag(String userID, String playlist, ArrayList<String> hashtags)
 	{
 		Statement st = null;
-		String sql = "INSERT INTO Hashtag VALUES ('"+hashtags+"','"+playlist+"','"+userID+"')";
+		String sql = null;
+		
+		for(int i=0; i<hashtags.size(); i++)
+		{
+			sql = "INSERT INTO Hashtag VALUES ('"+hashtags.get(i)+"','"+playlist+"','"+userID+"')";
 
-		try {
-			st = con.createStatement();
-			st.executeUpdate(sql);
-	    	
-		} catch (SQLException e) {
-			System.out.println("addHashTag_Hashtag problem: ");
-			e.printStackTrace();
+			try {
+				st = con.createStatement();
+				st.executeUpdate(sql);
+		    	
+			} catch (SQLException e) {
+				System.out.println("addHashTag_Hashtag problem: ");
+				e.printStackTrace();
+			}
 		}
+		
 	}
 	
 	public void addHashTag_HashtagNames(ArrayList<String> hashtags)
@@ -1489,11 +1495,11 @@ public class DB {
 		}
 	}
 	
-	public String deleteHashTag_Hashtag(String userID, String playlistName)
+	public ArrayList<String> deleteHashTag_Hashtag(String userID, String playlistName)
 	{
 		Statement st = null;
 		ResultSet result = null;
-		String hashtags = null;
+		ArrayList<String> hashtags = new ArrayList<String>();
 		String sql = "DELETE FROM Hashtag WHERE playlist_name='"+playlistName+"' AND user_id='"+userID+"'";
 		String sql1 = "SELECT tagname FROM Hashtag WHERE playlist_name='"+playlistName+"' AND user_id='"+userID+"'";
 
@@ -1502,7 +1508,7 @@ public class DB {
 			
 			result = st.executeQuery(sql1);
 			while(result.next())
-				hashtags = (result.getString("tagname"));
+				hashtags.add(result.getString("tagname"));
 			
 			st.executeUpdate(sql);
 	    	
@@ -1521,7 +1527,6 @@ public class DB {
 		String sql1 = null;
 		String sql2 = null;
 		ResultSet result = null;
-		// first insert new hash-tags
 		for(int i=0;i<hashtags.size();i++)
 		{
 			sql = "SELECT cnt FROM HashtagNames WHERE tagname ='"+hashtags.get(i)+"'";

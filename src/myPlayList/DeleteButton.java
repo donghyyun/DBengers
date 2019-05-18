@@ -33,8 +33,7 @@ public class DeleteButton extends JButton implements Setting{
 			// when click, the corresponding play-list should be deleted from the Database
 			// also, this play-list should be deleted from the MyPlayListFrame(or panel)
 			DB.getInstance().deletePlayList(DB.currentID, MyPlayListPanel.playListButtons.get(buttonNum).getText());
-			String str = DB.getInstance().deleteHashTag_Hashtag(DB.currentID, MyPlayListPanel.playListButtons.get(buttonNum).getText());
-			ArrayList<String> hashtags = new ArrayList<String>(Arrays.asList(str.split(",")));
+			ArrayList<String> hashtags = DB.getInstance().deleteHashTag_Hashtag(DB.currentID, MyPlayListPanel.playListButtons.get(buttonNum).getText());
 			DB.getInstance().deleteHashTag_HashtagNames(hashtags);
 			
 			mainClasses.MainController.myPlayListFrame.setVisible(false);
