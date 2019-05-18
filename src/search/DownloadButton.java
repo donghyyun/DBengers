@@ -20,7 +20,7 @@ public class DownloadButton extends JButton implements Setting{
 		this.setText("Download");
 		this.setFont(SearchPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds(SearchFrame.frameWidth/10 + 370 +100, SearchFrame.frameHeight/10 + 40*(numOfListen++), 100, 35);
+		this.setBounds(SearchFrame.frameWidth/10 + 370 +100, SearchFrame.frameHeight/10 + 40*(numOfListen++), 150, 35);
 		this.addActionListener(new Listener());
 		num = count;
 	}

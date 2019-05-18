@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 import interfaces.Setting;
 import mainClasses.DB;
-import mainClasses.PlayListMusicFrame;
+import mainClasses.SearchFrame;
 import mainClasses.SearchFrame;
 import search.DownloadButton;
 import search.ListenButton;
@@ -30,7 +30,7 @@ public class SearchPanel extends JPanel implements Setting {
 
 	public static int numOfMusicInSearchList = 0;	// number of music in the play-list
 	
-	public static Font font = new Font ("Arial", Font.BOLD, PlayListMusicFrame.frameHeight / 30);
+	public static Font font = new Font ("Arial", Font.BOLD, SearchFrame.frameHeight / 30);
 	
 	public SearchPanel() {this.setThis(null);}
 
@@ -41,13 +41,14 @@ public class SearchPanel extends JPanel implements Setting {
 		artists = DB.getInstance().getSearchMusicArtist(userID,searchText);
 		numOfMusicInSearchList = musics.size();
 		System.out.println("Music: "+musics.get(0)+"\nArtist: "+artists.get(0));
-		this.setBounds(0, 0, PlayListMusicFrame.frameWidth, PlayListMusicFrame.frameHeight);
+		this.setBounds(0, 0, SearchFrame.frameWidth, SearchFrame.frameHeight);
 		this.setLayout(null);
 		this.setComponents();
 		this.addComponents();
 	}
 
 	public void setComponents() {
+		
 		for(int i=0; i<numOfMusicInSearchList ;i++)
 		{
 			listenButtons.add(new ListenButton());
@@ -55,13 +56,24 @@ public class SearchPanel extends JPanel implements Setting {
 			downloadButtons.add(new DownloadButton());
 			downloadButtons.get(i).setThis(null,i);
 			musicNames.add(new JLabel(musics.get(i)));
-			musicNames.get(i).setBounds(PlayListMusicFrame.frameWidth/10, PlayListMusicFrame.frameHeight/10+40*i, 180, 35);
+			musicNames.get(i).setBounds(SearchFrame.frameWidth/10, SearchFrame.frameHeight/10+40*i, 180, 35);
 			artistNames.add(new JLabel(artists.get(i)));
-			artistNames.get(i).setBounds(PlayListMusicFrame.frameWidth/10+190, PlayListMusicFrame.frameHeight/10+40*i, 180, 35);
+			artistNames.get(i).setBounds(SearchFrame.frameWidth/10+190, SearchFrame.frameHeight/10+40*i, 180, 35);
 		}
+		
+		musicTitle.setFont(font);
+		musicTitle.setSize(musicTitle.getPreferredSize());
+		musicTitle.setLocation(50, 30);
+		musicArtist.setFont(font);
+		musicArtist.setSize(musicArtist.getPreferredSize());
+		musicArtist.setLocation(250, 30);
+		
 	}
 
 	public void addComponents() {
+		
+		this.add(musicTitle);
+		this.add(musicArtist);
 		
 		for(int i=0; i<numOfMusicInSearchList; i++)
 		{

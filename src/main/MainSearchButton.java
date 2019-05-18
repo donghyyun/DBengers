@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import interfaces.Setting;
 import main.MainMyPageButton.Listener;
@@ -30,9 +31,15 @@ public class MainSearchButton extends JButton implements Setting {
 
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			mainClasses.MainController.searchFrame = new mainClasses.SearchFrame();
-			mainClasses.MainController.searchFrame.setThis();
-			
+
+			try{
+				mainClasses.MainController.searchFrame = new mainClasses.SearchFrame();
+				mainClasses.MainController.searchFrame.setThis();
+	        }catch(ArrayIndexOutOfBoundsException a){
+				JOptionPane.showMessageDialog(null, "No Data!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+	        }catch(Exception a){
+				JOptionPane.showMessageDialog(null, "No Data!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+	        }finally{}			
 		}
 	}
 }
