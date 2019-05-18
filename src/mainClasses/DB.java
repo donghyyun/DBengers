@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
+import javax.swing.JLabel;
+
 import myPlayList.MyPlayListPanel;
 
 public class DB {
@@ -18,10 +20,10 @@ public class DB {
 
 	private DB() {        	
 
-        String url = "jdbc:mysql://172.17.192.208/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.192.58/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "ysk", "thisgood");
+			con = DriverManager.getConnection(url, "pjh", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
@@ -180,17 +182,23 @@ public class DB {
 	public ArrayList<String> getUserInfo(String id) {
     	Statement st = null;
 		ResultSet result = null;
+		Statement st2 = null;
+		ResultSet result2 = null;
 		String sql = "SELECT name, id, password, password_change_date, nickname, birthday, gender, address, email, phone_num,"
 				+ "voucher_name, is_artist, alarm_to_mail, alarm_to_sms "
 				+ " FROM User WHERE id='"+id+"'"; 
+		String sql2 = "SELECT streaming_num, download_num FROM My_Voucher WHERE id='"+id+"'";
 		ArrayList<String> infos = new ArrayList<String>();
 
     	//System.out.println("getUserInfo entered!!");
     	
     	try {
+    		
     		st = con.createStatement();
+    		st2 = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		result = st.executeQuery(sql);
+    		result2 = st2.executeQuery(sql2);
     		
     		while (result.next()) {
     			infos.add(result.getString("name"));
@@ -207,9 +215,15 @@ public class DB {
     	    	infos.add(String.valueOf(result.getBoolean("is_artist")));
     	    	infos.add(String.valueOf(result.getBoolean("alarm_to_mail")));
     	    	infos.add(String.valueOf(result.getBoolean("alarm_to_sms")));
+    	    	
     	    	break;
     		}
-	    	
+    		while (result2.next()) {
+    			infos.add(String.valueOf(result2.getInt("streaming_num")));
+    			infos.add(String.valueOf(result2.getInt("download_num")));
+    			
+    			break;
+    		}
     	
     		
 		} catch (SQLException e) {
@@ -245,7 +259,7 @@ public class DB {
     	return voucherinfos;
 	}
 	
-	public ArrayList<String> getArtistInfo() {
+	public ArrayList<String> getArtistName() {
 		Statement st = null;
 		ResultSet result = null;
 		String sql = "SELECT name FROM Artist"; 
@@ -307,7 +321,7 @@ public class DB {
 	
 	public void addPlayList(String id, String playlistName) {
 		Statement st = null;
-		String sql = "INSERT INTO User_PlayList VALUES ('"+id+"', '"+playlistName+"', 0, ' ')"; 
+		String sql = "INSERT INTO User_PlayList(id, name, num_like, hashtag, play_num) VALUES ('"+id+"', '"+playlistName+"', 0, ' ', 0)"; 
     	try {
     		st = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
@@ -342,7 +356,7 @@ public class DB {
     		st.executeUpdate(sql);
 
     	} catch (SQLException e) {
-			System.out.println("addPlayList problem: ");
+			System.out.println("changePlayList problem: ");
 			e.printStackTrace();
 		}
 	}
@@ -441,16 +455,38 @@ public class DB {
     	return artists;
 	}
 	
-	public void addMusicPlaynum(String musicName) {
+	public void addMusicPlaynum(String userID, String musicName) {
 		Statement st = null;
-		String sql = "UPDATE Music SET play_num = play_num+1 WHERE name = '"+musicName+"'"; 
+		Statement st2= null;
+		String sql = "UPDATE Music SET play_num = play_num+1 WHERE name = '"+musicName+"'";
+		String sql2 = "UPDATE My_Voucher SET streaming_num = streaming_num-1 WHERE id = '"+userID+"'";
     	try {
     		st = con.createStatement();
+    		st2 = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
 
     	} catch (SQLException e) {
 			System.out.println("addMusicPlaynum problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+	public void addMusicDownloadnum(String userID, String musicName) {
+		Statement st = null;
+		Statement st2= null;
+		String sql = "UPDATE Music SET download_num = download_num+1 WHERE name = '"+musicName+"'";
+		String sql2 = "UPDATE My_Voucher SET download_num = download_num-1 WHERE id = '"+userID+"'";
+    	try {
+    		st = con.createStatement();
+    		st2 = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
+
+    	} catch (SQLException e) {
+			System.out.println("addMusicDownloadnum problem: ");
 			e.printStackTrace();
 		}
 	}
@@ -469,6 +505,487 @@ public class DB {
 			System.out.println("addMusicPlaynum problem: ");
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<String> getArtistInfo(String currentArtistName) {
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT name, birthday, introduction, debut_date, debut_song, type, gender, agency, nationality, constellation, blood_type, num_stars, fanclub, youtube, facebook, twitter FROM Artist WHERE name = '"+currentArtistName+"'"; 
+		ArrayList<String> infos = new ArrayList<String>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			infos.add(result.getString("name"));
+    			infos.add(result.getString("birthday"));
+    			infos.add(result.getString("introduction"));
+    			infos.add(result.getString("debut_date"));
+    			infos.add(result.getString("debut_song"));
+    			infos.add(result.getString("type"));
+    			infos.add(result.getString("gender"));
+    			infos.add(result.getString("agency"));
+    			infos.add(result.getString("nationality"));
+    			infos.add(result.getString("constellation"));
+    			infos.add(result.getString("blood_type"));
+    			infos.add(result.getString("num_stars"));
+    			infos.add(result.getString("fanclub"));
+    			infos.add(result.getString("youtube"));
+    			infos.add(result.getString("facebook"));
+    			infos.add(result.getString("twitter"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getArtistInfo problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return infos;
+	}
+	
+	public String getArtistID(String artistName) {
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT id FROM Artist WHERE name = '"+artistName+"'"; 
+		String info = null;
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			info = result.getString("id");
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getArtistID problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return info;
+	}
+	
+	public ArrayList<String> getArtistField(){
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT column_name FROM information_schema.columns WHERE table_schema = 'DBengers' AND table_name = 'Artist'"; 
+		ArrayList<String> infos = new ArrayList<String>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			infos.add(result.getString("column_name"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getArtistField problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return infos;
+	}
+
+	public void buy100Voucher(String userid) {
+		Statement st = null;
+		Statement st2 = null;
+		String vouchername = "100 Streaming";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
+		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
+				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
+				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ ", streaming_num = (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ "";
+    	try {
+    		st = con.createStatement();
+    		st2 = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
+    		
+    	} catch (SQLException e) {
+			System.out.println("buy Voucher problem: ");
+			e.printStackTrace();
+		}
+	}
+
+	public void buy300Voucher(String userid) {
+		Statement st = null;
+		Statement st2 = null;
+		String vouchername = "300 Streaming";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
+		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
+				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
+				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ ", streaming_num = (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ "";
+    	try {
+    		st = con.createStatement();
+    		st2 = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
+
+    	} catch (SQLException e) {
+			System.out.println("buy Voucher problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+	public void buyUnlimitVoucher(String userid) {
+		Statement st = null;
+		Statement st2 = null;
+		String vouchername = "Unlimited Streaming";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
+		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
+				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
+				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ ", streaming_num = (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ "";
+    	try {
+    		st = con.createStatement();
+    		st2 = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
+
+    	} catch (SQLException e) {
+			System.out.println("buy Voucher problem: ");
+			e.printStackTrace();
+		}
+
+	}
+	
+	public ArrayList<String> getArtistMusic(String artistID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT name FROM Music WHERE artist_id='"+artistID+"'"; 
+		ArrayList<String> infos = new ArrayList<String>();
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			infos.add(result.getString("name"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getArtistMusic problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<String> getArtistMusicAlbum(String artistID, ArrayList<String> music)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql;
+		ArrayList<String> infos;
+		ArrayList<String> albumName = new ArrayList<String>();
+		// get album_id using artist_id and music's name
+		for(int m=0; m<music.size();m++)
+		{
+			sql = "SELECT album_id FROM Music where artist_id='"+artistID+"' AND name = '"+music.get(m)+"'"; 
+			infos = new ArrayList<String>();
+
+			try {
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getString("album_id"));
+	    		}
+				
+				// get album name using album_id
+				for(int i=0; i<infos.size();i++)
+				{
+					sql = "SELECT title From Album where id = '"+infos.get(i)+"'";	
+					st = con.createStatement();
+					result = st.executeQuery(sql);
+					
+					while (result.next()) {
+		    			albumName.add(result.getString("title"));
+		    		}
+				}
+			} catch (SQLException e) {
+				System.out.println("getArtistMusicAlbum problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+    	return albumName;
+	}
+	
+	public ArrayList<String> getArtistAlbum(String artistID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		ArrayList<String> infos = new ArrayList<String>();
+		ArrayList<String> albumName = new ArrayList<String>();
+		// get artist's album_id using artist_id
+		String sql = "SELECT album_id FROM Music where artist_id='"+artistID+"'"; 
+
+		try {
+			st = con.createStatement();
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			infos.add(result.getString("album_id"));
+    		}
+			
+			// get album name using album_id
+			for(int i=0; i<infos.size();i++)
+			{
+				sql = "SELECT title From Album where id = '"+infos.get(i)+"'";	
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			albumName.add(result.getString("title"));
+	    		}
+			}
+		} catch (SQLException e) {
+			System.out.println("getArtistAlbum problem: ");
+			e.printStackTrace();
+		}
+		
+    	return albumName;
+	}
+	
+	public ArrayList<Date> getArtistAlbumDate(String artistID, ArrayList<String> albumName)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Date> albumDate = new ArrayList<Date>();
+		
+		for(int i=0; i<albumName.size();i++)
+		{
+			sql = "SELECT released_date FROM Album WHERE artist_id='"+artistID+"' AND title='"+albumName.get(i)+"'"; 
+
+			try {
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			albumDate.add(result.getDate("released_date"));
+	    		}
+				
+			} catch (SQLException e) {
+				System.out.println("getArtistAlbumDate problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+		
+    	return albumDate;
+	}
+	
+	public ArrayList<Integer> getArtistAlbumLikes(String artistID, ArrayList<String> albumName)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Integer> infos = new ArrayList<Integer>();
+		// get num_stars from album
+		for(int i=0;i<albumName.size();i++)
+		{
+			sql = "SELECT num_stars FROM Album WHERE artist_id='"+artistID+"' AND title='"+albumName.get(i)+"'"; 
+
+			try {
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getInt("num_stars"));
+	    		}
+				
+			} catch (SQLException e) {
+				System.out.println("getArtistAlbumLikes problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+    	return infos;
+	}
+	
+	public ArrayList<Integer> getStarPostID(String artistID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT star_post_id FROM Star_Post WHERE user_id='"+artistID+"'"; 
+		ArrayList<Integer> starpostIDs = new ArrayList<Integer>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			starpostIDs.add(result.getInt("star_post_id"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getStarPostID problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return starpostIDs;
+	}
+	
+	public ArrayList<String> getStarPostTitle(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<String> infos = new ArrayList<String>();
+		
+		for(int i=0; i<starpostID.size(); i++)
+		{
+			sql = "SELECT title FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+		
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getString("title"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostTitle problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<Date> getStarPostDate(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Date> infos = new ArrayList<Date>();
+		
+		for(int i=0;i<starpostID.size();i++)
+		{
+			sql = "SELECT date FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getDate("date"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostDate problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+    	return infos;
+	}
+	
+	public ArrayList<Integer> getStarPostLike(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Integer> infos = new ArrayList<Integer>();
+		
+		for(int i=0;i<starpostID.size();i++)
+		{
+			sql = "SELECT like_num FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getInt("like_num"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostLike problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<Integer> getStarPostView(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Integer> infos = new ArrayList<Integer>();
+		
+		for(int i=0;i<starpostID.size();i++)
+		{
+			sql = "SELECT view_num FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getInt("view_num"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostView problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+    	
+    	return infos;
+	}
+	
+	public ArrayList<String> getStarPostDescript(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<String> infos = new ArrayList<String>();
+		
+		for(int i=0; i<starpostID.size();i++)
+		{
+			sql = "SELECT description FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getString("description"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostDescript problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
 	}
 	
 	public void closeConnection() {

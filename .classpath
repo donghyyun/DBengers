@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-<<<<<<< HEAD
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home/lib/mysql-connector-java-8.0.16.jar"/>
-=======
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/jeff.sk.yoo/Desktop/mysql-connector-java-8.0.16/mysql-connector-java-8.0.16/mysql-connector-java-8.0.16.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
->>>>>>> 6742c074aa655b233fe302e8272c43738f904c65
+	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home/lib/mysql-connector-java-8.0.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
+

@@ -14,7 +14,12 @@ public class MainController {
 	public static MyPlayListFrame myPlayListFrame;
 	public static AddPlayListFrame addPlayListFrame;
 	public static PlayListMusicFrame playListMusicFrame;
-
+	
+	public static ArtistChannelFrame artistChannelFrame;
+	public static ArtistChannelMusicFrame artistChannelMusicFrame;
+	public static ArtistChannelAlbumFrame artistChannelAlbumFrame;
+	public static ArtistChannelStarPostFrame artistChannelStarPostFrame;
+	
 	public static void main(String[] args) {
 		 //TODO Auto-generated method stub
 		mainFrame.setThis();
@@ -23,6 +28,7 @@ public class MainController {
 //		DBInsert.getInstance().Usergenerator();
 //		DBInsert.getInstance().Musicgenerator();
 //		DBInsert.getInstance().StarPostgenerator();
+//		DBInsert.getInstance().ArtistCommentgenerator();
 //		DBInsert.getInstance().closeConnection();
 	}
 }

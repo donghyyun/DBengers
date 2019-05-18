@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import interfaces.Setting;
+import mainClasses.DB;
 import mainClasses.VoucherFrame;
 
 public class VoucherBuyUnlimitButton extends JButton implements Setting {
@@ -43,6 +44,11 @@ public class VoucherBuyUnlimitButton extends JButton implements Setting {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			JOptionPane.showMessageDialog(null, "You bought Unlimited Streaming", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			DB.getInstance().buyUnlimitVoucher(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText());
+			mainClasses.MainController.myPageFrame.setVisible(false);
+			mainClasses.MainController.myPageFrame = null;
+			mainClasses.MainController.voucherFrame.setVisible(false);
+			mainClasses.MainController.voucherFrame = null;
 
 		}
 	}

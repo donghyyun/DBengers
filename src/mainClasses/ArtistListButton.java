@@ -11,6 +11,7 @@ import join.JoinArtistInfoPanel;
 
 public class ArtistListButton extends JButton implements Setting{
 	public static int artistlistnum = 0;
+	String currentArtistName;
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setText("Artist");
@@ -28,8 +29,8 @@ public class ArtistListButton extends JButton implements Setting{
 	class Listener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			
-			mainClasses.MainController.joinArtistFrame.setVisible(false);
-			mainClasses.MainController.joinArtistFrame = null;
+			mainClasses.MainController.artistChannelFrame = new ArtistChannelFrame();
+			mainClasses.MainController.artistChannelFrame.setThis(currentArtistName);
 		}
 	}
 }
