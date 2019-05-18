@@ -476,12 +476,21 @@ public class DB {
 
 	public void buy100Voucher(String userid) {
 		Statement st = null;
-		String sql = "UPDATE User SET voucher_name='100 Streaming' WHERE id='"+userid+"'"; 
+		Statement st2 = null;
+		String vouchername = "100 Streaming";
+		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
+				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
+				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ ", streaming_num = (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ "";
     	try {
     		st = con.createStatement();
+    		st2 = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		st.executeUpdate(sql);
-
+    		st2.executeUpdate(sql2);
+    		
     	} catch (SQLException e) {
 			System.out.println("buy Voucher problem: ");
 			e.printStackTrace();
@@ -490,11 +499,20 @@ public class DB {
 
 	public void buy300Voucher(String userid) {
 		Statement st = null;
-		String sql = "UPDATE User SET voucher_name='300 Streaming' WHERE id='"+userid+"'"; 
+		Statement st2 = null;
+		String vouchername = "300 Streaming";
+		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
+				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
+				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ ", streaming_num = (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ "";
     	try {
     		st = con.createStatement();
+    		st2 = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
 
     	} catch (SQLException e) {
 			System.out.println("buy Voucher problem: ");
@@ -504,11 +522,20 @@ public class DB {
 	
 	public void buyUnlimitVoucher(String userid) {
 		Statement st = null;
-		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'"; 
+		Statement st2 = null;
+		String vouchername = "Unlimited Streaming";
+		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
+				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
+				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ ", streaming_num = (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')"
+				+ "";
     	try {
     		st = con.createStatement();
+    		st2 = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
 
     	} catch (SQLException e) {
 			System.out.println("buy Voucher problem: ");

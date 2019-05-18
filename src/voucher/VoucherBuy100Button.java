@@ -20,7 +20,7 @@ public class VoucherBuy100Button extends JButton implements Setting {
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setText("Buy 200 Streaming");
+		this.setText("Buy 100 Streaming");
 		this.setFont(font);
 		this.setBorderPainted(true);
 		this.setBounds(prevComp.getX() +  prevComp.getWidth(), prevComp.getY(), prevComp.getWidth(), prevComp.getHeight());
@@ -44,7 +44,7 @@ public class VoucherBuy100Button extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			JOptionPane.showMessageDialog(null, "You bought 200 Streaming", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "You bought 100 Streaming", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 			DB.getInstance().buy100Voucher(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText());
 			mainClasses.MainController.myPageFrame.setVisible(false);
 			mainClasses.MainController.myPageFrame = null;
