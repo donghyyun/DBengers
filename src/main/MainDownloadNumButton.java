@@ -6,21 +6,19 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 import interfaces.Setting;
 import mainClasses.DB;
 
-public class MainAllButton extends JButton implements Setting {
+public class MainDownloadNumButton extends JButton implements Setting {
 
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setText("All");
+		this.setText("Download");
 		this.setFont(MainPanel.smallFont);
 		this.setBorderPainted(true);
 		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MainPanel.marginHeight);
-		this.setLocation(prevComp.getX(), prevComp.getY() + prevComp.getHeight());
+		this.setLocation(prevComp.getX() + prevComp.getWidth(), prevComp.getY());
 		this.addActionListener(new Listener());
 	}
 
@@ -34,13 +32,12 @@ public class MainAllButton extends JButton implements Setting {
 			// TODO Auto-generated method stub
 			ArrayList<String> infos = new ArrayList<String>();
 			
-			infos = DB.getInstance().getMusicInfoByRank("All");
+			infos = DB.getInstance().getMusicInfoByRank("Download");
 			
 			for (String info : infos) 
 				mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[infos.indexOf(info) / 3].songInfo[infos.indexOf(info) % 3].setText(info);
 			
 			mainClasses.MainController.mainFrame.mainPanel.scroll.setVisible(true);
-			
 		}
 	}
 }

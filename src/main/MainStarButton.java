@@ -8,17 +8,16 @@ import javax.swing.JButton;
 
 import interfaces.Setting;
 
-public class MainArtistButton extends JButton implements Setting {
+public class MainStarButton extends JButton implements Setting {
 
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setText("Artist");
+		this.setText("Star");
 		this.setFont(MainPanel.font);
 		this.setBorderPainted(true);
-		this.setSize(MainPanel.rankButtonWidth, this.getFont().getSize() + MainPanel.marginHeight);
-//		this.setLocation(prevComp.getX() + prevComp.getWidth(), prevComp.getY());
-		this.setLocation(MainPanel.startX, prevComp.getY() + prevComp.getHeight());
+		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MainPanel.marginHeight);
+		this.setLocation(prevComp.getX(), prevComp.getY() + prevComp.getHeight() + MainPanel.marginHeight);
 		this.addActionListener(new Listener());
 	}
 
