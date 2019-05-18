@@ -184,17 +184,23 @@ public class DB {
 	public ArrayList<String> getUserInfo(String id) {
     	Statement st = null;
 		ResultSet result = null;
+		Statement st2 = null;
+		ResultSet result2 = null;
 		String sql = "SELECT name, id, password, password_change_date, nickname, birthday, gender, address, email, phone_num,"
 				+ "voucher_name, is_artist, alarm_to_mail, alarm_to_sms "
 				+ " FROM User WHERE id='"+id+"'"; 
+		String sql2 = "SELECT streaming_num, download_num FROM My_Voucher WHERE id='"+id+"'";
 		ArrayList<String> infos = new ArrayList<String>();
 
     	//System.out.println("getUserInfo entered!!");
     	
     	try {
+    		
     		st = con.createStatement();
+    		st2 = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		result = st.executeQuery(sql);
+    		result2 = st2.executeQuery(sql2);
     		
     		while (result.next()) {
     			infos.add(result.getString("name"));
@@ -211,9 +217,15 @@ public class DB {
     	    	infos.add(String.valueOf(result.getBoolean("is_artist")));
     	    	infos.add(String.valueOf(result.getBoolean("alarm_to_mail")));
     	    	infos.add(String.valueOf(result.getBoolean("alarm_to_sms")));
+    	    	
     	    	break;
     		}
-	    	
+    		while (result2.next()) {
+    			infos.add(String.valueOf(result2.getInt("streaming_num")));
+    			infos.add(String.valueOf(result2.getInt("download_num")));
+    			
+    			break;
+    		}
     	
     		
 		} catch (SQLException e) {
@@ -463,6 +475,24 @@ public class DB {
 		}
 	}
 	
+	public void addMusicDownloadnum(String userID, String musicName) {
+		Statement st = null;
+		Statement st2= null;
+		String sql = "UPDATE Music SET download_num = download_num+1 WHERE name = '"+musicName+"'";
+		String sql2 = "UPDATE My_Voucher SET download_num = download_num-1 WHERE id = '"+userID+"'";
+    	try {
+    		st = con.createStatement();
+    		st2 = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
+
+    	} catch (SQLException e) {
+			System.out.println("addMusicDownloadnum problem: ");
+			e.printStackTrace();
+		}
+	}
+	
 	public void addToHistory(String userid, String musicname) {
 		Statement st = null;
 		long time = System.currentTimeMillis(); 
@@ -567,7 +597,7 @@ public class DB {
 		Statement st = null;
 		Statement st2 = null;
 		String vouchername = "100 Streaming";
-		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
 		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
 				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
 				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
@@ -590,7 +620,7 @@ public class DB {
 		Statement st = null;
 		Statement st2 = null;
 		String vouchername = "300 Streaming";
-		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
 		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
 				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
 				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
@@ -613,7 +643,7 @@ public class DB {
 		Statement st = null;
 		Statement st2 = null;
 		String vouchername = "Unlimited Streaming";
-		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
 		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
 				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
 				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
