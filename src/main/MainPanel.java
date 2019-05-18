@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JLabel;
@@ -32,28 +33,26 @@ public class MainPanel extends JPanel implements Setting {
 	
 	public JLabel rank = new JLabel("Rank", JLabel.LEFT);
 	public MainAllButton allButton = new MainAllButton();
-	public MainGenreButton genreButton = new MainGenreButton();
-	public MainLikeButton likeButton = new MainLikeButton();
+	public MainPlayNumButton playNumButton = new MainPlayNumButton();
+	public MainDownloadNumButton downlaodNumButton = new MainDownloadNumButton();
 	public MainDateButton dateButton = new MainDateButton();
 	
 	
 	public MainMusicPanel musicPanel = new MainMusicPanel();
-	public JScrollPane scroll = new JScrollPane();
+	public JScrollPane scroll;
 	
 	public static final int width = mainClasses.MainFrame.frameWidth;
-	public static final int height = mainClasses.MainFrame.frameWidth;
+	public static final int height = mainClasses.MainFrame.frameHeight;
 	public static final int startX = width / 20;
-	public static final int startY = height / 20;
+	public static final int startY = height / 30;
 	
-	public static Font font = new Font ("Arial", Font.BOLD, height / 20);
-	public static Font smallFont = new Font ("Arial", Font.BOLD, height / 30);
+	public static Font font = new Font ("Arial", Font.BOLD, height / 30);
+	public static Font smallFont = new Font ("Arial", Font.BOLD, height / 40);
 	
 	
 	
-	public static final int marginHeight = height / 20;
+	public static final int marginHeight = height / 30;
 	public static final int marginWidth = width / 20;
-	
-	public static final int rankButtonWidth = (width - (2 * marginWidth)) / 4;
 			
 	public MainPanel() {this.setThis(null);}
 	
@@ -99,9 +98,16 @@ public class MainPanel extends JPanel implements Setting {
 		setLabels();
 		
 		allButton.setThis(hiphop);
-		genreButton.setThis(allButton);
-		likeButton.setThis(genreButton);
-		dateButton.setThis(likeButton);
+		playNumButton.setThis(allButton);
+		downlaodNumButton.setThis(playNumButton);
+		dateButton.setThis(downlaodNumButton);
+		
+		musicPanel.setThis(allButton);
+		scroll = new JScrollPane(musicPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setLocation(marginWidth, allButton.getY() + allButton.getHeight());
+		scroll.setSize(width - 2 * marginWidth, height - (scroll.getY() + 2 * marginHeight));
+		
+		scroll.setVisible(false);
 	}
 
 	public void addComponents() {
@@ -125,10 +131,11 @@ public class MainPanel extends JPanel implements Setting {
 		this.add(pop);
 		
 		this.add(allButton);
-		this.add(genreButton);
-		this.add(likeButton);
+		this.add(playNumButton);
+		this.add(downlaodNumButton);
 		this.add(dateButton);
 		
+		this.add(scroll);
 	}
 
 }

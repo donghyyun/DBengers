@@ -18,7 +18,7 @@ public class DB {
 
 	private DB() {        	
 
-        String url = "jdbc:mysql://172.30.1.13/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.192.58/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "ysk", "thisgood");
@@ -176,6 +176,132 @@ public class DB {
     	return false;
 	}
 	
+	public ArrayList<String> getMusicInfoByGenre(String genre){
+		Statement st = null;
+		ResultSet result = null;
+		
+		Statement stTemp1 = null;
+		ResultSet rsTemp1 = null;
+		
+		Statement stTemp2 = null;
+		ResultSet rsTemp2 = null;
+		
+		
+		String sql = "SELECT name, artist_id, album_id"
+				+ " FROM Music WHERE genre='" + genre + "'";
+		
+		ArrayList<String> infos = new ArrayList<String>();
+    	
+    	try {
+    		st = con.createStatement();
+    		stTemp1 = con.createStatement();
+    		stTemp2 = con.createStatement();
+    		
+    		result = st.executeQuery(sql);
+    		
+    		
+    		String artist_id;
+    		int album_id;
+    		
+    		while (result.next()) {
+    			
+    			if (infos.size() > 60)
+    				return infos;
+    			
+    			
+    			infos.add(result.getString("name"));
+    			artist_id = result.getString("artist_id");
+    			album_id = result.getInt("album_id");
+    			
+    			
+    			rsTemp1 = stTemp1.executeQuery("SELECT name FROM Artist WHERE id='" + artist_id + "'");
+    	    	while (rsTemp1.next()) {
+    	    		infos.add(rsTemp1.getString("name"));
+    	    	}
+    	    	
+    			
+    			rsTemp2 = stTemp2.executeQuery("SELECT title FROM Album WHERE id=" + album_id);
+    			while (rsTemp2.next()) {
+    				infos.add(rsTemp2.getString("title"));
+    			}
+    		}
+    		
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<String> getMusicInfoByRank(String sortBy){
+		Statement st = null;
+		ResultSet result = null;
+		
+		Statement stTemp1 = null;
+		ResultSet rsTemp1 = null;
+		
+		Statement stTemp2 = null;
+		ResultSet rsTemp2 = null;
+		
+		
+		String sql = "SELECT name, artist_id, album_id"
+				+ " FROM Music order by ";
+		
+		if (sortBy.equalsIgnoreCase("All")) 
+			sql += "music_id";
+		 else if(sortBy.equalsIgnoreCase("Play_num")) 
+			sql += "play_num";
+		 else if(sortBy.equalsIgnoreCase("Download")) 
+			sql += "download_num";
+		 else
+			sql += "released_date";
+		
+		sql += " desc";
+		
+		ArrayList<String> infos = new ArrayList<String>();
+    	
+    	try {
+    		st = con.createStatement();
+    		stTemp1 = con.createStatement();
+    		stTemp2 = con.createStatement();
+    		
+    		result = st.executeQuery(sql);
+    		
+    		
+    		String artist_id;
+    		int album_id;
+    		
+    		while (result.next()) {
+    			
+    			if (infos.size() > 60)
+    				return infos;
+    			
+    			
+    			infos.add(result.getString("name"));
+    			artist_id = result.getString("artist_id");
+    			album_id = result.getInt("album_id");
+    			
+    			
+    			rsTemp1 = stTemp1.executeQuery("SELECT name FROM Artist WHERE id='" + artist_id + "'");
+    	    	while (rsTemp1.next()) {
+    	    		infos.add(rsTemp1.getString("name"));
+    	    	}
+    	    	
+    			
+    			rsTemp2 = stTemp2.executeQuery("SELECT title FROM Album WHERE id=" + album_id);
+    			while (rsTemp2.next()) {
+    				infos.add(rsTemp2.getString("title"));
+    			}
+    		}
+    		
+		} catch (SQLException e) {
+			System.out.println("createStatement problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return infos;
+	}
 	
 	public ArrayList<String> getUserInfo(String id) {
     	Statement st = null;
