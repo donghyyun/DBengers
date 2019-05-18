@@ -7,40 +7,32 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 
 import interfaces.Setting;
 import mainClasses.DB;
 import mainClasses.SearchFrame;
-import mainClasses.SearchFrame;
-import search.DownloadButton;
-import search.ListenButton;
 
 public class SearchPanel extends JPanel implements Setting {
-	private JLabel musicTitle = new JLabel("MusicTitle");
-	private JLabel musicArtist = new JLabel("MusicArtist");
-	public ArrayList<ListenButton> listenButtons = new ArrayList<ListenButton>();
-	public ArrayList<DownloadButton> downloadButtons = new ArrayList<DownloadButton>();
-	public static ArrayList<JLabel> musicNames = new ArrayList<JLabel>();
-	public ArrayList<JLabel> artistNames = new ArrayList<JLabel>();
-	public ArrayList<String> musics;
-	public ArrayList<String> artists;
-	public String userID = mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText();
-	public String searchText = mainClasses.MainController.mainFrame.mainPanel.searchTextF.getText();
-
-	public static int numOfMusicInSearchList = 0;	// number of music in the play-list
+	public static final int width = mainClasses.SearchFrame.frameWidth;
+	public static final int height = mainClasses.SearchFrame.frameHeight;
+	public static final int startX = width / 20;
+	public static final int startY = height / 30;
+	
+	public static final int marginHeight = height / 30;
+	public static final int marginWidth = width / 20;
 	
 	public static Font font = new Font ("Arial", Font.BOLD, SearchFrame.frameHeight / 30);
+	
+	public String searchText = mainClasses.MainController.mainFrame.mainPanel.searchTextF.getText();
+	
+	private JLabel musicTitle = new JLabel("MusicTitle");
+	private JLabel musicArtist = new JLabel("MusicArtist");
+	public SearchMusicPanel musicPanel = new SearchMusicPanel();
+	public JScrollPane scroll;
 	
 	public SearchPanel() {this.setThis(null);}
 
 	public void setThis(Component prevComp) {
-		ListenButton.numOfListen = 0;
-		DownloadButton.numOfListen = 0;
-		musics = DB.getInstance().getSearchMusic(userID,searchText);
-		artists = DB.getInstance().getSearchMusicArtist(userID,searchText);
-		numOfMusicInSearchList = musics.size();
-		System.out.println("Music: "+musics.get(0)+"\nArtist: "+artists.get(0));
 		this.setBounds(0, 0, SearchFrame.frameWidth, SearchFrame.frameHeight);
 		this.setLayout(null);
 		this.setComponents();
@@ -48,39 +40,33 @@ public class SearchPanel extends JPanel implements Setting {
 	}
 
 	public void setComponents() {
-		
-		for(int i=0; i<numOfMusicInSearchList ;i++)
-		{
-			listenButtons.add(new ListenButton());
-			listenButtons.get(i).setThis(null,i);
-			downloadButtons.add(new DownloadButton());
-			downloadButtons.get(i).setThis(null,i);
-			musicNames.add(new JLabel(musics.get(i)));
-			musicNames.get(i).setBounds(SearchFrame.frameWidth/10, SearchFrame.frameHeight/10+40*i, 180, 35);
-			artistNames.add(new JLabel(artists.get(i)));
-			artistNames.get(i).setBounds(SearchFrame.frameWidth/10+190, SearchFrame.frameHeight/10+40*i, 180, 35);
-		}
-		
 		musicTitle.setFont(font);
 		musicTitle.setSize(musicTitle.getPreferredSize());
-		musicTitle.setLocation(50, 30);
+		musicTitle.setLocation(startX + marginWidth / 2, startY);
 		musicArtist.setFont(font);
 		musicArtist.setSize(musicArtist.getPreferredSize());
-		musicArtist.setLocation(250, 30);
+		musicArtist.setLocation(musicTitle.getX() + musicTitle.getWidth() + marginWidth * 2, musicTitle.getY());
 		
+		musicPanel.setThis(null);
+		scroll = new JScrollPane(musicPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setLocation(marginWidth, musicTitle.getY() + musicTitle.getHeight());
+		scroll.setSize(width - 2 * marginWidth, height - (scroll.getY() + 2 * marginHeight));
+		
+		ArrayList <Integer> musicId = DB.getInstance().getSearchMusicId(DB.currentID,searchText);
+		ArrayList <String> musicList = DB.getInstance().getSearchMusic(DB.currentID,searchText);
+		ArrayList <String> artistList = DB.getInstance().getSearchMusicArtist(DB.currentID,searchText);
+		
+		for (int i = 0; i < SearchMusicPanel.num; i++) {
+			musicPanel.rows[i].music_id = musicId.get(i);
+			musicPanel.rows[i].songInfo[0].setText(musicList.get(i));
+			musicPanel.rows[i].songInfo[1].setText(artistList.get(i));
+		}
 	}
 
 	public void addComponents() {
-		
 		this.add(musicTitle);
 		this.add(musicArtist);
-		
-		for(int i=0; i<numOfMusicInSearchList; i++)
-		{
-			this.add(musicNames.get(i));
-			this.add(artistNames.get(i));
-			this.add(listenButtons.get(i));
-			this.add(downloadButtons.get(i));
-		}
+	
+		this.add(scroll);
 	}	
 }

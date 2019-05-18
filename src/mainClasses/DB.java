@@ -166,7 +166,7 @@ public class DB {
 			st = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		result = st.executeQuery("SELECT * FROM User WHERE id='" + id +"'");
-    		System.out.println("SELECT * FROM User WHERE id='" + id + "'");
+
     		if (!result.next()) {
     			return true;
     		}
@@ -189,7 +189,7 @@ public class DB {
 		ResultSet rsTemp2 = null;
 		
 		
-		String sql = "SELECT name, artist_id, album_id"
+		String sql = "SELECT music_id, name, artist_id, album_id"
 				+ " FROM Music WHERE genre='" + genre + "'";
 		
 		ArrayList<String> infos = new ArrayList<String>();
@@ -207,9 +207,10 @@ public class DB {
     		
     		while (result.next()) {
     			
-    			if (infos.size() > 60)
+    			if (infos.size() > 80)
     				return infos;
     			
+    			infos.add(String.valueOf(result.getInt("music_id")));
     			
     			infos.add(result.getString("name"));
     			artist_id = result.getString("artist_id");
@@ -247,7 +248,7 @@ public class DB {
 		ResultSet rsTemp2 = null;
 		
 		
-		String sql = "SELECT name, artist_id, album_id"
+		String sql = "SELECT music_id, name, artist_id, album_id"
 				+ " FROM Music order by ";
 		
 		if (sortBy.equalsIgnoreCase("All")) 
@@ -276,10 +277,10 @@ public class DB {
     		
     		while (result.next()) {
     			
-    			if (infos.size() > 60)
+    			if (infos.size() > 80)
     				return infos;
     			
-    			
+    			infos.add(String.valueOf(result.getInt("music_id")));
     			infos.add(result.getString("name"));
     			artist_id = result.getString("artist_id");
     			album_id = result.getInt("album_id");
@@ -406,6 +407,42 @@ public class DB {
     	
     	return artists;
 	}
+	
+	public boolean checkMyPlaylist (String userId, int musicId, String playlistName) {
+		Statement st = null;
+		ResultSet result = null;
+		
+		String sql = "SELECT * FROM User_PlayList_Music WHERE user_id='" + userId + "' and name='" + playlistName + "'and music_id=" + musicId;
+		System.out.println(sql);
+		try {
+    		st = con.createStatement();
+    		result = st.executeQuery(sql);
+    		
+    		if (!result.next()) {
+    			return true;
+    		}
+
+    	} catch (SQLException e) {
+			System.out.println("addToMyPlaylist problem: ");
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public void addToMyPlaylist(String userId, int musicId, String playlistName) {
+		Statement st = null;
+		
+		String sql = "INSERT INTO User_PlayList_Music VALUES ('" + userId + "', " + "'" + playlistName + "', " + musicId + ")";
+		try {
+    		st = con.createStatement();
+    		st.executeUpdate(sql);
+
+    	} catch (SQLException e) {
+			System.out.println("addToMyPlaylist problem: ");
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<String> getPlayListInfo(String id) {
 		Statement st = null;
 		ResultSet result = null;
@@ -968,6 +1005,34 @@ public class DB {
     	
     	return starpostIDs;
 	}
+	
+	public ArrayList<Integer> getSearchMusicId(String id, String searchText) {
+		Statement st = null;
+		ResultSet result = null;
+		// get music_id to search music info later
+		String sql = "SELECT music_id FROM Music WHERE ("
+				+ "name LIKE'%"+searchText+"%' "
+				+ ")";
+		ArrayList<Integer> musicIDs = new ArrayList<Integer>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			musicIDs.add(result.getInt("music_id"));
+    			
+    		}
+		} catch (SQLException e) {
+			System.out.println("getPlayListMusic problem: ");
+			e.printStackTrace();
+		}
+		
+		return musicIDs;
+	}
+		
+	
 	public ArrayList<String> getSearchMusic(String id, String searchText) {
 		Statement st = null;
 		ResultSet result = null;
@@ -983,17 +1048,15 @@ public class DB {
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
 			result = st.executeQuery(sql);
 			
-			int j=0;
 			while (result.next()) {
     			musicIDs.add(result.getInt("music_id"));
-    			System.out.println("MusicID: "+musicIDs.get(j++));
     			
     		}
 			
 			// use music_id to get music name
-			for(int i=0; i<musicIDs.size();i++)
+			for(int i=0; i< musicIDs.size(); i++)
 			{
-				sql = "SELECT name FROM Music WHERE music_id='"+musicIDs.get(i)+"'";
+				sql = "SELECT name FROM Music WHERE music_id='" + musicIDs.get(i) + "'";
 				st = con.createStatement();
 				result = st.executeQuery(sql);
 				while (result.next()) {

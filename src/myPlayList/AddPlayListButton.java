@@ -33,7 +33,6 @@ public class AddPlayListButton extends JButton implements Setting{
 			// when click, the Add PlayList Frame should pop up 
 			mainClasses.MainController.addPlayListFrame = new mainClasses.AddPlayListFrame();
 			mainClasses.MainController.addPlayListFrame.setThis(null);
-			System.out.println("AddPlayListButton pressed");
 		}
 		
 	}

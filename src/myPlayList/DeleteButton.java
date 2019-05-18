@@ -36,9 +36,9 @@ public class DeleteButton extends JButton implements Setting{
 			ArrayList<String> hashtags = DB.getInstance().deleteHashTag_Hashtag(DB.currentID, MyPlayListPanel.playListButtons.get(buttonNum).getText());
 			DB.getInstance().deleteHashTag_HashtagNames(hashtags);
 			
+			
 			mainClasses.MainController.myPlayListFrame.setVisible(false);
 			mainClasses.MainController.myPlayListFrame = null;
-			
 			
 			mainClasses.MainController.myPlayListFrame = new mainClasses.MyPlayListFrame();
 			mainClasses.MainController.myPlayListFrame.setThis();

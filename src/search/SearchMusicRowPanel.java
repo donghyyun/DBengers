@@ -1,4 +1,4 @@
-package main;
+package search;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -10,33 +10,32 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import interfaces.Setting;
+import main.MainPanel;
 
-public class MainMusicRowPanel extends JPanel implements Setting {
+public class SearchMusicRowPanel extends JPanel implements Setting {
 	
 	private int rowNum;
 	public int music_id;
-	public JLabel[] songInfo = {new JLabel("Name"), new JLabel("Artist"), new JLabel("Album")};
 	
-	public MainMusicPlayButton play;
-	public MainMusicDownloadButton download;
-	public MainMusicAddToListButton add;
+	public JLabel[] songInfo = {new JLabel("Name"), new JLabel("Artist")};
 	
-	public static Font buttonFont = new Font ("Arial", Font.BOLD, MainPanel.smallFont.getSize() * 3 / 4);
-	private Font infoFont = new Font ("Arial", Font.PLAIN, MainPanel.smallFont.getSize() * 3 / 4);
+	public PlayButton play;
+	public DownloadButton download;
+	public AddToListButton add;
 	
-	MainMusicRowPanel (int row) {
-		this.rowNum = row;
-	}
+	public static Font font = new Font ("Arial", Font.BOLD, MainPanel.smallFont.getSize());
+	
+	SearchMusicRowPanel (int row) {this.rowNum = row;}
 	
 	public void setLabels() {
 		for (JLabel l : songInfo) {
-			l.setFont(infoFont);
+			l.setFont(font);
 			l.setHorizontalAlignment(JLabel.LEFT);
 			l.setBorder(new LineBorder(Color.black, 1));
 			l.setSize(l.getPreferredSize());
 		}
 	}
-	
+
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
@@ -58,9 +57,9 @@ public class MainMusicRowPanel extends JPanel implements Setting {
 		// TODO Auto-generated method stub
 		setLabels();
 		
-		play = new MainMusicPlayButton(rowNum);
-		download = new MainMusicDownloadButton(rowNum);
-		add = new MainMusicAddToListButton(rowNum);
+		play = new PlayButton(rowNum);
+		download = new DownloadButton(rowNum);
+		add = new AddToListButton(rowNum);
 		
 		play.setThis(null);
 		download.setThis(null);
