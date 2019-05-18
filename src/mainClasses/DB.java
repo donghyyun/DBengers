@@ -996,7 +996,6 @@ public class DB {
 				sql = "SELECT name FROM Music WHERE music_id='"+musicIDs.get(i)+"'";
 				st = con.createStatement();
 				result = st.executeQuery(sql);
-				int k=0;
 				while (result.next()) {
 	    			musics.add(result.getString("name"));
 	    		}
@@ -1447,7 +1446,103 @@ public class DB {
 		}
 	}
 	
+	public void addHashTag_Hashtag(String userID, String playlist, String hashtags)
+	{
+		Statement st = null;
+		String sql = "INSERT INTO Hashtag VALUES ('"+hashtags+"','"+playlist+"','"+userID+"')";
+
+		try {
+			st = con.createStatement();
+			st.executeUpdate(sql);
+	    	
+		} catch (SQLException e) {
+			System.out.println("addHashTag_Hashtag problem: ");
+			e.printStackTrace();
+		}
+	}
 	
+	public void addHashTag_HashtagNames(ArrayList<String> hashtags)
+	{
+		Statement st = null;
+		String sql = null;
+		String sql2 = null;
+		// first insert new hash-tags
+		for(int i=0;i<hashtags.size();i++)
+		{
+			sql = "INSERT INTO HashtagNames VALUES ('"+hashtags.get(i)+"',0)";
+			sql2 = "UPDATE HashtagNames SET cnt = cnt+1 WHERE tagname = '"+hashtags.get(i)+"'";
+			try {
+				st = con.createStatement();
+				st.executeUpdate(sql);
+				st.executeUpdate(sql2);
+		    	
+			} catch (SQLException e) {
+				System.out.println("addHashTag_HashtagNames insert problem: ");
+				try {
+					st = con.createStatement();
+					st.executeUpdate(sql2);
+			    	
+				} catch (SQLException eq) {
+					System.out.println("addHashTag_HashtagNames add problem: ");
+				}
+			}
+		}
+	}
+	
+	public String deleteHashTag_Hashtag(String userID, String playlistName)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String hashtags = null;
+		String sql = "DELETE FROM Hashtag WHERE playlist_name='"+playlistName+"' AND user_id='"+userID+"'";
+		String sql1 = "SELECT tagname FROM Hashtag WHERE playlist_name='"+playlistName+"' AND user_id='"+userID+"'";
+
+		try {
+			st = con.createStatement();
+			
+			result = st.executeQuery(sql1);
+			while(result.next())
+				hashtags = (result.getString("tagname"));
+			
+			st.executeUpdate(sql);
+	    	
+		} catch (SQLException e) {
+			System.out.println("deleteHashTag_Hashtag problem: ");
+			e.printStackTrace();
+		}
+		
+		return hashtags;
+	}
+	
+	public void deleteHashTag_HashtagNames(ArrayList<String> hashtags)
+	{
+		Statement st = null;
+		String sql = null;
+		String sql1 = null;
+		String sql2 = null;
+		ResultSet result = null;
+		// first insert new hash-tags
+		for(int i=0;i<hashtags.size();i++)
+		{
+			sql = "SELECT cnt FROM HashtagNames WHERE tagname ='"+hashtags.get(i)+"'";
+			sql1 = "DELETE FROM HashtagNames WHERE tagname ='"+hashtags.get(i)+"'";
+			sql2 = "UPDATE HashtagNames SET cnt = cnt-1 WHERE tagname = '"+hashtags.get(i)+"'";
+			try {
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				int temp=0;
+				while(result.next())
+					temp = result.getInt("cnt");
+				if(temp ==1)
+					st.executeUpdate(sql1);
+				else
+					st.executeUpdate(sql2);
+		    	
+			} catch (SQLException e) {
+				System.out.println("deleteHashTag_HashtagNames problem: ");
+			}
+		}
+	}
 	
 	public void closeConnection() {
 		try {

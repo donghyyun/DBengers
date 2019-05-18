@@ -3,6 +3,8 @@ package myPlayList;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 
@@ -33,6 +35,12 @@ public class ApplyButton extends JButton implements Setting{
 			DB.getInstance().addPlayList(DB.currentID, AddPlayListPanel.newPlaylistName.getText());
 			DB.getInstance().addHashtag(DB.currentID, AddPlayListPanel.newPlaylistName.getText(), AddPlayListPanel.hashtags.getText());
 			
+			String str = AddPlayListPanel.hashtags.getText();
+			ArrayList<String> hashtags = new ArrayList<String>(Arrays.asList(str.split(",")));
+			
+			DB.getInstance().addHashTag_Hashtag(DB.currentID, AddPlayListPanel.newPlaylistName.getText(), str);
+			DB.getInstance().addHashTag_HashtagNames(hashtags);
+
 			mainClasses.MainController.addPlayListFrame.setVisible(false);
 			mainClasses.MainController.addPlayListFrame = null;
 			
