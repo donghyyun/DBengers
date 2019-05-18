@@ -967,6 +967,48 @@ public class DB {
     	
     	return starpostIDs;
 	}
+	public ArrayList<String> getSearchMusic(String id, String searchText) {
+		Statement st = null;
+		ResultSet result = null;
+		// get music_id to search music info later
+		String sql = "SELECT music_id FROM Music WHERE ("
+				+ "name LIKE'%"+searchText+"%' "
+				+ ")";
+		ArrayList<Integer> musicIDs = new ArrayList<Integer>();
+		ArrayList<String> musics = new ArrayList<String>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			int j=0;
+			while (result.next()) {
+    			musicIDs.add(result.getInt("music_id"));
+    			System.out.println("MusicID: "+musicIDs.get(j++));
+    			
+    		}
+			
+			// use music_id to get music name
+			for(int i=0; i<musicIDs.size();i++)
+			{
+				sql = "SELECT name FROM Music WHERE music_id='"+musicIDs.get(i)+"'";
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				int k=0;
+				while (result.next()) {
+	    			musics.add(result.getString("name"));
+	    		}
+			}
+
+		} catch (SQLException e) {
+			System.out.println("getPlayListMusic problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return musics;
+	}
+
 	
 	public ArrayList<String> getStarPostTitle(ArrayList<Integer> starpostID)
 	{
@@ -1112,6 +1154,58 @@ public class DB {
 		}
     	
     	return infos;
+	}
+	public ArrayList<String> getSearchMusicArtist(String id, String searchText) {
+		Statement st = null;
+		ResultSet result = null;
+		// get music_id to search music info later
+		String sql = "SELECT music_id FROM Music WHERE ("
+				+ "name LIKE'%"+searchText+"%' "
+				+ ")";
+		ArrayList<Integer> musicIDs = new ArrayList<Integer>();
+		ArrayList<String> musics = new ArrayList<String>();
+		ArrayList<String> artistIDs = new ArrayList<String>();
+		ArrayList<String> artists = new ArrayList<String>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+				musicIDs.add(result.getInt("music_id"));
+    		}
+			
+			// use music_id to get artist_id
+			for(int i=0; i<musicIDs.size();i++)
+			{
+				sql = "SELECT artist_id FROM Music WHERE music_id='"+musicIDs.get(i)+"'";
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			artistIDs.add(result.getString("artist_id"));
+	    		}
+			}
+			
+			// use artist_id to get artist name
+			for(int i=0; i<artistIDs.size();i++)
+			{
+				sql = "SELECT name FROM Artist WHERE id='"+artistIDs.get(i)+"'";
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			artists.add(result.getString("name"));
+	    		}
+			}
+
+		} catch (SQLException e) {
+			System.out.println("getPlayListMusicArtist problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return artists;
 	}
 	
 	public void closeConnection() {

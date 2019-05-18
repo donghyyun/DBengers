@@ -1,4 +1,4 @@
-package myPlayList;
+package search;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import interfaces.Setting;
 import mainClasses.DB;
-import mainClasses.PlayListMusicFrame;
+import mainClasses.SearchFrame;
 
 public class DownloadButton extends JButton implements Setting{
 	
@@ -19,9 +19,9 @@ public class DownloadButton extends JButton implements Setting{
 	public void setThis(Component prevComp, int count) {
 		// TODO Auto-generated method stub
 		this.setText("Download");
-		this.setFont(PlayListMusicPanel.font);
+		this.setFont(SearchPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds(PlayListMusicFrame.frameWidth/10 + 370 +100, PlayListMusicFrame.frameHeight/10 + 40*(numOfListen++), 100, 35);
+		this.setBounds(SearchFrame.frameWidth/10 + 370 +100, SearchFrame.frameHeight/10 + 40*(numOfListen++), 150, 35);
 		this.addActionListener(new Listener());
 		num = count;
 	}
@@ -34,7 +34,7 @@ public class DownloadButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			
-			DB.getInstance().addMusicDownloadnum(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText(),PlayListMusicPanel.musicNames.get(num).getText());
+			DB.getInstance().addMusicDownloadnum(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText(),SearchPanel.musicNames.get(num).getText());
 			//DB.getInstance().addToHistory(DB.currentID,PlayListMusicPanel.musicNames.get(num).getText());
 			JOptionPane.showMessageDialog(null, "Download Done!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 		}

@@ -31,6 +31,7 @@ public class PlayListMusicPanel extends JPanel implements Setting{
 
 	public void setThis(Component prevComp) {
 		ListenButton.numOfListen = 0;
+		DownloadButton.numOfListen = 0;
 		musics = DB.getInstance().getPlayListMusic(DB.currentID, playListName);
 		artists = DB.getInstance().getPlayListMusicArtist(DB.currentID, playListName);
 		numOfMusicInPlayList = musics.size();

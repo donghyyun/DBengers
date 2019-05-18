@@ -20,6 +20,8 @@ public class MainController {
 	public static ArtistChannelAlbumFrame artistChannelAlbumFrame;
 	public static ArtistChannelStarPostFrame artistChannelStarPostFrame;
 	
+	public static SearchFrame searchFrame;
+	
 	public static void main(String[] args) {
 		 //TODO Auto-generated method stub
 		mainFrame.setThis();
