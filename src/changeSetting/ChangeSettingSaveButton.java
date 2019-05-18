@@ -39,7 +39,7 @@ public class ChangeSettingSaveButton extends JButton implements interfaces.Setti
 					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.pwTextF.getText(),
 					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.nickNameTextF.getText(),
 					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.addressTextF.getText(),
-					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.profilePhotoTextF.getText(),
+					"",
 					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.eMailTextF.getText(),
 					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.phoneNumTextF.getText(),
 					MainController.changeSettingFrame.changeSettingPanel.userInfoPanel.alarmCheckB.one.isSelected(),

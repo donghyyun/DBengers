@@ -13,6 +13,7 @@ import mainClasses.MyPlayListFrame;
 
 public class ChangeNameButton extends JButton implements Setting{
 	int buttonNum;	// used to distinguish which to change name
+	
 	public void setThis(Component prevComp, int num) {
 		this.setText("Change Name");
 		this.setFont(MyPlayListPanel.font);
@@ -32,7 +33,12 @@ public class ChangeNameButton extends JButton implements Setting{
 			// when click, it should change the corresponding play-list name 
 			String newName = JOptionPane.showInputDialog("Type in new name");
 			DB.getInstance().changePlayListName(DB.currentID, MyPlayListPanel.playListButtons.get(buttonNum).getText(), newName);
-			System.out.println("ChangeNameButton Pressed");
+			mainClasses.MainController.myPlayListFrame.setVisible(false);
+			mainClasses.MainController.myPlayListFrame = null;
+			
+			mainClasses.MainController.myPlayListFrame = new mainClasses.MyPlayListFrame();
+			mainClasses.MainController.myPlayListFrame.setThis();
+			
 		}
 		
 	}

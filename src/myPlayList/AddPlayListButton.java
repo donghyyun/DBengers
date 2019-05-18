@@ -17,7 +17,8 @@ public class AddPlayListButton extends JButton implements Setting{
 		this.setText("add playlist");	// should get the play-list name from the Database!
 		this.setFont(MyPlayListPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds(MyPlayListFrame.frameWidth - 200, MyPlayListFrame.frameHeight - 100, prevComp.getWidth(), prevComp.getHeight());
+		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MyPlayListFrame.marginHeight);
+		this.setLocation(MyPlayListFrame.frameWidth - (this.getWidth() + MyPlayListFrame.marginWidth * 2), MyPlayListFrame.frameHeight - (this.getHeight() + MyPlayListFrame.marginHeight * 2));
 		this.addActionListener(new Listener());
 	}
 
