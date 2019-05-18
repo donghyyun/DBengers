@@ -24,6 +24,5 @@ public class SearchFrame extends JFrame {
 		getContentPane().setLayout(null);
 		this.add(searchPanel);
 		this.setVisible(true);
-		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

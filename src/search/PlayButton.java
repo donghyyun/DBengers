@@ -8,19 +8,19 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import interfaces.Setting;
-import main.MainMusicDownloadButton;
+import main.MainMusicPlayButton;
 import mainClasses.DB;
 import mainClasses.SearchFrame;
 
-public class DownloadButton extends JButton implements Setting{
+public class PlayButton extends JButton implements Setting{
 	int rowNum;
 	
-	DownloadButton(int rowNum) {this.rowNum = rowNum;}
+	PlayButton(int rowNum) {this.rowNum = rowNum;}
 
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setText("Download");
+		this.setText("Play");
 		this.setFont(SearchMusicRowPanel.font);
 		this.setBorderPainted(true);
 		this.setSize(this.getPreferredSize());
@@ -38,12 +38,12 @@ public class DownloadButton extends JButton implements Setting{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String musicName = mainClasses.MainController.searchFrame.searchPanel.musicPanel.rows[((DownloadButton)e.getSource()).rowNum].songInfo[0].getText();
-			
-			DB.getInstance().addMusicDownloadnum(DB.currentID, 
+			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((PlayButton)e.getSource()).rowNum].songInfo[0].getText();
+			DB.getInstance().addMusicPlaynum(DB.currentID, 
 					musicName);
-			
-			musicName += " is downloaded!";
+			DB.getInstance().addToHistory(DB.currentID, 
+					musicName);
+			musicName += " is playing now!";
 			
 			JOptionPane.showMessageDialog(null, musicName, "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 		}
