@@ -37,7 +37,7 @@ public class MainAllButton extends JButton implements Setting {
 			infos = DB.getInstance().getMusicInfoByRank("All");
 			
 			for (String info : infos) 
-				mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[infos.indexOf(info) / 3].songInfo[infos.indexOf(info) % 3].setText(info);
+				mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[infos.indexOf(info) / 4].songInfo[infos.indexOf(info) % 4].setText(info);
 			
 			mainClasses.MainController.mainFrame.mainPanel.scroll.setVisible(true);
 			

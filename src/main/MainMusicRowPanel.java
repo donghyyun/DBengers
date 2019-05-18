@@ -13,13 +13,18 @@ import interfaces.Setting;
 
 public class MainMusicRowPanel extends JPanel implements Setting {
 	
-	public String musicId;
+	private int rowNum;
 	public JLabel[] songInfo = {new JLabel("Name"), new JLabel("Artist"), new JLabel("Album")};
-	public MainMusicPlayButton play = new MainMusicPlayButton();
-	public MainMusicDownloadButton download = new MainMusicDownloadButton();
+	public MainMusicPlayButton play;
+	public MainMusicDownloadButton download;
+	public MainMusicAddToListButton add;
 	
 	public static Font buttonFont = new Font ("Arial", Font.BOLD, MainPanel.smallFont.getSize() * 3 / 4);
 	private Font infoFont = new Font ("Arial", Font.PLAIN, MainPanel.smallFont.getSize() * 3 / 4);
+	
+	MainMusicRowPanel (int row) {
+		this.rowNum = row;
+	}
 	
 	public void setLabels() {
 		for (JLabel l : songInfo) {
@@ -50,8 +55,14 @@ public class MainMusicRowPanel extends JPanel implements Setting {
 	public void setComponents() {
 		// TODO Auto-generated method stub
 		setLabels();
+		
+		play = new MainMusicPlayButton(rowNum);
+		download = new MainMusicDownloadButton(rowNum);
+		add = new MainMusicAddToListButton(rowNum);
+		
 		play.setThis(null);
 		download.setThis(null);
+		add.setThis(null);
 	}
 
 	@Override
@@ -61,8 +72,8 @@ public class MainMusicRowPanel extends JPanel implements Setting {
 			this.add(songInfo[i]);
 		
 		this.add(play);
+		this.add(add);
 		this.add(download);
-
 	}
 
 }

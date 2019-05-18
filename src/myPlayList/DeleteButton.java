@@ -32,9 +32,9 @@ public class DeleteButton extends JButton implements Setting{
 			// also, this play-list should be deleted from the MyPlayListFrame(or panel)
 			DB.getInstance().deletePlayList(DB.currentID, MyPlayListPanel.playListButtons.get(buttonNum).getText());
 			
+			
 			mainClasses.MainController.myPlayListFrame.setVisible(false);
 			mainClasses.MainController.myPlayListFrame = null;
-			
 			
 			mainClasses.MainController.myPlayListFrame = new mainClasses.MyPlayListFrame();
 			mainClasses.MainController.myPlayListFrame.setThis();

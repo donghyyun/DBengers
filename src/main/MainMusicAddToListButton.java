@@ -10,20 +10,19 @@ import javax.swing.JOptionPane;
 import interfaces.Setting;
 import mainClasses.DB;
 
-public class MainMusicDownloadButton extends JButton implements Setting {
+public class MainMusicAddToListButton extends JButton implements Setting {
 	int rowNum;
 	
-	MainMusicDownloadButton(int rowNum) {this.rowNum = rowNum;}
+	MainMusicAddToListButton(int rowNum) {this.rowNum = rowNum;}
 
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setText("Download");
+		this.setText("Add to playlist");
 		this.setFont(MainMusicRowPanel.buttonFont);
 		this.setBorderPainted(true);
 		this.setSize(this.getPreferredSize());
 		this.addActionListener(new Listener());
-		
 	}
 
 	@Override
@@ -37,12 +36,14 @@ public class MainMusicDownloadButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((MainMusicDownloadButton)e.getSource()).rowNum].songInfo[0].getText();
+			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((MainMusicAddToListButton)e.getSource()).rowNum].songInfo[0].getText();
+			String playlistName = JOptionPane.showInputDialog("Type your playlist name");
 			
-			DB.getInstance().addMusicDownloadnum(DB.currentID, 
-					musicName);
 			
-			musicName += " is downloaded!";
+			//DB.getInstance().addMusicPlaynum(DB.currentID, musicName);
+			//DB.getInstance().addToHistory(DB.currentID, musicName);
+			
+			musicName += " is added to " + playlistName;
 			
 			JOptionPane.showMessageDialog(null, musicName, "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 		}

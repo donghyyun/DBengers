@@ -406,6 +406,9 @@ public class DB {
     	
     	return artists;
 	}
+	
+	//public void addToMyPlaylist(String id, String music)
+	
 	public ArrayList<String> getPlayListInfo(String id) {
 		Statement st = null;
 		ResultSet result = null;

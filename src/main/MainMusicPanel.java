@@ -25,11 +25,11 @@ public class MainMusicPanel extends JPanel implements Setting {
 	@Override
 	public void setComponents() {
 		// TODO Auto-generated method stub
-		rows[0] = new MainMusicRowPanel();
+		rows[0] = new MainMusicRowPanel(0);
 		rows[0].setThis(null);
 		
 		for (int i = 1; i < rows.length; i++) {
-			rows[i] = new MainMusicRowPanel();
+			rows[i] = new MainMusicRowPanel(i);
 			rows[i].setThis(rows[i - 1]);
 		}
 			
