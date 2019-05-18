@@ -323,7 +323,7 @@ public class DB {
 	
 	public void addPlayList(String id, String playlistName) {
 		Statement st = null;
-		String sql = "INSERT INTO User_PlayList VALUES ('"+id+"', '"+playlistName+"', 0, ' ')"; 
+		String sql = "INSERT INTO User_PlayList(id, name, num_like, hashtag, play_num) VALUES ('"+id+"', '"+playlistName+"', 0, ' ', 0)"; 
     	try {
     		st = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
@@ -358,7 +358,7 @@ public class DB {
     		st.executeUpdate(sql);
 
     	} catch (SQLException e) {
-			System.out.println("addPlayList problem: ");
+			System.out.println("changePlayList problem: ");
 			e.printStackTrace();
 		}
 	}
