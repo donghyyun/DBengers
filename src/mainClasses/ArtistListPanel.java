@@ -21,7 +21,6 @@ public class ArtistListPanel extends JPanel implements Setting {
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		artistList = DB.getInstance().getArtistName();
-//		System.out.println("setthis log");
 		numofartist = artistList.size();
 		ArtistListButton.artistlistnum = 0;
 		this.setBounds(0, 0, ArtistListFrame.frameWidth, ArtistListFrame.frameHeight);

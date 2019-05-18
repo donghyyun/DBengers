@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 //import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Random;
@@ -16,12 +17,13 @@ public class DBInsert {
 	private static DBInsert db = new DBInsert();
 	private String[] artist_ids = new String[20];
 	private String[] artist_names = new String[20];
+	private String [] user_ids = new String[100];
 	private String pwd = System.getProperty("user.dir");
 	long time = System.currentTimeMillis(); 
 	Date now = new Date(time);
-
+	
 	private DBInsert() {        	
-        String url = "jdbc:mysql://172.30.1.13/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.192.58/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "ysh", "thisgood");
@@ -189,6 +191,39 @@ public class DBInsert {
 		}
 		
 	}
+	public void ArtistCommentgenerator() {
+		PreparedStatement pstmt;
+		String tableName = "Artist_Comment_List ";
+		String sql = "INSERT INTO " + tableName + "(artist_comment_id, artist_id, user_id, comment, comment_comment, comment_date, num_like, num_dislike) " + 
+					"VALUES" + "(?,?,?,?,?,?,?,?)";
+		
+		ArrayList<String> artistlist = DB.getInstance().getArtistName();
+		int numofartist = artistlist.size();
+		System.out.println(numofartist);
+		for(int i = 1; i <= numofartist; i++) {
+			for (int j = 1; j <= 10; j++) {
+				try {
+					pstmt = con.prepareStatement(sql);
+					pstmt.setInt(1, i);
+					pstmt.setString(2, artist_ids[i-1]);
+					pstmt.setString(3, user_ids[j-1]);
+					pstmt.setString(4, "comment"+ getRandomString(4));
+					pstmt.setInt(5, 0);
+					pstmt.setDate(6, now);
+					pstmt.setInt(7, 0);
+					pstmt.setInt(8, 0);
+					
+					pstmt.executeUpdate();
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
 	public void Usergenerator() {
 		PreparedStatement pstmt;
 		PreparedStatement pstmt2;
@@ -209,6 +244,7 @@ public class DBInsert {
 				
 				pstmt.setString(1, name);	// name
 				pstmt.setString(2, id);	// id
+				user_ids[i-1] = id;
 				pstmt.setString(3, getRandomString(6));	// password
 				
 //				pstmt.setDate(4, getRandomDate());	// password_change_date
