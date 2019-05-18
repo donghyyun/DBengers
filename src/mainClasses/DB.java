@@ -22,10 +22,10 @@ public class DB {
 
 	private DB() {        	
 
-        String url = "jdbc:mysql://172.30.1.13/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.17.192.58/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "ysh", "thisgood");
+			con = DriverManager.getConnection(url, "pjh", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
@@ -817,6 +817,176 @@ public class DB {
 			}
 		}
 		
+    	return infos;
+	}
+	
+	public ArrayList<Integer> getStarPostID(String artistID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT star_post_id FROM Star_Post WHERE user_id='"+artistID+"'"; 
+		ArrayList<Integer> starpostIDs = new ArrayList<Integer>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			starpostIDs.add(result.getInt("star_post_id"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getStarPostID problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return starpostIDs;
+	}
+	
+	public ArrayList<String> getStarPostTitle(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<String> infos = new ArrayList<String>();
+		
+		for(int i=0; i<starpostID.size(); i++)
+		{
+			sql = "SELECT title FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+		
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getString("title"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostTitle problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<Date> getStarPostDate(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Date> infos = new ArrayList<Date>();
+		
+		for(int i=0;i<starpostID.size();i++)
+		{
+			sql = "SELECT date FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getDate("date"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostDate problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+    	return infos;
+	}
+	
+	public ArrayList<Integer> getStarPostLike(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Integer> infos = new ArrayList<Integer>();
+		
+		for(int i=0;i<starpostID.size();i++)
+		{
+			sql = "SELECT like_num FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getInt("like_num"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostLike problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<Integer> getStarPostView(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Integer> infos = new ArrayList<Integer>();
+		
+		for(int i=0;i<starpostID.size();i++)
+		{
+			sql = "SELECT view_num FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getInt("view_num"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostView problem: ");
+				e.printStackTrace();
+			}
+		}
+		
+    	
+    	return infos;
+	}
+	
+	public ArrayList<String> getStarPostDescript(ArrayList<Integer> starpostID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<String> infos = new ArrayList<String>();
+		
+		for(int i=0; i<starpostID.size();i++)
+		{
+			sql = "SELECT description FROM Star_Post WHERE star_post_id='"+starpostID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getString("description"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getStarPostDescript problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
     	return infos;
 	}
 	

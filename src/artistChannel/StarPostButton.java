@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 import interfaces.Setting;
 import mainClasses.ArtistChannelFrame;
+import mainClasses.ArtistChannelStarPostFrame;
 
 public class StarPostButton extends JButton implements Setting{
 	
@@ -28,8 +29,8 @@ public class StarPostButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			
-//			mainClasses.MainController.addPlayListFrame.setVisible(false);
-//			mainClasses.MainController.addPlayListFrame = null;
+			mainClasses.MainController.artistChannelStarPostFrame = new ArtistChannelStarPostFrame();
+			mainClasses.MainController.artistChannelStarPostFrame.setThis();;
 		}
 	}
 }

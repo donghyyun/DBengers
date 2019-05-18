@@ -1,6 +1,7 @@
 package artistChannel;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import interfaces.Setting;
+import mainClasses.ArtistChannelAlbumFrame;
 import mainClasses.ArtistChannelMusicFrame;
 import mainClasses.DB;
 import myPlayList.ListenButton;
@@ -22,7 +24,8 @@ public ArtistChannelAlbumPanel() {this.setThis(null);}
 	ArrayList<JLabel> likes = new ArrayList<JLabel>();
 	ArrayList<String> albumName;
 	ArrayList<Date> albumDate;
-	ArrayList<Integer> albumLike; 
+	ArrayList<Integer> albumLike;
+	JLabel title = new JLabel();
 	String currentArtistID;
 	
 	ArrayList<ListenButton> listenButton = new ArrayList<ListenButton>();
@@ -39,22 +42,24 @@ public ArtistChannelAlbumPanel() {this.setThis(null);}
 	}
 
 	public void setComponents() {
-		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		for(int i=0; i<albumName.size(); i++)
 		{
 			albums.add(new JLabel(albumName.get(i)));
-			albums.get(i).setBounds((int)(ArtistChannelMusicFrame.frameWidth * 0.1), (int)(ArtistChannelMusicFrame.frameHeight * 0.1 + 30*i), 150, 35);
+			albums.get(i).setBounds((int)(ArtistChannelAlbumFrame.frameWidth * 0.1), (int)(ArtistChannelAlbumFrame.frameHeight * 0.1 + 30*i), 150, 35);
 			String convertedDate = transFormat.format(albumDate.get(i));
 			dates.add(new JLabel(convertedDate));
-			dates.get(i).setBounds((int)(ArtistChannelMusicFrame.frameWidth * 0.1)+150, (int)(ArtistChannelMusicFrame.frameHeight * 0.1 + 30*i), 150, 35);
+			dates.get(i).setBounds((int)(ArtistChannelAlbumFrame.frameWidth * 0.1)+150, (int)(ArtistChannelAlbumFrame.frameHeight * 0.1 + 30*i), 150, 35);
 			likes.add(new JLabel(Integer.toString(albumLike.get(i))));
-			likes.get(i).setBounds((int)(ArtistChannelMusicFrame.frameWidth * 0.1)+300, (int)(ArtistChannelMusicFrame.frameHeight * 0.1 + 30*i), 150, 35);
+			likes.get(i).setBounds((int)(ArtistChannelAlbumFrame.frameWidth * 0.1)+330, (int)(ArtistChannelAlbumFrame.frameHeight * 0.1 + 30*i), 150, 35);
 		}
-		
+		title.setText("Album Name               Released Date               Likes");
+		title.setFont(new Font("Arial", Font.BOLD, ArtistChannelAlbumFrame.frameHeight / 30));
+		title.setBounds((int)(ArtistChannelAlbumFrame.frameWidth * 0.1), (int)(ArtistChannelAlbumFrame.frameHeight * 0.1-25), 400, 35);
 	}
 
 	public void addComponents() {
+		this.add(title);
 		for(int i=0; i<albumName.size(); i++)
 		{
 			this.add(albums.get(i));
