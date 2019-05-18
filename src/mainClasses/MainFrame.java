@@ -10,9 +10,10 @@ public class MainFrame extends JFrame {
 	
 	public static int startX = screenWidth / 3;
 	public static int startY = screenHeight / 6;
+	//public static int frameWidth = screenWidth / 3;
+	//public static int frameHeight = screenHeight * 2 / 3;
 	public static int frameWidth = screenWidth / 3;
-	public static int frameHeight = screenHeight * 2 / 3;
-	
+	public static int frameHeight = screenHeight * 3 / 4;
 	
 	public login.LogPanel logPanel = new login.LogPanel();
 	public main.MainPanel mainPanel = new main.MainPanel();

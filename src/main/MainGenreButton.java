@@ -13,9 +13,9 @@ public class MainGenreButton extends JButton implements Setting {
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setText("Genre");
-		this.setFont(MainPanel.font);
+		this.setFont(MainPanel.smallFont);
 		this.setBorderPainted(true);
-		this.setSize(MainPanel.rankButtonWidth, this.getFont().getSize() + MainPanel.marginHeight);
+		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MainPanel.marginHeight);
 		this.setLocation(prevComp.getX() + prevComp.getWidth(), prevComp.getY());
 		this.addActionListener(new Listener());
 	}

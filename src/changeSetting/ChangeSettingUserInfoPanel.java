@@ -15,7 +15,7 @@ import mainClasses.*;
 public class ChangeSettingUserInfoPanel extends JPanel implements Setting {
 	private JLabel[] labels = {new JLabel("Name"), new JLabel("ID"), new JLabel("PW"), new JLabel("Nickname")
 								, new JLabel("Birthday"), new JLabel("Address"), new JLabel("Profile Photo"), new JLabel("E-mail")
-								, new JLabel("Phone num"), new JLabel("Is Artist"), new JLabel("Alarms")};
+								, new JLabel("Phone num"),  new JLabel("Alarms")};
 	
 	public JLabel id = new JLabel("id");
 	public JTextField nameTextF = new JTextField();
@@ -26,7 +26,6 @@ public class ChangeSettingUserInfoPanel extends JPanel implements Setting {
 	public JTextField profilePhotoTextF = new JTextField();
 	public JTextField eMailTextF = new JTextField();
 	public JTextField phoneNumTextF = new JTextField();
-	public ChangeSettingCheckBoxPanel artistCheckB = new ChangeSettingCheckBoxPanel("yes", "no");
 	public ChangeSettingCheckBoxPanel alarmCheckB = new ChangeSettingCheckBoxPanel("Email", "SMS");
 	
 	
@@ -35,7 +34,7 @@ public class ChangeSettingUserInfoPanel extends JPanel implements Setting {
 	
 	private Component[] fields = {nameTextF, id, pwTextF, nickNameTextF
 								, birthday, addressTextF, profilePhotoTextF, eMailTextF
-								, phoneNumTextF, artistCheckB, alarmCheckB};
+								, phoneNumTextF, alarmCheckB};
 	
 	public static Font font = new Font ("Arial", Font.BOLD, ChangeSettingFrame.frameHeight / 30);
 	
