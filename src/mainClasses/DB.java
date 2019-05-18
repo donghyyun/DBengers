@@ -8,6 +8,8 @@ import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.Random;
 
+import javax.swing.JLabel;
+
 import myPlayList.MyPlayListPanel;
 
 public class DB {
@@ -20,7 +22,7 @@ public class DB {
 
 	private DB() {        	
 
-        String url = "jdbc:mysql://172.17.192.208/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.30.1.13/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "ysk", "thisgood");
@@ -247,7 +249,7 @@ public class DB {
     	return voucherinfos;
 	}
 	
-	public ArrayList<String> getArtistInfo() {
+	public ArrayList<String> getArtistName() {
 		Statement st = null;
 		ResultSet result = null;
 		String sql = "SELECT name FROM Artist"; 
@@ -471,6 +473,67 @@ public class DB {
 			System.out.println("addMusicPlaynum problem: ");
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<String> getArtistInfo(String currentArtistName) {
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT name, birthday, introduction, debut_date, debut_song, type, gender, agency, nationality, constellation, blood_type, num_stars, fanclub, youtube, facebook, twitter FROM Artist WHERE name = '"+currentArtistName+"'"; 
+		ArrayList<String> infos = new ArrayList<String>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			infos.add(result.getString("name"));
+    			infos.add(result.getString("birthday"));
+    			infos.add(result.getString("introduction"));
+    			infos.add(result.getString("debut_date"));
+    			infos.add(result.getString("debut_song"));
+    			infos.add(result.getString("type"));
+    			infos.add(result.getString("gender"));
+    			infos.add(result.getString("agency"));
+    			infos.add(result.getString("nationality"));
+    			infos.add(result.getString("constellation"));
+    			infos.add(result.getString("blood_type"));
+    			infos.add(result.getString("num_stars"));
+    			infos.add(result.getString("fanclub"));
+    			infos.add(result.getString("youtube"));
+    			infos.add(result.getString("facebook"));
+    			infos.add(result.getString("twitter"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getArtistInfo problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<String> getArtistField(){
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT column_name FROM information_schema.columns WHERE table_schema = 'DBengers' AND table_name = 'Artist'"; 
+		ArrayList<String> infos = new ArrayList<String>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			infos.add(result.getString("column_name"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getArtistField problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return infos;
 	}
 	
 	public void closeConnection() {

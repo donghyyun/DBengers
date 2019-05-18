@@ -14,7 +14,8 @@ public class MainController {
 	public static MyPlayListFrame myPlayListFrame;
 	public static AddPlayListFrame addPlayListFrame;
 	public static PlayListMusicFrame playListMusicFrame;
-
+	public static ArtistChannelFrame artistChannelFrame;
+	
 	public static void main(String[] args) {
 		 //TODO Auto-generated method stub
 		mainFrame.setThis();
