@@ -443,13 +443,17 @@ public class DB {
     	return artists;
 	}
 	
-	public void addMusicPlaynum(String musicName) {
+	public void addMusicPlaynum(String userID, String musicName) {
 		Statement st = null;
-		String sql = "UPDATE Music SET play_num = play_num+1 WHERE name = '"+musicName+"'"; 
+		Statement st2= null;
+		String sql = "UPDATE Music SET play_num = play_num+1 WHERE name = '"+musicName+"'";
+		String sql2 = "UPDATE My_Voucher SET streaming_num = streaming_num-1 WHERE id = '"+userID+"'";
     	try {
     		st = con.createStatement();
+    		st2 = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
 
     	} catch (SQLException e) {
 			System.out.println("addMusicPlaynum problem: ");
