@@ -30,6 +30,8 @@ public class MainSearchButton extends JButton implements Setting {
 
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			mainClasses.MainController.searchFrame = new mainClasses.SearchFrame();
+			mainClasses.MainController.searchFrame.setThis();
 			
 		}
 	}

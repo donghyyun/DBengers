@@ -13,8 +13,8 @@ import interfaces.Setting;
 import mainClasses.DB;
 import mainClasses.PlayListMusicFrame;
 import mainClasses.SearchFrame;
-import myPlayList.DownloadButton;
-import myPlayList.ListenButton;
+import search.DownloadButton;
+import search.ListenButton;
 
 public class SearchPanel extends JPanel implements Setting {
 	private JLabel musicTitle = new JLabel("MusicTitle");
@@ -36,6 +36,7 @@ public class SearchPanel extends JPanel implements Setting {
 
 	public void setThis(Component prevComp) {
 		ListenButton.numOfListen = 0;
+		DownloadButton.numOfListen = 0;
 		musics = DB.getInstance().getSearchMusic(userID,searchText);
 		artists = DB.getInstance().getSearchMusicArtist(userID,searchText);
 		numOfMusicInSearchList = musics.size();

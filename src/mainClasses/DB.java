@@ -731,13 +731,12 @@ public class DB {
 		Statement st = null;
 		ResultSet result = null;
 		// get music_id to search music info later
-		String sql = "SELECT name FROM Music WHERE ("
+		String sql = "SELECT music_id FROM Music WHERE ("
 				+ "name LIKE'%"+searchText+"%' "
 				+ ")";
 		ArrayList<Integer> musicIDs = new ArrayList<Integer>();
 		ArrayList<String> musics = new ArrayList<String>();
 	
-		MyPlayListPanel.numOfPlayList = 0;
 		try {
 			st = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
@@ -747,7 +746,7 @@ public class DB {
 			while (result.next()) {
     			musicIDs.add(result.getInt("music_id"));
     			System.out.println("MusicID: "+musicIDs.get(j++));
-    			MyPlayListPanel.numOfPlayList++;
+    			
     		}
 			
 			// use music_id to get music name
@@ -759,7 +758,6 @@ public class DB {
 				int k=0;
 				while (result.next()) {
 	    			musics.add(result.getString("name"));
-	    			System.out.println("Music name: "+musics.get(k++));
 	    		}
 			}
 
@@ -775,12 +773,14 @@ public class DB {
 		Statement st = null;
 		ResultSet result = null;
 		// get music_id to search music info later
-		String sql = "SELECT music_id FROM User_PlayList_music WHERE user_id='"+id+"'";
+		String sql = "SELECT music_id FROM Music WHERE ("
+				+ "name LIKE'%"+searchText+"%' "
+				+ ")";
 		ArrayList<Integer> musicIDs = new ArrayList<Integer>();
+		ArrayList<String> musics = new ArrayList<String>();
 		ArrayList<String> artistIDs = new ArrayList<String>();
 		ArrayList<String> artists = new ArrayList<String>();
 	
-		MyPlayListPanel.numOfPlayList = 0;
 		try {
 			st = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
@@ -788,7 +788,6 @@ public class DB {
 			
 			while (result.next()) {
     			musicIDs.add(result.getInt("music_id"));
-    			MyPlayListPanel.numOfPlayList++;
     		}
 			
 			// use music_id to get artist_id
