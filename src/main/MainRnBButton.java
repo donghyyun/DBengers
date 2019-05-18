@@ -39,8 +39,13 @@ public class MainRnBButton extends JButton implements Setting {
 			
 			infos = DB.getInstance().getMusicInfoByGenre("R&B");
 			
-			for (String info : infos) 
-				mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[infos.indexOf(info) / 3].songInfo[infos.indexOf(info) % 3].setText(info);
+			for (String info : infos) {
+				if (infos.indexOf(info) % 4 != 0)
+					mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[infos.indexOf(info) / 4].songInfo[infos.indexOf(info) % 4 - 1].setText(info);
+				else
+					mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[infos.indexOf(info) / 4].music_id = Integer.parseInt(info);
+					
+			}
 			
 			mainClasses.MainController.mainFrame.mainPanel.scroll.setVisible(true);
 			

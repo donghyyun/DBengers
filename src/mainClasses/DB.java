@@ -189,7 +189,7 @@ public class DB {
 		ResultSet rsTemp2 = null;
 		
 		
-		String sql = "SELECT name, artist_id, album_id"
+		String sql = "SELECT music_id, name, artist_id, album_id"
 				+ " FROM Music WHERE genre='" + genre + "'";
 		
 		ArrayList<String> infos = new ArrayList<String>();
@@ -207,9 +207,10 @@ public class DB {
     		
     		while (result.next()) {
     			
-    			if (infos.size() > 60)
+    			if (infos.size() > 80)
     				return infos;
     			
+    			infos.add(String.valueOf(result.getInt("music_id")));
     			
     			infos.add(result.getString("name"));
     			artist_id = result.getString("artist_id");
@@ -247,7 +248,7 @@ public class DB {
 		ResultSet rsTemp2 = null;
 		
 		
-		String sql = "SELECT name, artist_id, album_id"
+		String sql = "SELECT music_id, name, artist_id, album_id"
 				+ " FROM Music order by ";
 		
 		if (sortBy.equalsIgnoreCase("All")) 
@@ -276,10 +277,10 @@ public class DB {
     		
     		while (result.next()) {
     			
-    			if (infos.size() > 60)
+    			if (infos.size() > 80)
     				return infos;
     			
-    			
+    			infos.add(String.valueOf(result.getInt("music_id")));
     			infos.add(result.getString("name"));
     			artist_id = result.getString("artist_id");
     			album_id = result.getInt("album_id");
@@ -407,7 +408,20 @@ public class DB {
     	return artists;
 	}
 	
-	//public void addToMyPlaylist(String id, String music)
+	public void addToMyPlaylist(String userId, int musicId, String playlistName) {
+		Statement st = null;
+		ResultSet result = null;
+		
+		String sql = "INSERT INTO User_PlayList_Music VALUES ('" + userId + "', " + "'" + playlistName + "', " + musicId + ")";
+		try {
+    		st = con.createStatement();
+    		st.executeUpdate(sql);
+
+    	} catch (SQLException e) {
+			System.out.println("addToMyPlaylist problem: ");
+			e.printStackTrace();
+		}
+	}
 	
 	public ArrayList<String> getPlayListInfo(String id) {
 		Statement st = null;

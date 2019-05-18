@@ -36,16 +36,13 @@ public class MainMusicAddToListButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((MainMusicAddToListButton)e.getSource()).rowNum].songInfo[0].getText();
+			int musicId = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((MainMusicAddToListButton)e.getSource()).rowNum].music_id;
 			String playlistName = JOptionPane.showInputDialog("Type your playlist name");
 			
 			
-			//DB.getInstance().addMusicPlaynum(DB.currentID, musicName);
-			//DB.getInstance().addToHistory(DB.currentID, musicName);
+			DB.getInstance().addToMyPlaylist(DB.currentID, musicId, playlistName);
 			
-			musicName += " is added to " + playlistName;
-			
-			JOptionPane.showMessageDialog(null, musicName, "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, musicId + " is added to " + playlistName, "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
