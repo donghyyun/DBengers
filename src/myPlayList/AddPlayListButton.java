@@ -19,6 +19,7 @@ public class AddPlayListButton extends JButton implements Setting{
 		this.setBorderPainted(true);
 		this.setSize(this.getPreferredSize().width, this.getFont().getSize() + MyPlayListFrame.marginHeight);
 		this.setLocation(MyPlayListFrame.frameWidth - (this.getWidth() + MyPlayListFrame.marginWidth * 2), MyPlayListFrame.frameHeight - (this.getHeight() + MyPlayListFrame.marginHeight * 2));
+
 		this.addActionListener(new Listener());
 	}
 

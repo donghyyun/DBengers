@@ -1,23 +1,27 @@
 package artistChannel;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
 import interfaces.Setting;
-import mainClasses.ArtistChannelCommentFrame;
 import mainClasses.ArtistChannelFrame;
+import mainClasses.DB;
 
-public class CommentButton extends JButton implements Setting {
+public class StarPostTitleButton extends JButton implements Setting{
 
+	int currentStarpostID;
+	
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setText("Comments");
-		this.setFont(ArtistChannelPanel.font);
+		this.setText("example title");
+		this.setFont(new Font ("Arial", Font.BOLD, ArtistChannelFrame.frameHeight / 35));
+		this.setContentAreaFilled(false);
 		this.setBorderPainted(true);
-		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.7), (int) (ArtistChannelFrame.frameHeight * 0.8), 120, 35);
+		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.1), (int) (ArtistChannelFrame.frameHeight * 0.8), 100, 40);
 		this.addActionListener(new Listener());
 	}
 
@@ -28,9 +32,8 @@ public class CommentButton extends JButton implements Setting {
 	class Listener implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
-			
-			mainClasses.MainController.artistChannelCommentFrame = new ArtistChannelCommentFrame();
-			mainClasses.MainController.artistChannelCommentFrame.setThis();
+			DB.getInstance().addStarpostView(currentStarpostID);
+			DB.getInstance().addVideoHistory(DB.currentID, currentStarpostID);
 		}
 	}
 }

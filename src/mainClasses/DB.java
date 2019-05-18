@@ -944,6 +944,7 @@ public class DB {
     	return infos;
 	}
 	
+	
 	public ArrayList<Integer> getStarPostID(String artistID)
 	{
 		Statement st = null;
@@ -1207,6 +1208,246 @@ public class DB {
     	
     	return artists;
 	}
+	
+	
+	public ArrayList<Integer> getCommentID(String artistID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = "SELECT artist_comment_id FROM Artist_Comment_List WHERE artist_id='"+artistID+"'"; 
+		ArrayList<Integer> commentIDs = new ArrayList<Integer>();
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			commentIDs.add(result.getInt("artist_comment_id"));
+    		}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getCommentID problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return commentIDs;
+	}	
+	public ArrayList<String> getCommentWriter(ArrayList<Integer> commentID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<String> infos = new ArrayList<String>();
+		
+		for(int i=0; i<commentID.size();i++)
+		{
+			sql = "SELECT user_id FROM Artist_Comment_List WHERE artist_comment_id='"+commentID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getString("user_id"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getCommentWriter problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<Date> getCommentDate(ArrayList<Integer> commentID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Date> infos = new ArrayList<Date>();
+		
+		for(int i=0; i<commentID.size();i++)
+		{
+			sql = "SELECT comment_date FROM Artist_Comment_List WHERE artist_comment_id='"+commentID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getDate("comment_date"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getCommentDate problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<Integer> getCommentLike(ArrayList<Integer> commentID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Integer> infos = new ArrayList<Integer>();
+		
+		for(int i=0; i<commentID.size();i++)
+		{
+			sql = "SELECT num_like FROM Artist_Comment_List WHERE artist_comment_id='"+commentID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getInt("num_like"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getCommentLike problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<Integer> getCommentDislike(ArrayList<Integer> commentID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<Integer> infos = new ArrayList<Integer>();
+		
+		for(int i=0; i<commentID.size();i++)
+		{
+			sql = "SELECT num_dislike FROM Artist_Comment_List WHERE artist_comment_id='"+commentID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			infos.add(result.getInt("num_dislike"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getCommentDislike problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	public ArrayList<String> getCommentContent(ArrayList<Integer> commentID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		String sql = null;
+		ArrayList<String> infos = new ArrayList<String>();
+		
+		for(int i=0; i<commentID.size();i++)
+		{
+			sql = "SELECT comment FROM Artist_Comment_List WHERE artist_comment_id='"+commentID.get(i)+"'"; 
+			
+			try {
+				st = con.createStatement();
+				// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+				result = st.executeQuery(sql);
+				while (result.next()) {
+	    			infos.add(result.getString("comment"));
+	    		}
+		    	
+			} catch (SQLException e) {
+				System.out.println("getCommentContent problem: ");
+				e.printStackTrace();
+			}
+		}
+    	
+    	return infos;
+	}
+	
+	
+	public void sendComment(int commentNum, String artistID, String userID, String comment)
+	{
+		Statement st = null;
+		String sql = "INSERT INTO Artist_Comment_List (artist_comment_id,artist_id,user_id,comment,num_like,num_dislike)"
+				+ " VALUES ("+(commentNum+1)+",'"+artistID+"','"+userID+"','"+comment+"',0,0)"; 
+
+		try {
+			st = con.createStatement();
+			st.executeUpdate(sql);
+	    	
+		} catch (SQLException e) {
+			System.out.println("sendComment problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+	public int countComment(String artistID)
+	{
+		Statement st = null;
+		ResultSet result = null;
+		int count =0;
+		String sql = "SELECT * FROM Artist_Comment_List WHERE artist_id='"+artistID+"'"; 
+	
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {count++;}
+	    	
+		} catch (SQLException e) {
+			System.out.println("getCommentID problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return count;
+	}
+	
+	
+	public void addStarpostView(int starpostID)
+	{
+		Statement st = null;
+		String sql = "UPDATE Star_Post SET view_num = view_num+1 WHERE star_post_id = '"+starpostID+"'";
+
+		try {
+			st = con.createStatement();
+			st.executeUpdate(sql);
+	    	
+		} catch (SQLException e) {
+			System.out.println("addStarpostView problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+	public void addVideoHistory(String userID, int starpostID)
+	{
+		Statement st = null;
+		String sql = "INSERT INTO Played_Video_History VALUES ('"+userID+"',"+starpostID+",'2019-05-19')";
+
+		try {
+			st = con.createStatement();
+			st.executeUpdate(sql);
+	    	
+		} catch (SQLException e) {
+			System.out.println("addVideoHistory problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	public void closeConnection() {
 		try {
