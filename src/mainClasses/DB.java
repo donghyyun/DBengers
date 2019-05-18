@@ -1446,19 +1446,25 @@ public class DB {
 		}
 	}
 	
-	public void addHashTag_Hashtag(String userID, String playlist, String hashtags)
+	public void addHashTag_Hashtag(String userID, String playlist, ArrayList<String> hashtags)
 	{
 		Statement st = null;
-		String sql = "INSERT INTO Hashtag VALUES ('"+hashtags+"','"+playlist+"','"+userID+"')";
+		String sql = null;
+		
+		for(int i=0; i<hashtags.size(); i++)
+		{
+			sql = "INSERT INTO Hashtag VALUES ('"+hashtags.get(i)+"','"+playlist+"','"+userID+"')";
 
-		try {
-			st = con.createStatement();
-			st.executeUpdate(sql);
-	    	
-		} catch (SQLException e) {
-			System.out.println("addHashTag_Hashtag problem: ");
-			e.printStackTrace();
+			try {
+				st = con.createStatement();
+				st.executeUpdate(sql);
+		    	
+			} catch (SQLException e) {
+				System.out.println("addHashTag_Hashtag problem: ");
+				e.printStackTrace();
+			}
 		}
+		
 	}
 	
 	public void addHashTag_HashtagNames(ArrayList<String> hashtags)
@@ -1489,11 +1495,11 @@ public class DB {
 		}
 	}
 	
-	public String deleteHashTag_Hashtag(String userID, String playlistName)
+	public ArrayList<String> deleteHashTag_Hashtag(String userID, String playlistName)
 	{
 		Statement st = null;
 		ResultSet result = null;
-		String hashtags = null;
+		ArrayList<String> hashtags = new ArrayList<String>();
 		String sql = "DELETE FROM Hashtag WHERE playlist_name='"+playlistName+"' AND user_id='"+userID+"'";
 		String sql1 = "SELECT tagname FROM Hashtag WHERE playlist_name='"+playlistName+"' AND user_id='"+userID+"'";
 
@@ -1502,7 +1508,7 @@ public class DB {
 			
 			result = st.executeQuery(sql1);
 			while(result.next())
-				hashtags = (result.getString("tagname"));
+				hashtags.add(result.getString("tagname"));
 			
 			st.executeUpdate(sql);
 	    	
@@ -1542,6 +1548,46 @@ public class DB {
 				System.out.println("deleteHashTag_HashtagNames problem: ");
 			}
 		}
+	}
+	
+	public ArrayList<String> getTopHashtag()
+	{
+		ArrayList<String> tags = new ArrayList<String>();
+		Statement st = null;
+		String sql = "SELECT tagname FROM HashtagNames ORDER BY cnt DESC LIMIT 6";
+		ResultSet result = null;
+		try {
+			st = con.createStatement();
+			result = st.executeQuery(sql);
+			while(result.next())
+				tags.add(result.getString("tagname"));
+	    	
+		} catch (SQLException e) {
+			System.out.println("addHashTag_Hashtag problem: ");
+			e.printStackTrace();
+		}
+		
+		return tags;
+	}
+	
+	public ArrayList<String> getPlaylistNameByHashtag(String input)
+	{
+		ArrayList<String> names = new ArrayList<String>();
+		Statement st = null;
+		String sql = "SELECT playlist_name FROM Hashtag WHERE tagname='"+input+"'";
+		ResultSet result = null;
+		try {
+			st = con.createStatement();
+			result = st.executeQuery(sql);
+			while(result.next())
+				names.add(result.getString("playlist_name"));
+	    	
+		} catch (SQLException e) {
+			System.out.println("getPlaylistNameByHashtag problem: ");
+			e.printStackTrace();
+		}
+		
+		return names;
 	}
 	
 	public void closeConnection() {

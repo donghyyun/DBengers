@@ -38,7 +38,7 @@ public class ApplyButton extends JButton implements Setting{
 			String str = AddPlayListPanel.hashtags.getText();
 			ArrayList<String> hashtags = new ArrayList<String>(Arrays.asList(str.split(",")));
 			
-			DB.getInstance().addHashTag_Hashtag(DB.currentID, AddPlayListPanel.newPlaylistName.getText(), str);
+			DB.getInstance().addHashTag_Hashtag(DB.currentID, AddPlayListPanel.newPlaylistName.getText(), hashtags);
 			DB.getInstance().addHashTag_HashtagNames(hashtags);
 
 			mainClasses.MainController.addPlayListFrame.setVisible(false);
