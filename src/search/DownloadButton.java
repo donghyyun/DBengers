@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import interfaces.Setting;
 import mainClasses.DB;
@@ -35,6 +36,7 @@ public class DownloadButton extends JButton implements Setting{
 			
 			DB.getInstance().addMusicDownloadnum(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText(),SearchPanel.musicNames.get(num).getText());
 			//DB.getInstance().addToHistory(DB.currentID,PlayListMusicPanel.musicNames.get(num).getText());
+			JOptionPane.showMessageDialog(null, "Download Done!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
