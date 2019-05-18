@@ -184,17 +184,23 @@ public class DB {
 	public ArrayList<String> getUserInfo(String id) {
     	Statement st = null;
 		ResultSet result = null;
+		Statement st2 = null;
+		ResultSet result2 = null;
 		String sql = "SELECT name, id, password, password_change_date, nickname, birthday, gender, address, email, phone_num,"
 				+ "voucher_name, is_artist, alarm_to_mail, alarm_to_sms "
 				+ " FROM User WHERE id='"+id+"'"; 
+		String sql2 = "SELECT streaming_num, download_num FROM My_Voucher WHERE id='"+id+"'";
 		ArrayList<String> infos = new ArrayList<String>();
 
     	//System.out.println("getUserInfo entered!!");
     	
     	try {
+    		
     		st = con.createStatement();
+    		st2 = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		result = st.executeQuery(sql);
+    		result2 = st2.executeQuery(sql2);
     		
     		while (result.next()) {
     			infos.add(result.getString("name"));
@@ -211,9 +217,15 @@ public class DB {
     	    	infos.add(String.valueOf(result.getBoolean("is_artist")));
     	    	infos.add(String.valueOf(result.getBoolean("alarm_to_mail")));
     	    	infos.add(String.valueOf(result.getBoolean("alarm_to_sms")));
+    	    	
     	    	break;
     		}
-	    	
+    		while (result2.next()) {
+    			infos.add(String.valueOf(result2.getInt("streaming_num")));
+    			infos.add(String.valueOf(result2.getInt("download_num")));
+    			
+    			break;
+    		}
     	
     		
 		} catch (SQLException e) {
