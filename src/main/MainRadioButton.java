@@ -36,7 +36,7 @@ public class MainRadioButton extends JButton implements Setting {
 	// samples : 
 	
 	
-	ArrayList<String> hashtags = DB.getInstance().getTopHashtag();
+	ArrayList<String> hashtags = null;
 	Scanner scn = new Scanner(System.in);
 	int choice = 0;
 	
@@ -45,7 +45,7 @@ public class MainRadioButton extends JButton implements Setting {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			hashtags = DB.getInstance().getTopHashtag();
 			JOptionPane.showMessageDialog(null, "RadioButton Presses", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 			//mainClasses.MainController.artistlistframe = new mainClasses.ArtistListFrame();
 			//mainClasses.MainController.artistlistframe.setThis();
