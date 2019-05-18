@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import interfaces.Setting;
 import mainClasses.AddPlayListFrame;
 import mainClasses.DB;
+import mainClasses.MyPlayListFrame;
 
 public class ApplyButton extends JButton implements Setting{
 	
@@ -34,6 +35,12 @@ public class ApplyButton extends JButton implements Setting{
 			
 			mainClasses.MainController.addPlayListFrame.setVisible(false);
 			mainClasses.MainController.addPlayListFrame = null;
+			
+			mainClasses.MainController.myPlayListFrame.setVisible(false);
+			mainClasses.MainController.myPlayListFrame = null;
+			
+			mainClasses.MainController.myPlayListFrame = new mainClasses.MyPlayListFrame();
+			mainClasses.MainController.myPlayListFrame.setThis();
 		}
 	}
 }
