@@ -19,7 +19,7 @@ public class ArtistChannelPanel extends JPanel implements Setting{
 	public ArrayList<String> labelName = new ArrayList<String>();
 	public ArrayList<String> contentName = new ArrayList<String>();
 	public static String currentArtistName;
-	
+	public static String currentArtistID;
 	MusicButton musicButton = new MusicButton();
 	AlbumButton albumButton = new AlbumButton();
 	StarPostButton starpostButton = new StarPostButton();
@@ -33,7 +33,7 @@ public class ArtistChannelPanel extends JPanel implements Setting{
 	}
 
 	public void setThis(Component prevComp) {
-		
+		currentArtistID = DB.getInstance().getArtistID(currentArtistName);
 		contentName = DB.getInstance().getArtistInfo(currentArtistName);
 		labelName = DB.getInstance().getArtistField();
 		this.setBounds(0, 0, ArtistChannelFrame.frameWidth, ArtistChannelFrame.frameHeight);

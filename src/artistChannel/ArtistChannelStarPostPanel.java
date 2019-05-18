@@ -19,7 +19,7 @@ public class ArtistChannelStarPostPanel extends JPanel implements Setting{
 	
 public ArtistChannelStarPostPanel() {this.setThis(null);}
 	
-	ArrayList<JLabel> titles = new ArrayList<JLabel>();
+	ArrayList<StarPostTitleButton> titles = new ArrayList<StarPostTitleButton>();
 	ArrayList<JLabel> dates = new ArrayList<JLabel>();
 	ArrayList<JLabel> likes = new ArrayList<JLabel>();
 	ArrayList<JLabel> views = new ArrayList<JLabel>();
@@ -53,8 +53,11 @@ public ArtistChannelStarPostPanel() {this.setThis(null);}
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		for(int i=0; i<starpostID.size(); i++)
 		{
-			titles.add(new JLabel(titleName.get(i)));
-			titles.get(i).setBounds((int)(ArtistChannelStarPostFrame.frameWidth * 0.1), (int)(ArtistChannelStarPostFrame.frameHeight * 0.1 + 80*i), 140, 30);
+			titles.add(new StarPostTitleButton());
+			titles.get(i).setThis(null);
+			titles.get(i).setText(titleName.get(i));
+			titles.get(i).currentStarpostID = starpostID.get(i);
+			titles.get(i).setBounds((int)(ArtistChannelStarPostFrame.frameWidth * 0.05), (int)(ArtistChannelStarPostFrame.frameHeight * 0.1 + 80*i), 140, 35);
 			String convertedDate = transFormat.format(dateTime.get(i));
 			dates.add(new JLabel(convertedDate));
 			dates.get(i).setBounds((int)(ArtistChannelStarPostFrame.frameWidth * 0.1)+140, (int)(ArtistChannelStarPostFrame.frameHeight * 0.1 + 80*i), 140, 30);
@@ -63,7 +66,7 @@ public ArtistChannelStarPostPanel() {this.setThis(null);}
 			views.add(new JLabel(Integer.toString(viewNum.get(i))));
 			views.get(i).setBounds((int)(ArtistChannelStarPostFrame.frameWidth * 0.1)+330, (int)(ArtistChannelStarPostFrame.frameHeight * 0.1 + 80*i), 20, 30);
 			descripts.add(new JLabel(description.get(i)));
-			descripts.get(i).setBounds((int)(ArtistChannelStarPostFrame.frameWidth * 0.1), (int)(ArtistChannelStarPostFrame.frameHeight * 0.1 + 15 + 80*i), 300, 50);
+			descripts.get(i).setBounds((int)(ArtistChannelStarPostFrame.frameWidth * 0.1), (int)(ArtistChannelStarPostFrame.frameHeight * 0.1 + 20 + 80*i), 300, 50);
 		}
 		title.setFont(new Font("Arial", Font.BOLD, ArtistChannelStarPostFrame.frameHeight / 30));
 		title.setBounds((int)(ArtistChannelStarPostFrame.frameWidth * 0.1), (int)(ArtistChannelStarPostFrame.frameHeight * 0.1)-30, 400, 40);

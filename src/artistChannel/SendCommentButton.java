@@ -3,21 +3,23 @@ package artistChannel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 
 import interfaces.Setting;
 import mainClasses.ArtistChannelCommentFrame;
-import mainClasses.ArtistChannelFrame;
+import mainClasses.DB;
 
-public class CommentButton extends JButton implements Setting {
+public class SendCommentButton extends JButton implements Setting{
 
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setText("Comments");
+		this.setText("Send");
 		this.setFont(ArtistChannelPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.7), (int) (ArtistChannelFrame.frameHeight * 0.8), 120, 35);
+		this.setBounds((int) (ArtistChannelCommentFrame.frameWidth * 0.6), 10, 70, 40);
 		this.addActionListener(new Listener());
 	}
 
@@ -29,8 +31,9 @@ public class CommentButton extends JButton implements Setting {
 
 		public void actionPerformed(ActionEvent e) {
 			
-			mainClasses.MainController.artistChannelCommentFrame = new ArtistChannelCommentFrame();
-			mainClasses.MainController.artistChannelCommentFrame.setThis();
+			int count = DB.getInstance().countComment(ArtistChannelPanel.currentArtistID);
+			DB.getInstance().sendComment(count, ArtistChannelPanel.currentArtistID, DB.currentID, ArtistChannelCommentingPanel.commentBox.getText());
+		
 		}
 	}
 }
