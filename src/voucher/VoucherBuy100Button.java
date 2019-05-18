@@ -9,9 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import interfaces.Setting;
+import mainClasses.DB;
 import mainClasses.VoucherFrame;
+import myPlayList.MyPlayListPanel;
 
-public class VoucherBuy200Button extends JButton implements Setting {
+public class VoucherBuy100Button extends JButton implements Setting {
 	
 	public static Font font = new Font ("Arial", Font.BOLD, VoucherFrame.frameHeight / 20);
 	
@@ -43,6 +45,7 @@ public class VoucherBuy200Button extends JButton implements Setting {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			JOptionPane.showMessageDialog(null, "You bought 200 Streaming", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			DB.getInstance().buy100Voucher(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText());
 			mainClasses.MainController.myPageFrame.setVisible(false);
 			mainClasses.MainController.myPageFrame = null;
 			mainClasses.MainController.voucherFrame.setVisible(false);

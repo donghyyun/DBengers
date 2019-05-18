@@ -20,7 +20,7 @@ public class DB {
 
 	private DB() {        	
 
-        String url = "jdbc:mysql://172.17.192.208/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.30.1.13/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "ysk", "thisgood");
@@ -469,6 +469,49 @@ public class DB {
 
     	} catch (SQLException e) {
 			System.out.println("addMusicPlaynum problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+
+	public void buy100Voucher(String userid) {
+		Statement st = null;
+		String sql = "UPDATE User SET voucher_name='100 Streaming' WHERE id='"+userid+"'"; 
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+
+    	} catch (SQLException e) {
+			System.out.println("buy Voucher problem: ");
+			e.printStackTrace();
+		}
+	}
+
+	public void buy300Voucher(String userid) {
+		Statement st = null;
+		String sql = "UPDATE User SET voucher_name='300 Streaming' WHERE id='"+userid+"'"; 
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+
+    	} catch (SQLException e) {
+			System.out.println("buy Voucher problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+	public void buyUnlimitVoucher(String userid) {
+		Statement st = null;
+		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'"; 
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+
+    	} catch (SQLException e) {
+			System.out.println("buy Voucher problem: ");
 			e.printStackTrace();
 		}
 	}

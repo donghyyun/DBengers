@@ -12,7 +12,7 @@ public class VoucherPanel extends JPanel implements Setting {
 	public VoucherCancelButton cancelButton = new VoucherCancelButton();
 	public VoucherBuyUnlimitButton buyUnlimitButton = new VoucherBuyUnlimitButton();
 	public VoucherBuy300Button buy300Button = new VoucherBuy300Button();
-	public VoucherBuy200Button buy200Button = new VoucherBuy200Button();
+	public VoucherBuy100Button buy100Button = new VoucherBuy100Button();
 	
 	public VoucherPanel() {this.setThis(null);}
 
@@ -29,7 +29,7 @@ public class VoucherPanel extends JPanel implements Setting {
 		voucherInfoPanel.setThis(null);
 		buyUnlimitButton.setThis(voucherInfoPanel);
 		buy300Button.setThis(buyUnlimitButton);
-		buy200Button.setThis(buy300Button);
+		buy100Button.setThis(buy300Button);
 		cancelButton.setThis(buyUnlimitButton);
 		
 	}
@@ -40,7 +40,7 @@ public class VoucherPanel extends JPanel implements Setting {
 		this.add(cancelButton);
 		this.add(buyUnlimitButton);
 		this.add(buy300Button);
-		this.add(buy200Button);
+		this.add(buy100Button);
 
 	}
 }
