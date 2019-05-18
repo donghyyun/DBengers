@@ -562,7 +562,7 @@ public class DB {
 		Statement st = null;
 		Statement st2 = null;
 		String vouchername = "100 Streaming";
-		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
 		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
 				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
 				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
@@ -585,7 +585,7 @@ public class DB {
 		Statement st = null;
 		Statement st2 = null;
 		String vouchername = "300 Streaming";
-		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
 		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
 				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
 				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
@@ -608,7 +608,7 @@ public class DB {
 		Statement st = null;
 		Statement st2 = null;
 		String vouchername = "Unlimited Streaming";
-		String sql = "UPDATE User SET voucher_name='Unlimited Streaming' WHERE id='"+userid+"'";
+		String sql = "UPDATE User SET voucher_name='"+vouchername+"' WHERE id='"+userid+"'";
 		String sql2 = "INSERT INTO My_Voucher (id, download_num, streaming_num) VALUES('"+userid+"', (SELECT download_num from Voucher "
 				+ "WHERE voucher_name='"+vouchername+"'), (SELECT streaming_num from Voucher WHERE voucher_name='"+vouchername+"')) ON DUPLICATE KEY UPDATE "
 				+ "download_num =(SELECT download_num from Voucher WHERE voucher_name='"+vouchername+"')"
