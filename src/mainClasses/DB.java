@@ -1549,6 +1549,46 @@ public class DB {
 		}
 	}
 	
+	public ArrayList<String> getTopHashtag()
+	{
+		ArrayList<String> tags = new ArrayList<String>();
+		Statement st = null;
+		String sql = "SELECT tagname FROM HashtagNames ORDER BY cnt DESC LIMIT 6";
+		ResultSet result = null;
+		try {
+			st = con.createStatement();
+			result = st.executeQuery(sql);
+			while(result.next())
+				tags.add(result.getString("tagname"));
+	    	
+		} catch (SQLException e) {
+			System.out.println("addHashTag_Hashtag problem: ");
+			e.printStackTrace();
+		}
+		
+		return tags;
+	}
+	
+	public ArrayList<String> getPlaylistNameByHashtag(String input)
+	{
+		ArrayList<String> names = new ArrayList<String>();
+		Statement st = null;
+		String sql = "SELECT playlist_name FROM Hashtag WHERE tagname='"+input+"'";
+		ResultSet result = null;
+		try {
+			st = con.createStatement();
+			result = st.executeQuery(sql);
+			while(result.next())
+				names.add(result.getString("playlist_name"));
+	    	
+		} catch (SQLException e) {
+			System.out.println("getPlaylistNameByHashtag problem: ");
+			e.printStackTrace();
+		}
+		
+		return names;
+	}
+	
 	public void closeConnection() {
 		try {
             if(con != null && !con.isClosed())
