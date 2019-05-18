@@ -21,7 +21,7 @@ public class DB {
         String url = "jdbc:mysql://172.17.192.208/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "pjh", "thisgood");
+			con = DriverManager.getConnection(url, "ysk", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
@@ -347,6 +347,129 @@ public class DB {
 		}
 	}
 	
+	public ArrayList<String> getPlayListMusic(String id, String playlistName) {
+		Statement st = null;
+		ResultSet result = null;
+		// get music_id to search music info later
+		String sql = "SELECT music_id FROM User_PlayList_music WHERE user_id='"+id+"' AND name = '"+playlistName+"'";
+		ArrayList<Integer> musicIDs = new ArrayList<Integer>();
+		ArrayList<String> musics = new ArrayList<String>();
+	
+		MyPlayListPanel.numOfPlayList = 0;
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			int j=0;
+			while (result.next()) {
+    			musicIDs.add(result.getInt("music_id"));
+    			System.out.println("MusicID: "+musicIDs.get(j++));
+    			MyPlayListPanel.numOfPlayList++;
+    		}
+			
+			// use music_id to get music name
+			for(int i=0; i<musicIDs.size();i++)
+			{
+				sql = "SELECT name FROM Music WHERE music_id='"+musicIDs.get(i)+"'";
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				int k=0;
+				while (result.next()) {
+	    			musics.add(result.getString("name"));
+	    			System.out.println("Music name: "+musics.get(k++));
+	    		}
+			}
+
+		} catch (SQLException e) {
+			System.out.println("getPlayListMusic problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return musics;
+	}
+
+	public ArrayList<String> getPlayListMusicArtist(String id, String playlistName) {
+		Statement st = null;
+		ResultSet result = null;
+		// get music_id to search music info later
+		String sql = "SELECT music_id FROM User_PlayList_music WHERE user_id='"+id+"' AND name = '"+playlistName+"'";
+		ArrayList<Integer> musicIDs = new ArrayList<Integer>();
+		ArrayList<String> artistIDs = new ArrayList<String>();
+		ArrayList<String> artists = new ArrayList<String>();
+	
+		MyPlayListPanel.numOfPlayList = 0;
+		try {
+			st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			result = st.executeQuery(sql);
+			
+			while (result.next()) {
+    			musicIDs.add(result.getInt("music_id"));
+    			MyPlayListPanel.numOfPlayList++;
+    		}
+			
+			// use music_id to get artist_id
+			for(int i=0; i<musicIDs.size();i++)
+			{
+				sql = "SELECT artist_id FROM Music WHERE music_id='"+musicIDs.get(i)+"'";
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			artistIDs.add(result.getString("artist_id"));
+	    		}
+			}
+			
+			// use artist_id to get artist name
+			for(int i=0; i<artistIDs.size();i++)
+			{
+				sql = "SELECT name FROM Artist WHERE id='"+artistIDs.get(i)+"'";
+				st = con.createStatement();
+				result = st.executeQuery(sql);
+				
+				while (result.next()) {
+	    			artists.add(result.getString("name"));
+	    		}
+			}
+
+		} catch (SQLException e) {
+			System.out.println("getPlayListMusicArtist problem: ");
+			e.printStackTrace();
+		}
+    	
+    	return artists;
+	}
+	
+	public void addMusicPlaynum(String musicName) {
+		Statement st = null;
+		String sql = "UPDATE Music SET play_num = play_num+1 WHERE name = '"+musicName+"'"; 
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+
+    	} catch (SQLException e) {
+			System.out.println("addMusicPlaynum problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+	public void addToHistory(String userid, String musicname) {
+		Statement st = null;
+		long time = System.currentTimeMillis(); 
+		Date now = new Date(time);
+		String sql = "insert into Played_Music_History(user_id, name, playing_date) values ('"+userid+"', '"+musicname+"', '"+now+"')"; 
+    	try {
+    		st = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+
+    	} catch (SQLException e) {
+			System.out.println("addMusicPlaynum problem: ");
+			e.printStackTrace();
+		}
+	}
 	
 	public void closeConnection() {
 		try {

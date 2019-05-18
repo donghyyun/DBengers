@@ -40,6 +40,7 @@ public class MyPlayListPanel extends JPanel implements Setting{
 			playListButtons.add(new PlayListButton());
 			playListButtons.get(i).setThis(this);
 			playListButtons.get(i).setText(playLists.get(i));
+			playListButtons.get(i).playlistName = playLists.get(i);
 			deleteButtons.add(new DeleteButton());
 			deleteButtons.get(i).setThis(playListButtons.get(i), i);
 			changeNameButtons.add(new ChangeNameButton());
