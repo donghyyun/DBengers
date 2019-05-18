@@ -33,7 +33,7 @@ public class ListenButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			
-			DB.getInstance().addMusicPlaynum(PlayListMusicPanel.musicNames.get(num).getText());
+			DB.getInstance().addMusicPlaynum(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText(),PlayListMusicPanel.musicNames.get(num).getText());
 			DB.getInstance().addToHistory(DB.currentID,PlayListMusicPanel.musicNames.get(num).getText());
 		}
 	}

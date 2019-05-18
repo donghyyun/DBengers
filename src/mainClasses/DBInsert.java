@@ -20,7 +20,7 @@ public class DBInsert {
 
 
 	private DBInsert() {        	
-        String url = "jdbc:mysql://172.17.192.208/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://172.30.1.13/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "ysk", "thisgood");
