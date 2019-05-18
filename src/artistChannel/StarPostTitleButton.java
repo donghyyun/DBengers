@@ -33,6 +33,7 @@ public class StarPostTitleButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			DB.getInstance().addStarpostView(currentStarpostID);
+			DB.getInstance().addVideoHistory(DB.currentID, currentStarpostID);
 		}
 	}
 }

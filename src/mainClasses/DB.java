@@ -1214,6 +1214,21 @@ public class DB {
 		}
 	}
 	
+	public void addVideoHistory(String userID, int starpostID)
+	{
+		Statement st = null;
+		String sql = "INSERT INTO Played_Video_History VALUES ('"+userID+"',"+starpostID+",'2019-05-19')";
+
+		try {
+			st = con.createStatement();
+			st.executeUpdate(sql);
+	    	
+		} catch (SQLException e) {
+			System.out.println("addVideoHistory problem: ");
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	public void closeConnection() {
