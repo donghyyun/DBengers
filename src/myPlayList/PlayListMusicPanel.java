@@ -15,6 +15,7 @@ import mainClasses.PlayListMusicFrame;
 public class PlayListMusicPanel extends JPanel implements Setting{
 
 	public ArrayList<ListenButton> listenButtons = new ArrayList<ListenButton>();
+	public ArrayList<DownloadButton> downloadButtons = new ArrayList<DownloadButton>();
 	public static ArrayList<JLabel> musicNames = new ArrayList<JLabel>();
 	public ArrayList<JLabel> artistNames = new ArrayList<JLabel>();
 	public ArrayList<String> musics;
@@ -46,6 +47,8 @@ public class PlayListMusicPanel extends JPanel implements Setting{
 		{
 			listenButtons.add(new ListenButton());
 			listenButtons.get(i).setThis(null,i);
+			downloadButtons.add(new DownloadButton());
+			downloadButtons.get(i).setThis(null,i);
 			musicNames.add(new JLabel(musics.get(i)));
 			musicNames.get(i).setBounds(PlayListMusicFrame.frameWidth/10, PlayListMusicFrame.frameHeight/10+40*i, 180, 35);
 			artistNames.add(new JLabel(artists.get(i)));
@@ -60,6 +63,7 @@ public class PlayListMusicPanel extends JPanel implements Setting{
 			this.add(musicNames.get(i));
 			this.add(artistNames.get(i));
 			this.add(listenButtons.get(i));
+			this.add(downloadButtons.get(i));
 		}
 	}	
 }

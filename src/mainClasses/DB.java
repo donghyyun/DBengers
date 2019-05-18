@@ -463,6 +463,24 @@ public class DB {
 		}
 	}
 	
+	public void addMusicDownloadnum(String userID, String musicName) {
+		Statement st = null;
+		Statement st2= null;
+		String sql = "UPDATE Music SET download_num = download_num+1 WHERE name = '"+musicName+"'";
+		String sql2 = "UPDATE My_Voucher SET download_num = download_num-1 WHERE id = '"+userID+"'";
+    	try {
+    		st = con.createStatement();
+    		st2 = con.createStatement();
+			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+    		st.executeUpdate(sql);
+    		st2.executeUpdate(sql2);
+
+    	} catch (SQLException e) {
+			System.out.println("addMusicDownloadnum problem: ");
+			e.printStackTrace();
+		}
+	}
+	
 	public void addToHistory(String userid, String musicname) {
 		Statement st = null;
 		long time = System.currentTimeMillis(); 
