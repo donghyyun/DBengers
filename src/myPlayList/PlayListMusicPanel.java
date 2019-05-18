@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 
 import interfaces.Setting;
 import mainClasses.DB;
-import mainClasses.MyPlayListFrame;
 import mainClasses.PlayListMusicFrame;
 
 public class PlayListMusicPanel extends JPanel implements Setting{
