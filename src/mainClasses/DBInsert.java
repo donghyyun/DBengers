@@ -120,7 +120,7 @@ public class DBInsert {
 		PreparedStatement pstmt_album;
 		PreparedStatement pstmt_album_music;
 		String tableName = "Music ";
-		String sql = "INSERT INTO " + tableName + "(music_id, artist_id, album_id, name, released_date, genre, lyrics, like_num, play_num) VALUES " + "(?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO " + tableName + "(music_id, artist_id, album_id, name, released_date, genre, lyrics, download_num, play_num) VALUES " + "(?,?,?,?,?,?,?,?,?)";
 		String sql_album = "INSERT INTO Album(id, artist_id, title, released_date, num_stars, description, genre, agency, publisher) Values " + "(?,?,?,?,?,?,?,?,?)";
 		String sql_album_music = "INSERT INTO Album_Music(album_id, music_id, music_name) Values " + "(?,?,?)";
 		
@@ -174,7 +174,7 @@ public class DBInsert {
 				pstmt_album.setString(9, "publisher"+getRandomString(4));
 				
 				pstmt.setString(7, "lyric"+i+" "+getRandomString(10));	// lyrics
-				pstmt.setInt(8, 0);	// like_num
+				pstmt.setInt(8, 0);	// download_num
 				pstmt.setInt(9, 0);	// play_num
 				
 				
