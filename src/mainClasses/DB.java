@@ -20,7 +20,7 @@ public class DB {
 
 	private DB() {        	
 
-        String url = "jdbc:mysql://172.17.192.58/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://119.202.40.103/DBengers?serverTimezone=UTC";
         
         try {
 			con = DriverManager.getConnection(url, "pjh", "thisgood");

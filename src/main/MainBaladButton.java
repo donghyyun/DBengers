@@ -37,7 +37,7 @@ public class MainBaladButton extends JButton implements Setting {
 			
 			ArrayList<String> infos = new ArrayList<String>();
 			
-			infos = DB.getInstance().getMusicInfoByRank("Balad");
+			infos = DB.getInstance().getMusicInfoByGenre("Balad");
 			
 			for (String info : infos) {
 				if (infos.indexOf(info) % 4 != 0)

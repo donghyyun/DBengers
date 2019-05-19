@@ -37,9 +37,9 @@ public class AddToListButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			int musicId = mainClasses.MainController.searchFrame.searchPanel.musicPanel.rows[((AddToListButton)e.getSource()).rowNum].music_id;
+			int musicId = mainClasses.MainController.searchFrame.searchPanel.musicPanel.rows.get(((AddToListButton)e.getSource()).rowNum).music_id;
 			String playlistName = JOptionPane.showInputDialog("Type your playlist name");
-			String musicName = mainClasses.MainController.searchFrame.searchPanel.musicPanel.rows[((AddToListButton)e.getSource()).rowNum].songInfo[0].getText();
+			String musicName = mainClasses.MainController.searchFrame.searchPanel.musicPanel.rows.get(((AddToListButton)e.getSource()).rowNum).songInfo[0].getText();
 			
 			if (playlistName == null)
 				return;

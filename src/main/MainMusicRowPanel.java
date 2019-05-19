@@ -15,7 +15,7 @@ public class MainMusicRowPanel extends JPanel implements Setting {
 	
 	private int rowNum;
 	public int music_id;
-	public JLabel[] songInfo = {new JLabel("Name"), new JLabel("Artist"), new JLabel("Album")};
+	public JLabel[] songInfo = {new JLabel("No Data"), new JLabel("No Data"), new JLabel("No Data")};
 	
 	public MainMusicPlayButton play;
 	public MainMusicDownloadButton download;
