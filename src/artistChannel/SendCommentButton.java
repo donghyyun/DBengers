@@ -31,7 +31,7 @@ public class SendCommentButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			
-			int count = DB.getInstance().countComment(ArtistChannelPanel.currentArtistID);
+			int count = DB.getInstance().countComment();
 			DB.getInstance().sendComment(count, ArtistChannelPanel.currentArtistID, DB.currentID, ArtistChannelCommentingPanel.commentBox.getText());
 		
 		}

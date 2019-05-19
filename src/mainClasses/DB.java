@@ -1518,12 +1518,12 @@ public class DB {
 		}
 	}
 	
-	public int countComment(String artistID)
+	public int countComment()
 	{
 		Statement st = null;
 		ResultSet result = null;
 		int count =0;
-		String sql = "SELECT * FROM Artist_Comment_List WHERE artist_id='"+artistID+"'"; 
+		String sql = "SELECT * FROM Artist_Comment_List"; 
 	
 		try {
 			st = con.createStatement();
@@ -1533,7 +1533,7 @@ public class DB {
 			while (result.next()) {count++;}
 	    	
 		} catch (SQLException e) {
-			System.out.println("getCommentID problem: ");
+			System.out.println("countComment problem: ");
 			e.printStackTrace();
 		}
     	
