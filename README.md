@@ -57,7 +57,9 @@
 
      - open port
 
-       - 
+       - ```$ vim /etc/mysql/my.cnf```
+       - Find ```bind-address           = 127.0.0.1``` statement and comment it
+       - ```#bind-address           = 127.0.0.1```
 
      - external access by multiple collaborators
 
