@@ -36,10 +36,11 @@ public class MainDateButton extends JButton implements Setting {
 			
 			for (String info : infos) {
 				if (infos.indexOf(info) % 4 != 0)
-					mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[infos.indexOf(info) / 4].songInfo[infos.indexOf(info) % 4 - 1].setText(info);
+					mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows.get(infos.indexOf(info) / 4).songInfo[infos.indexOf(info) % 4 - 1].setText(info);
 				else
-					mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[infos.indexOf(info) / 4].music_id = Integer.parseInt(info);
-					
+					mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows.get(infos.indexOf(info) / 4).music_id = Integer.parseInt(info);
+				
+				mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows.get(infos.indexOf(info) / 4).setVisible(true);	
 			}	
 			
 			mainClasses.MainController.mainFrame.mainPanel.scroll.setVisible(true);

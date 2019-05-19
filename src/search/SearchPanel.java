@@ -21,6 +21,8 @@ public class SearchPanel extends JPanel implements Setting {
 	public static final int marginHeight = height / 30;
 	public static final int marginWidth = width / 20;
 	
+	public static final int maxLength = 20;
+	
 	public static Font font = new Font ("Arial", Font.BOLD, SearchFrame.frameHeight / 30);
 	
 	public String searchText = mainClasses.MainController.mainFrame.mainPanel.searchTextF.getText();
@@ -47,20 +49,29 @@ public class SearchPanel extends JPanel implements Setting {
 		musicArtist.setSize(musicArtist.getPreferredSize());
 		musicArtist.setLocation(musicTitle.getX() + musicTitle.getWidth() + marginWidth * 2, musicTitle.getY());
 		
-		musicPanel.setThis(null);
-		scroll = new JScrollPane(musicPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scroll.setLocation(marginWidth, musicTitle.getY() + musicTitle.getHeight());
-		scroll.setSize(width - 2 * marginWidth, height - (scroll.getY() + 2 * marginHeight));
-		
 		ArrayList <Integer> musicId = DB.getInstance().getSearchMusicId(DB.currentID,searchText);
 		ArrayList <String> musicList = DB.getInstance().getSearchMusic(DB.currentID,searchText);
 		ArrayList <String> artistList = DB.getInstance().getSearchMusicArtist(DB.currentID,searchText);
 		
-		for (int i = 0; i < SearchMusicPanel.num; i++) {
-			musicPanel.rows[i].music_id = musicId.get(i);
-			musicPanel.rows[i].songInfo[0].setText(musicList.get(i));
-			musicPanel.rows[i].songInfo[1].setText(artistList.get(i));
+
+		int length = musicId.size() < maxLength ? musicId.size() : maxLength;
+		
+		musicPanel.setLength(length);
+		musicPanel.setThis(null);
+		musicPanel.setPreferredSize(musicPanel.getPreferredSize());
+		
+		for (int i = 0; i < length; i++) {
+			musicPanel.rows.get(i).music_id = musicId.get(i);
+			musicPanel.rows.get(i).songInfo[0].setText(musicList.get(i));
+			musicPanel.rows.get(i).songInfo[1].setText(artistList.get(i));
 		}
+		
+		scroll = new JScrollPane(musicPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setLocation(marginWidth, musicTitle.getY() + musicTitle.getHeight());
+		scroll.setSize(width - 2 * marginWidth, (height - (scroll.getY() + 2 * marginHeight)));//height - (scroll.getY() + 2 * marginHeight));
+		scroll.setViewportView(musicPanel);
+		
+		
 	}
 
 	public void addComponents() {

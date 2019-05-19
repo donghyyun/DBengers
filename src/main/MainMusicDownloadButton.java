@@ -37,7 +37,7 @@ public class MainMusicDownloadButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((MainMusicDownloadButton)e.getSource()).rowNum].songInfo[0].getText();
+			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows.get(((MainMusicDownloadButton)e.getSource()).rowNum).songInfo[0].getText();
 			
 			DB.getInstance().addMusicDownloadnum(DB.currentID, 
 					musicName);

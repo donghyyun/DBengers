@@ -23,10 +23,10 @@ public class DBInsert {
 	Date now = new Date(time);
 	
 	private DBInsert() {        	
-        String url = "jdbc:mysql://172.17.192.58/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://119.202.40.103/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "ysh", "thisgood");
+			con = DriverManager.getConnection(url, "ysk", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();

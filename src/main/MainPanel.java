@@ -66,6 +66,12 @@ public class MainPanel extends JPanel implements Setting {
 		rank.setLocation(startX, genre.getY() + hiphop.getHeight());
 	}
 	
+	public void setMusicPanelScroll() {		
+		scroll = new JScrollPane(musicPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setLocation(marginWidth, allButton.getY() + allButton.getHeight());
+		scroll.setSize(width - 2 * marginWidth, height - (scroll.getY() + 2 * marginHeight));
+	}
+	
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
 		this.setBounds(0, 0, width, height);
@@ -102,10 +108,9 @@ public class MainPanel extends JPanel implements Setting {
 		downlaodNumButton.setThis(playNumButton);
 		dateButton.setThis(downlaodNumButton);
 		
-		musicPanel.setThis(allButton);
-		scroll = new JScrollPane(musicPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scroll.setLocation(marginWidth, allButton.getY() + allButton.getHeight());
-		scroll.setSize(width - 2 * marginWidth, height - (scroll.getY() + 2 * marginHeight));
+		musicPanel.setLength(1);
+		musicPanel.setThis(null);
+		setMusicPanelScroll();
 		
 		scroll.setVisible(false);
 	}

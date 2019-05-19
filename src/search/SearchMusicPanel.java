@@ -2,6 +2,7 @@ package search;
 
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -9,14 +10,15 @@ import interfaces.Setting;
 import main.MainMusicRowPanel;
 
 public class SearchMusicPanel extends JPanel implements Setting {
-	public static final int num = 20;
+	private int length;
+	public ArrayList<SearchMusicRowPanel> rows = new ArrayList <SearchMusicRowPanel>();
 	
-	public SearchMusicRowPanel[] rows = new SearchMusicRowPanel[num];
+	public void setLength (int length) {this.length = length;}
 	
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setLayout(new GridLayout(num,1));
+		this.setLayout(new GridLayout(SearchPanel.maxLength,1));
 		this.setComponents();
 		this.addComponents();
 	}
@@ -24,12 +26,12 @@ public class SearchMusicPanel extends JPanel implements Setting {
 	@Override
 	public void setComponents() {
 		// TODO Auto-generated method stub
-		rows[0] = new SearchMusicRowPanel(0);
-		rows[0].setThis(null);
+		rows.add(new SearchMusicRowPanel(0));
+		rows.get(0).setThis(null);
 		
-		for (int i = 1; i < rows.length; i++) {
-			rows[i] = new SearchMusicRowPanel(i);
-			rows[i].setThis(rows[i - 1]);
+		for (int i = 1; i < length; i++) {
+			rows.add(new SearchMusicRowPanel(i));
+			rows.get(i).setThis(rows.get(i - 1));
 		}
 	}
 
