@@ -1652,6 +1652,41 @@ public class DB {
 		return names;
 	}
 	
+	public int getPreviousWrongCount(String userID)
+	{
+		ArrayList<Integer> count = new ArrayList<Integer>();
+		Statement st = null;
+		String sql = "SELECT login_wrong_count FROM Login_Data_List WHERE user_id='"+userID+"'";
+		ResultSet result = null;
+		try {
+			st = con.createStatement();
+			result = st.executeQuery(sql);
+			while(result.next())
+				count.add(result.getInt("login_wrong_count"));
+	    	
+		} catch (SQLException e) {
+			System.out.println("getPreviousWrongCount problem: ");
+			e.printStackTrace();
+		}
+		
+		return count.get(0);
+	}
+	
+	public void updateCurrentWrongCount(String userID)
+	{
+		Statement st = null;
+		String sql = "UPDATE Login_Data_List SET login_wrong_count=login_wrong_count+1 WHERE user_id='"+userID+"'";
+		try {
+			st = con.createStatement();
+			st.executeQuery(sql);
+	    	
+		} catch (SQLException e) {
+			System.out.println("updateCurrentWrongCount problem: ");
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void closeConnection() {
 		try {
             if(con != null && !con.isClosed())
