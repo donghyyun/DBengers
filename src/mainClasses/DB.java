@@ -20,10 +20,10 @@ public class DB {
 
 	private DB() {        	
 
-        String url = "jdbc:mysql://172.17.192.58/DBengers?serverTimezone=UTC";
+        String url = "jdbc:mysql://119.202.40.103/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "pjh", "thisgood");
+			con = DriverManager.getConnection(url, "ysk", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
@@ -541,7 +541,6 @@ public class DB {
 			int j=0;
 			while (result.next()) {
     			musicIDs.add(result.getInt("music_id"));
-    			System.out.println("MusicID: "+musicIDs.get(j++));
     			MyPlayListPanel.numOfPlayList++;
     		}
 			
@@ -1011,7 +1010,7 @@ public class DB {
 		ResultSet result = null;
 		// get music_id to search music info later
 		String sql = "SELECT music_id FROM Music WHERE ("
-				+ "name LIKE'%"+searchText+"%' "
+				+ "name LIKE'%"+searchText+"%'"
 				+ ")";
 		ArrayList<Integer> musicIDs = new ArrayList<Integer>();
 	
@@ -1019,9 +1018,10 @@ public class DB {
 			st = con.createStatement();
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
 			result = st.executeQuery(sql);
-			
+			int i=1;
 			while (result.next()) {
     			musicIDs.add(result.getInt("music_id"));
+    			System.out.println(i++);
     			
     		}
 		} catch (SQLException e) {
