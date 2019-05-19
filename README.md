@@ -1,5 +1,3 @@
-# DBengers
-
 ### Installation manual for Melon Database - DBengers
 
 ------
