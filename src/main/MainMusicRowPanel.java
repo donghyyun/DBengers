@@ -40,7 +40,7 @@ public class MainMusicRowPanel extends JPanel implements Setting {
 	@Override
 	public void setThis(Component prevComp) {
 		// TODO Auto-generated method stub
-		this.setLayout(new GridLayout(1, 5));
+		this.setLayout(new GridLayout(1, 6));
 		this.setBorder(new LineBorder(Color.black, 1));
 		
 		if (prevComp != null)

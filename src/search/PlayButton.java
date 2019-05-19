@@ -38,7 +38,7 @@ public class PlayButton extends JButton implements Setting{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((PlayButton)e.getSource()).rowNum].songInfo[0].getText();
+			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows.get(((PlayButton)e.getSource()).rowNum).songInfo[0].getText();
 			DB.getInstance().addMusicPlaynum(DB.currentID, 
 					musicName);
 			DB.getInstance().addToHistory(DB.currentID, 

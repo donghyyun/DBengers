@@ -10,7 +10,7 @@ import interfaces.Setting;
 import main.MainMusicRowPanel;
 
 public class SearchMusicPanel extends JPanel implements Setting {
-	public static int length;
+	private int length;
 	public ArrayList<SearchMusicRowPanel> rows = new ArrayList <SearchMusicRowPanel>();
 	
 	public void setLength (int length) {this.length = length;}
