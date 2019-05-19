@@ -17,7 +17,7 @@ public class StarPostButton extends JButton implements Setting{
 		this.setText("StarPost");
 		this.setFont(ArtistChannelPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.5), (int) (ArtistChannelFrame.frameHeight * 0.8), 95, 35);
+		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.45), (int) (ArtistChannelFrame.frameHeight * 0.8), 105, 35);
 		this.addActionListener(new Listener());
 	}
 
