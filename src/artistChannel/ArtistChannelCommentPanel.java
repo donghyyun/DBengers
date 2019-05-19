@@ -59,7 +59,7 @@ public ArtistChannelCommentPanel() {this.setThis(null);}
 			dislikes.add(new JLabel(Integer.toString(dislikeNum.get(i))));
 			dislikes.get(i).setBounds((int)(ArtistChannelCommentFrame.frameWidth * 0.1)+300, (int)(ArtistChannelCommentFrame.frameHeight * 0.05 + 70*i), 20, 35);
 			comments.add(new JLabel(commentContent.get(i)));
-			comments.get(i).setBounds((int)(ArtistChannelCommentFrame.frameWidth * 0.1), (int)(ArtistChannelCommentFrame.frameHeight * 0.05 +20 + 70*i), 150, 40);
+			comments.get(i).setBounds((int)(ArtistChannelCommentFrame.frameWidth * 0.1), (int)(ArtistChannelCommentFrame.frameHeight * 0.05 +20 + 70*i), 300, 40);
 		}
 	}
 
