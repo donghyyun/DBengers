@@ -17,7 +17,7 @@ public class CommentButton extends JButton implements Setting {
 		this.setText("Comments");
 		this.setFont(ArtistChannelPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.7), (int) (ArtistChannelFrame.frameHeight * 0.8), 120, 35);
+		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.65)+10, (int) (ArtistChannelFrame.frameHeight * 0.8), 130, 35);
 		this.addActionListener(new Listener());
 	}
 

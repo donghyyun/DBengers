@@ -17,7 +17,7 @@ public class AlbumButton extends JButton implements Setting{
 		this.setText("Album");
 		this.setFont(ArtistChannelPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.3), (int) (ArtistChannelFrame.frameHeight * 0.8), 95, 35);
+		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.25), (int) (ArtistChannelFrame.frameHeight * 0.8), 95, 35);
 		this.addActionListener(new Listener());
 	}
 

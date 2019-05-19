@@ -17,7 +17,7 @@ public class MusicButton extends JButton implements Setting{
 		this.setText("Music");
 		this.setFont(ArtistChannelPanel.font);
 		this.setBorderPainted(true);
-		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.1), (int) (ArtistChannelFrame.frameHeight * 0.8), 95, 35);
+		this.setBounds((int) (ArtistChannelFrame.frameWidth * 0.05), (int) (ArtistChannelFrame.frameHeight * 0.8), 95, 35);
 		this.addActionListener(new Listener());
 	}
 
