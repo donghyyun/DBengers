@@ -1,4 +1,6 @@
 package mainClasses;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -136,19 +138,45 @@ public class DB {
 		}
 	}
     		
-	
-	public boolean checkLogin(String id, String pw) {
+	public boolean checkLogin(String id, String pw, int count) {
 		Statement st = null;
 		ResultSet result = null;
 		
+		Statement hisst = null;
+		Statement wrongst = null;
+		
+		InetAddress local;
+		String UserIP = null;		
+		
+		try {
+		    local = InetAddress.getLocalHost();
+		    UserIP = local.getHostAddress();
+		} catch (UnknownHostException e1) {
+		    e1.printStackTrace();
+		}
+		
+		
+		String hissql = "INSERT INTO Login_Data_List (user_id,login_date ,login_wrong_count, user_login_IP) VALUES('"+ id +"', "
+				+ "now(), 0 , '"+UserIP+"')";
+    	
+		String wrongsql ="INSERT INTO Login_Data_List (user_id,login_wrong_time,user_login_IP,login_wrong_count) VALUES((SELECT id FROM User WHERE id='"+ id +"' OR password='" + pw + "'), "
+				+ " now(),'"+UserIP+"', "+count+")";
+    		
     	try {
 			st = con.createStatement();
+			hisst = con.createStatement();
+			wrongst = con.createStatement();
+			
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
     		result = st.executeQuery("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
-    		//System.out.println("SELECT * FROM User WHERE id='"+ id +"' AND password='" + pw + "'");
     		if (!result.next()) {
+    			wrongst.executeUpdate(wrongsql);
+    			
     			return false;
     		}
+    		
+    		hisst.executeUpdate(hissql);
+    		
     		currentID = id;
 
 		} catch (SQLException e) {
@@ -156,6 +184,40 @@ public class DB {
 			e.printStackTrace();
 		}
     	return true;
+	}
+	
+	public int getPreviousWrongCount(String userID)
+	{
+		ArrayList<Integer> count = new ArrayList<Integer>();
+		Statement st = null;
+		String sql = "SELECT login_wrong_count FROM Login_Data_List WHERE user_id='"+userID+"'";
+		ResultSet result = null;
+		try {
+			st = con.createStatement();
+			result = st.executeQuery(sql);
+			while(result.next())
+				count.add(result.getInt("login_wrong_count"));
+	    	
+		} catch (SQLException e) {
+			System.out.println("getPreviousWrongCount problem: ");
+			e.printStackTrace();
+		}
+		
+		return count.get(count.size()-1);
+	}
+	
+	public void updateCurrentWrongCount(String userID)
+	{
+		Statement st = null;
+		String sql = "UPDATE Login_Data_List SET login_wrong_count=login_wrong_count+1 WHERE user_id='"+userID+"'";
+		try {
+			st = con.createStatement();
+			st.executeUpdate(sql);
+	    	
+		} catch (SQLException e) {
+			System.out.println("updateCurrentWrongCount problem: ");
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean checkId(String id) {

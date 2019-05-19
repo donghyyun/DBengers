@@ -13,9 +13,10 @@ public class LogButtonActionListener implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
-		if (e.getSource().toString().contains("text=Login")) {			
+		if (e.getSource().toString().contains("text=Login")) {
+			int count = DB.getInstance().getPreviousWrongCount(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText());
 			if(DB.getInstance().checkLogin(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText()
-							, new String(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().pwTextF.getPassword()))) {
+							, new String(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().pwTextF.getPassword()),count)) {
 				
 				//지울때는 항상 setVisible(false) 할
 				mainClasses.MainController.mainFrame.logPanel.setVisible(false);
@@ -24,6 +25,7 @@ public class LogButtonActionListener implements ActionListener{
 			
 			}	
 			else {
+				DB.getInstance().updateCurrentWrongCount(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText());
 				JOptionPane.showMessageDialog(null, "Wrong ID or PW!", "WARNING", JOptionPane.ERROR_MESSAGE);
 			}
 				
