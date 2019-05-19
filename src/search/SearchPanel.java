@@ -58,8 +58,11 @@ public class SearchPanel extends JPanel implements Setting {
 		
 		for (int i = 0; i < SearchMusicPanel.num; i++) {
 			musicPanel.rows[i].music_id = musicId.get(i);
+			System.out.println(musicId.get(i));
 			musicPanel.rows[i].songInfo[0].setText(musicList.get(i));
+			System.out.println(musicList.get(i));
 			musicPanel.rows[i].songInfo[1].setText(artistList.get(i));
+			System.out.println(artistList.get(i));
 		}
 	}
 
