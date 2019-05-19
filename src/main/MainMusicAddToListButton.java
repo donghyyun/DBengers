@@ -36,13 +36,13 @@ public class MainMusicAddToListButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			int musicId = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((MainMusicAddToListButton)e.getSource()).rowNum].music_id;
+			int musicId = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows.get(((MainMusicAddToListButton)e.getSource()).rowNum).music_id;
 			String playlistName = JOptionPane.showInputDialog("Type your playlist name");
 			
 			if (playlistName == null)
 				return;
 			
-			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows[((MainMusicAddToListButton)e.getSource()).rowNum].songInfo[0].getText();
+			String musicName = mainClasses.MainController.mainFrame.mainPanel.musicPanel.rows.get(((MainMusicAddToListButton)e.getSource()).rowNum).songInfo[0].getText();
 			
 			if (!DB.getInstance().checkMyPlaylist(DB.currentID, musicId, playlistName))
 				JOptionPane.showMessageDialog(null, "You have same music in same playlist", "WARNING", JOptionPane.ERROR_MESSAGE);
