@@ -46,7 +46,7 @@ public class MainRadioButton extends JButton implements Setting {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			hashtags = DB.getInstance().getTopHashtag();
-			JOptionPane.showMessageDialog(null, "RadioButton Presses", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Hashtag Button Pressed", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 			//mainClasses.MainController.artistlistframe = new mainClasses.ArtistListFrame();
 			//mainClasses.MainController.artistlistframe.setThis();
 			System.out.println("== PlayLists with Hashtags ===");

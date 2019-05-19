@@ -25,7 +25,7 @@ public class DB {
         String url = "jdbc:mysql://119.202.40.103/DBengers?serverTimezone=UTC";
         
         try {
-			con = DriverManager.getConnection(url, "ysk", "thisgood");
+			con = DriverManager.getConnection(url, "ysh", "thisgood");
 		} catch (SQLException e) {
 			System.out.println("connection problem: ");
 			e.printStackTrace();
