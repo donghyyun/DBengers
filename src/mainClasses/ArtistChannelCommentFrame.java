@@ -12,7 +12,7 @@ public class ArtistChannelCommentFrame extends JFrame{
 	public static final int startX = mainClasses.MainFrame.startX + mainClasses.MainFrame.frameWidth / 3;
 	public static final int startY = mainClasses.MainFrame.startY - mainClasses.MainFrame.frameHeight / 4;
 	public static final int frameWidth = (int)(mainClasses.MainFrame.frameWidth * 1);
-	public static final int frameHeight = (int)(mainClasses.MainFrame.frameHeight * 1.4);
+	public static final int frameHeight = (int)(mainClasses.MainFrame.frameHeight * 1.2);
 	
 	public static final int marginHeight = frameHeight / 20;
 	public static final int marginWidth = frameWidth / 20;

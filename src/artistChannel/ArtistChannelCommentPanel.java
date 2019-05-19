@@ -12,7 +12,6 @@ import javax.swing.JPanel;
 import interfaces.Setting;
 import mainClasses.ArtistChannelCommentFrame;
 import mainClasses.DB;
-import myPlayList.ListenButton;
 
 public class ArtistChannelCommentPanel extends JPanel implements Setting{
 
@@ -31,8 +30,6 @@ public ArtistChannelCommentPanel() {this.setThis(null);}
 	String currentArtistID;
 	ArrayList<Integer> commentID;
 	
-	ArrayList<ListenButton> listenButton = new ArrayList<ListenButton>();
-
 	public void setThis(Component prevComp) {
 		currentArtistID = DB.getInstance().getArtistID(ArtistChannelPanel.currentArtistName);
 		commentID = DB.getInstance().getCommentID(currentArtistID);
@@ -49,6 +46,7 @@ public ArtistChannelCommentPanel() {this.setThis(null);}
 
 	public void setComponents() {
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println("commentID.size(): "+commentID.size());
 		for(int i=0; i<commentID.size(); i++)
 		{
 			writers.add(new JLabel(writerName.get(i)));

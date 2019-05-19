@@ -1505,8 +1505,8 @@ public class DB {
 	public void sendComment(int commentNum, String artistID, String userID, String comment)
 	{
 		Statement st = null;
-		String sql = "INSERT INTO Artist_Comment_List (artist_comment_id,artist_id,user_id,comment,num_like,num_dislike)"
-				+ " VALUES ("+(commentNum+1)+",'"+artistID+"','"+userID+"','"+comment+"',0,0)"; 
+		String sql = "INSERT INTO Artist_Comment_List (artist_comment_id,artist_id,user_id,comment,comment_date,num_like,num_dislike)"
+				+ " VALUES ("+(commentNum+1)+",'"+artistID+"','"+userID+"','"+comment+"',now(),0,0)"; 
 
 		try {
 			st = con.createStatement();
@@ -1713,41 +1713,6 @@ public class DB {
 		
 		return names;
 	}
-	
-	public int getPreviousWrongCount(String userID)
-	{
-		ArrayList<Integer> count = new ArrayList<Integer>();
-		Statement st = null;
-		String sql = "SELECT login_wrong_count FROM Login_Data_List WHERE user_id='"+userID+"'";
-		ResultSet result = null;
-		try {
-			st = con.createStatement();
-			result = st.executeQuery(sql);
-			while(result.next())
-				count.add(result.getInt("login_wrong_count"));
-	    	
-		} catch (SQLException e) {
-			System.out.println("getPreviousWrongCount problem: ");
-			e.printStackTrace();
-		}
-		
-		return count.get(0);
-	}
-	
-	public void updateCurrentWrongCount(String userID)
-	{
-		Statement st = null;
-		String sql = "UPDATE Login_Data_List SET login_wrong_count=login_wrong_count+1 WHERE user_id='"+userID+"'";
-		try {
-			st = con.createStatement();
-			st.executeQuery(sql);
-	    	
-		} catch (SQLException e) {
-			System.out.println("updateCurrentWrongCount problem: ");
-			e.printStackTrace();
-		}
-	}
-	
 	
 	public void closeConnection() {
 		try {
