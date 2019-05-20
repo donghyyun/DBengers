@@ -32,6 +32,7 @@ public class MainMyPlayListButton extends JButton implements Setting {
 	public class Listener implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
+			
 			mainClasses.MainController.myPlayListFrame = new mainClasses.MyPlayListFrame();
 			mainClasses.MainController.myPlayListFrame.setThis();
 		}

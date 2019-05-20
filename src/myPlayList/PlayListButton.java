@@ -19,8 +19,8 @@ public class PlayListButton extends JButton implements Setting {
 	public void setThis(Component prevComp) {
 		this.setText("PlayList");	// should get the play-list name from the Database!
 		this.setFont(MyPlayListPanel.font);
-		this.setContentAreaFilled(false);
-		this.setBorderPainted(false);
+		//this.setContentAreaFilled(false);
+		this.setBorderPainted(true);
 		this.setBounds(MyPlayListFrame.marginWidth, MyPlayListFrame.marginHeight  + 40*(playListNum++), 230, 35);
 		this.addActionListener(new Listener());
 	}
@@ -33,7 +33,7 @@ public class PlayListButton extends JButton implements Setting {
 
 		public void actionPerformed(ActionEvent e) {
 			// when click, the corresponding play-list should pop up!
-			System.out.println("playlistName: "+playlistName);
+			System.out.println("playlistName: " + playlistName);
 			mainClasses.MainController.playListMusicFrame = new PlayListMusicFrame();
 			mainClasses.MainController.playListMusicFrame.setThis(playlistName);
 			System.out.println("PlayListButton pressed");

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import interfaces.Setting;
 import mainClasses.DB;
@@ -33,8 +34,10 @@ public class ListenButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			
-			DB.getInstance().addMusicPlaynum(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText(),PlayListMusicPanel.musicNames.get(num).getText());
+			DB.getInstance().addMusicPlaynum(DB.currentID,PlayListMusicPanel.musicNames.get(num).getText());
 			DB.getInstance().addToHistory(DB.currentID,PlayListMusicPanel.musicNames.get(num).getText());
+			
+			JOptionPane.showMessageDialog(null, PlayListMusicPanel.musicNames.get(num).getText() + "is Playing!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

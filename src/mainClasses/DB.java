@@ -600,7 +600,6 @@ public class DB {
 			// executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
 			result = st.executeQuery(sql);
 			
-			int j=0;
 			while (result.next()) {
     			musicIDs.add(result.getInt("music_id"));
     			MyPlayListPanel.numOfPlayList++;
@@ -612,10 +611,9 @@ public class DB {
 				sql = "SELECT name FROM Music WHERE music_id='"+musicIDs.get(i)+"'";
 				st = con.createStatement();
 				result = st.executeQuery(sql);
-				int k=0;
+
 				while (result.next()) {
 	    			musics.add(result.getString("name"));
-	    			System.out.println("Music name: "+musics.get(k++));
 	    		}
 			}
 

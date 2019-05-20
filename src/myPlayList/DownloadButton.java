@@ -34,9 +34,8 @@ public class DownloadButton extends JButton implements Setting{
 
 		public void actionPerformed(ActionEvent e) {
 			
-			DB.getInstance().addMusicDownloadnum(mainClasses.MainController.mainFrame.logPanel.getLogInfoPanel().idTextF.getText(),PlayListMusicPanel.musicNames.get(num).getText());
-			//DB.getInstance().addToHistory(DB.currentID,PlayListMusicPanel.musicNames.get(num).getText());
-			JOptionPane.showMessageDialog(null, "Download Done!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
+			DB.getInstance().addMusicDownloadnum(DB.currentID, PlayListMusicPanel.musicNames.get(num).getText());
+			JOptionPane.showMessageDialog(null, PlayListMusicPanel.musicNames.get(num).getText() + "is downloaded!", "INFORMATION", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

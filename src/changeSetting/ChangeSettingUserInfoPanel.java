@@ -28,9 +28,6 @@ public class ChangeSettingUserInfoPanel extends JPanel implements Setting {
 	public ChangeSettingCheckBoxPanel alarmCheckB = new ChangeSettingCheckBoxPanel("Email", "SMS");
 	
 	
-	
-	
-	
 	private Component[] fields = {nameTextF, id, pwTextF, nickNameTextF
 								, birthday, addressTextF, eMailTextF
 								, phoneNumTextF, alarmCheckB};

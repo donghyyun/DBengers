@@ -9,7 +9,6 @@ import mainClasses.MyPageFrame;
 
 public class MyPagePanel extends JPanel implements Setting {
 	public MyPageUserInfoPanel myPageUserInfoPanel = new MyPageUserInfoPanel();
-	public MyPageUploadButton uploadButton = new MyPageUploadButton();
 	public MyPageCheckButton checkButton = new MyPageCheckButton();
 	public MyPagePurchaseButton purchaseButton = new MyPagePurchaseButton();
 	public MyPageChangeSettingsButton changeSettingsButton = new MyPageChangeSettingsButton();
@@ -29,14 +28,12 @@ public class MyPagePanel extends JPanel implements Setting {
 		myPageUserInfoPanel.setThis(null);
 		purchaseButton.setThis(myPageUserInfoPanel);
 		checkButton.setThis(purchaseButton);
-		uploadButton.setThis(checkButton);
 		changeSettingsButton.setThis(myPageUserInfoPanel);
 	}
 
 	public void addComponents() {
 		// TODO Auto-generated method stub
 		this.add(myPageUserInfoPanel);
-		this.add(uploadButton);
 		this.add(checkButton);
 		this.add(purchaseButton);
 		this.add(changeSettingsButton);
